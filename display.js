@@ -1,7 +1,7 @@
 var RESULTSBOX, SPINNER;
 
 // this is the box at the top of the page that the extracts appear in
-function makeRESULTSBOX() {
+function makeResultsBox() {
   var RESULTSBOX = document.createElement("div");
   RESULTSBOX.id = "RESULTSBOX";
   var spinner = document.createElement("div");
@@ -16,46 +16,46 @@ function makeRESULTSBOX() {
 }
 
 // create a summary of a result with an img, abstract and wiki link
-function create_extract(result) {
+function createExtract(result) {
   var extract = document.createElement("div");
   extract.className = "extract";
   var abstract = document.createElement("div");
   abstract.classList.add("abstract");
   abstract.innerText = result.abstract.substring(0, 15) + "...";
   var image = document.createElement("img");
-  image.className = "result_img";
+  image.className = "resultImg";
   image.src = result.image.thumbnail;
-  var wikilink = document.createElement("a");
-  wikilink.title = result.spot + " wikipedia";
-  var link_text = document.createTextNode(result.spot + " wikipedia");
-  wikilink.appendChild(link_text);
-  wikilink.href = result.lod.wikipedia;
+  var wikiLink = document.createElement("a");
+  wikiLink.title = result.spot + " wikipedia";
+  var linkText = document.createTextNode(result.spot + " wikipedia");
+  wikiLink.appendChild(linkText);
+  wikiLink.href = result.lod.wikipedia;
   extract.appendChild(image);
-  extract.appendChild(wikilink);
+  extract.appendChild(wikiLink);
   extract.appendChild(abstract);
   return extract;
 }
 
 // create a list of a result summary html nodes
-function create_extracts(results) {
+function createExtracts(results) {
   var extracts = document.createElement("div");
   extracts.className = "extracts";
-  results.map(create_extract).forEach(x => extracts.appendChild(x));
+  results.map(createExtract).forEach(x => extracts.appendChild(x));
   return extracts;
 }
 
 // ***************** EXECUTE THIS ON LOAD ***************** //
 if (document.querySelector("body") != null) {
-  RESULTSBOX = makeRESULTSBOX();
+  RESULTSBOX = makeResultsBox();
   document.body.prepend(RESULTSBOX);
   SPINNER = RESULTSBOX.querySelector(".spinner");
-  get_locations().then(
+  getLocations().then(
     results => {
       SPINNER.style.display = "none";
       if (results.length != 0) {
         RESULTSBOX.querySelector("h2").innerText =
           "Here are the locations mentioned on the page.";
-        RESULTSBOX.appendChild(create_extracts(results));
+        RESULTSBOX.appendChild(createExtracts(results));
       } else {
         RESULTSBOX.querySelector("h2").innerText =
           "Sorry we couldn't find any results for this page.";

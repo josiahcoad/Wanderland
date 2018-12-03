@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "HelpMeTravel!",
+  "name": "SeeTheWorld",
   "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
   "version": "0.0.1",
   "author": "Josiah Coad",
@@ -13,7 +13,7 @@
   ],
   "browser_action": {
     "default_icon": "tab-icon.png",
-    "default_title": "Let Me Travel"
+    "default_title": "SeeTheWorld"
   },
   "permissions": ["activeTab", "declarativeContent", "storage"]
 }

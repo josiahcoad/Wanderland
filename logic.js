@@ -1,7 +1,7 @@
 // ***************** COMMON LOGIC ***************** //
 
 // return results whose "types" are at least one of the LOCATION_TYPES
-function filter_locations(response) {
+function filterLocations(response) {
   return response.annotations.filter(
     annotation =>
       annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1)
@@ -11,16 +11,16 @@ function filter_locations(response) {
 
 // remove objects from an array who have the same value
 // for a given field, keeping only the first such object
-function filter_duplicates(array, field) {
-  var distinct_objects = [];
-  var distinct_values = [];
+function filterDuplicates(array, field) {
+  var distinctObjects = [];
+  var distinctValues = [];
   for (var i = 0; i < array.length; i++) {
-    if (distinct_values.indexOf(array[i][field]) == -1) {
-      distinct_objects.push(array[i]);
-      distinct_values.push(array[i][field]);
+    if (distinctValues.indexOf(array[i][field]) == -1) {
+      distinctObjects.push(array[i]);
+      distinctValues.push(array[i][field]);
     }
   }
-  return distinct_objects;
+  return distinctObjects;
 }
 
 // ***************** API CALLS ***************** //
@@ -36,11 +36,11 @@ var LOCATION_TYPES = [
 var PARAMS =
   "&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5";
 
-function get_webpage_uri() {
+function getWebpageUri() {
   return window.location.href;
 }
 
-function get_api_reponse(text) {
+function getApiReponse(text) {
   return new Promise((resolve, reject) => {
     const Http = new XMLHttpRequest();
     const url =
@@ -64,14 +64,14 @@ function get_api_reponse(text) {
 }
 
 // query the api to return all unique locations from the current page
-function get_locations() {
-  var text = get_webpage_uri();
+function getLocations() {
+  var text = getWebpageUri();
   return new Promise((resolve, reject) => {
-    get_api_reponse(text)
+    getApiReponse(text)
       .then(JSON.parse)
       .then(
         function(response) {
-          resolve(filter_duplicates(filter_locations(response), "spot"));
+          resolve(filterDuplicates(filterLocations(response), "spot"));
         },
         function(error) {
           reject(Error(error));
