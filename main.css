@@ -1,76 +1,8 @@
-#readme {
-    margin-bottom: 10px;
-}
-
-.warning {
-    font-weight: bold;
-    background-color: #fffccc;
-}
-
-.error {
-    font-weight: bold;
-    background-color: #fcdede;
-}
-
-.rec-group {
-    padding: 30px;
-    position: relative;
-    margin-bottom: 30px;
-    border-radius: 3px;
-    border: 1px solid #ddd;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-}
-
-.rec-group div {
-    width: auto;
-    margin: 0;
-}
-
-.rec-group svg {
-    display: inline-block;
-    margin-right: 0.3em;
-}
-
-.rec-group [itemprop='name'] {
-    /*float: left;*/
-    display: inline-block;
-    min-width: 30%;
-}
-
-.rec-group.sep {
-    text-align: center;
-}
-
-.rec-group [itemprop='description'] {
-    display: inline-block;
-    /*padding-left: 30px;*/
-    /*float: left;*/
-}
-
-#recbox h2 {
-    padding-bottom: 0.3em;
-    margin-bottom: 0.6em;
-    font-size: 1.5em;
-    border-bottom: 1px solid #eee;
-}
-
-#rec-flavor-thin {
-    margin: 0px;
-    padding-bottom: 0.3em;
-    margin-bottom: 0.6em;
-    font-size: 1.5em;
-    border-bottom: 1px solid #eee;
-}
-
-.rec-group>div {
-    min-width: 30%;
-    margin-bottom: 0.2em;
-}
+/* ************ For the Spinner ************ */
 
 /* Spinner from http://tobiasahlin.com/spinkit/ */
 
-.recspinner {
+.spinner {
     margin: 100px auto;
     width: 50px;
     height: 40px;
@@ -78,7 +10,7 @@
     font-size: 10px;
 }
 
-.recspinner>div {
+.spinner>div {
     background-color: #333;
     height: 100%;
     width: 6px;
@@ -87,22 +19,22 @@
     animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
 
-.recspinner .rect2 {
+.spinner .rect2 {
     -webkit-animation-delay: -1.1s;
     animation-delay: -1.1s;
 }
 
-.recspinner .rect3 {
+.spinner .rect3 {
     -webkit-animation-delay: -1.0s;
     animation-delay: -1.0s;
 }
 
-.recspinner .rect4 {
+.spinner .rect4 {
     -webkit-animation-delay: -0.9s;
     animation-delay: -0.9s;
 }
 
-.recspinner .rect5 {
+.spinner .rect5 {
     -webkit-animation-delay: -0.8s;
     animation-delay: -0.8s;
 }
@@ -127,20 +59,7 @@
     }
 }
 
-/* Added for GeoMapper */
-
-/* .result_img {
-    width: 100px;
-    height: 50px;
-} */
-
-
-/* .extract {
-    border: 1px solid black;
-    display: inline-block;
-    overflow: hidden;
-    width: 2000px;
-} */
+/* ************ For the Extracts ************ */
 
 div.extracts {
     height: 300px;

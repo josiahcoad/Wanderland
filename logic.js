@@ -1,5 +1,6 @@
-// ***************** LOGIC ***************** //
+// ***************** COMMON LOGIC ***************** //
 
+// return results whose "types" are at least one of the LOCATION_TYPES
 function filter_locations(response) {
   return response.annotations.filter(
     annotation =>
@@ -8,6 +9,8 @@ function filter_locations(response) {
   );
 }
 
+// remove objects from an array who have the same value
+// for a given field, keeping only the first such object
 function filter_duplicates(array, field) {
   var distinct_objects = [];
   var distinct_values = [];
@@ -60,6 +63,7 @@ function get_api_reponse(text) {
   });
 }
 
+// query the api to return all unique locations from the current page
 function get_locations() {
   var text = get_webpage_uri();
   return new Promise((resolve, reject) => {
@@ -67,8 +71,6 @@ function get_locations() {
       .then(JSON.parse)
       .then(
         function(response) {
-          // filter the response for only entities which are locations
-          // and then remove any duplicates from that list.
           resolve(filter_duplicates(filter_locations(response), "spot"));
         },
         function(error) {

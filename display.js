@@ -1,35 +1,22 @@
-var RECBOX, SPINNER;
+var RESULTSBOX, SPINNER;
 
-function makeRecbox() {
-  var recbox = document.createElement("div");
-  recbox.id = "recbox";
+// this is the box at the top of the page that the extracts appear in
+function makeRESULTSBOX() {
+  var RESULTSBOX = document.createElement("div");
+  RESULTSBOX.id = "RESULTSBOX";
   var spinner = document.createElement("div");
-  spinner.classList += "recspinner";
+  spinner.classList += "spinner";
   spinner.innerHTML =
     '<div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div>';
 
-  recbox.innerHTML = "<h2>Getting some cool things for you...</h2>";
-  recbox.classList += " rec-group ";
-  recbox.appendChild(spinner);
-  return recbox;
+  RESULTSBOX.innerHTML = "<h2>Getting some cool things for you...</h2>";
+  RESULTSBOX.classList += " rec-group ";
+  RESULTSBOX.appendChild(spinner);
+  return RESULTSBOX;
 }
 
-function displayWarning(message) {
-  RECBOX.innerHTML = "<h2>" + message + "</h2>";
-  RECBOX.classList += " warning ";
-}
-
-function displayError(message) {
-  RECBOX.innerHTML = "<h2>" + message + "</h2>";
-  RECBOX.classList += " error ";
-}
-
-function insertAtBodyTop(node) {
-  document.body.prepend(node);
-}
-
+// create a summary of a result with an img, abstract and wiki link
 function create_extract(result) {
-  // create thumbnails of entity
   var extract = document.createElement("div");
   extract.className = "extract";
   var abstract = document.createElement("div");
@@ -49,6 +36,7 @@ function create_extract(result) {
   return extract;
 }
 
+// create a list of a result summary html nodes
 function create_extracts(results) {
   var extracts = document.createElement("div");
   extracts.className = "extracts";
@@ -58,24 +46,23 @@ function create_extracts(results) {
 
 // ***************** EXECUTE THIS ON LOAD ***************** //
 if (document.querySelector("body") != null) {
-  RECBOX = makeRecbox();
-  insertAtBodyTop(RECBOX);
-  SPINNER = RECBOX.querySelector(".recspinner");
+  RESULTSBOX = makeRESULTSBOX();
+  document.body.prepend(RESULTSBOX);
+  SPINNER = RESULTSBOX.querySelector(".spinner");
   get_locations().then(
     results => {
       SPINNER.style.display = "none";
       if (results.length != 0) {
-        RECBOX.querySelector("h2").innerText =
+        RESULTSBOX.querySelector("h2").innerText =
           "Here are the locations mentioned on the page.";
-        RECBOX.appendChild(create_extracts(results));        
+        RESULTSBOX.appendChild(create_extracts(results));
       } else {
-        RECBOX.querySelector("h2").innerText =
+        RESULTSBOX.querySelector("h2").innerText =
           "Sorry we couldn't find any results for this page.";
       }
-      console.log(results);
     },
     error => {
-      console.log("Error! " + error);
+      allert("Error! " + error);
     }
   );
 }
