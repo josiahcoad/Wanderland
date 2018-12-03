@@ -1,5 +1,3 @@
-get_locations();
-
 // ***************** LOGIC ***************** //
 
 function filter_locations(response) {
@@ -10,9 +8,21 @@ function filter_locations(response) {
   );
 }
 
+function filter_duplicates(array, field) {
+  var distinct_objects = [];
+  var distinct_values = [];
+  for (var i = 0; i < array.length; i++) {
+    if (distinct_values.indexOf(array[i][field]) == -1) {
+      distinct_objects.push(array[i]);
+      distinct_values.push(array[i][field]);
+    }
+  }
+  return distinct_objects;
+}
+
 // ***************** API CALLS ***************** //
 
-const LOCATION_TYPES = [
+var LOCATION_TYPES = [
   "http://dbpedia.org/ontology/City",
   "http://dbpedia.org/ontology/Settlement",
   "http://dbpedia.org/ontology/PopulatedPlace",
@@ -20,7 +30,7 @@ const LOCATION_TYPES = [
   "http://dbpedia.org/ontology/Location"
 ];
 
-const PARAMS =
+var PARAMS =
   "&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5";
 
 function get_webpage_uri() {
@@ -52,49 +62,18 @@ function get_api_reponse(text) {
 
 function get_locations() {
   var text = get_webpage_uri();
-  get_api_reponse(text)
-    .then(JSON.parse)
-    .then(
-      function(response) {
-        var locations = filter_locations(response);
-        console.log("Success!", locations);
-      },
-      function(error) {
-        console.error("Failed!", error);
-      }
-    );
-}
-
-// ***************** HTML PAGE MANAGMENT ***************** //
-function insertAfter(self, node) {
-  if (!self.parentNode) {
-    return false;
-  }
-
-  if (self.previousSibling != null) {
-    self.parentNode.insertBefore(node, self.previousSibling);
-  } else {
-    self.parentNode.appendChild(node);
-  }
-}
-
-function insertBefore(self, node) {
-  if (!self.parentNode) {
-    return false;
-  }
-
-  if (self.nextSibling != null) {
-    self.parentNode.insertAfter(node, self.nextSibling);
-  } else {
-    self.parentNode.appendChild(node);
-  }
-}
-
-function insertInside(self, node) {
-  if (!self.parentNode) {
-    return false;
-  }
-  if (self.nextSibling != null) {
-    self.parentNode.appendChild(node);
-  }
+  return new Promise((resolve, reject) => {
+    get_api_reponse(text)
+      .then(JSON.parse)
+      .then(
+        function(response) {
+          // filter the response for only entities which are locations
+          // and then remove any duplicates from that list.
+          resolve(filter_duplicates(filter_locations(response), "spot"));
+        },
+        function(error) {
+          reject(Error(error));
+        }
+      );
+  });
 }
