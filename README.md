@@ -1,6 +1,8 @@
-# SeeTheWorld
+# SeeTheWorld :airplane:
 
-I love planning travel and seeing new places to go in the world. There is a recurrent problem with internet wanderlust though. Right now I'm planning a trip to India and googling queries such as *"best hill stations in the himalayas"* or *"best national parks in central india"*. I get back results like **"7 Best National Parks in Central India"**. Normally, it is a list of places that I have never heard of before and have literally no point of reference for the place. So what do I do when I see a name like **Bandhavgarh National Park**? Open up another tab, copy/paste the name into google maps. And I have to do that for *every place* that sounds interesting. And then I start forgetting places or maybe I write them down somewhere but a little while later forget why I wrote it down, and now lost the website that I first found it on. With *SeeTheWorld* you can track places that interest you across web pages. You can add places of interest to your saved places by just clicking on the name of the place when it appears on the site. The idea is that you can easily see a short blurb about any place you added at any time, take notes and see pictures all within your workflow looking through a web page like the **"7 Best National Parks in Central India"**!
+I love planning travel and seeing new places to go in the world :earth_africa:. There is a recurrent problem with internet wanderlust though. :grimacing: Right now I'm planning a trip to India and googling queries such as *"best hill stations in the himalayas"* or *"best national parks in central india"*. I get back results like **"7 Best National Parks in Central India"**. Normally, it is a list of places that I have never heard of before and have literally no point of reference for the place. So what do I do when I see a name like **Bandhavgarh National Park**? Open up another tab, copy/paste the name into google maps. And I have to do that for *every place* that sounds interesting :expressionless:. And then I start forgetting places or maybe I write them down somewhere but a little while later forget why I wrote it down, and now lost the website that I first found it on. With *SeeTheWorld* you can track places that interest you across web pages. You can add places of interest to your saved places by just clicking on the name of the place when it appears on the site. The idea is that you can easily see a short blurb about any place you added at any time, take notes and see pictures all within your workflow looking through a web page like the **"7 Best National Parks in Central India"**! :sunglasses:
+
+![tigerrr](https://travel-blog.waytoindia.com/wp-content/uploads/Kanger-Ghati-National-Park.jpg)
 
 ### Technical Details:
 - We use an API [dandelion](https://dandelion.eu/docs/api/datatxt/nex/v1/) to do entity extraction on a web page HTML that the user is visiting.
@@ -22,3 +24,5 @@ I love planning travel and seeing new places to go in the world. There is a recu
 - go to chrome://extensions/ in chrome browser
 - click "Load Unpacked" and select the repo folder
 - go to any site with locations mentioned to see results pop up at the top of the page
+
+Peace out and happy travelling :v: :yum:
