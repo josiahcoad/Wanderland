@@ -1,5 +1,7 @@
 //credit goes to Steven Frank of Cloud to Butt (https://github.com/panicsteve/cloud-to-butt/)
 
+get_locations();
+
 walk(document.body);
 
 function walk(node) {
@@ -39,11 +41,14 @@ function handleText(textNode) {
   textNode.nodeValue = v;
 }
 
-get_locations();
 
 function get_webpage_text() {
-  // can extend when i find out how to encode text not in the URI
+  // may be unneeded... get_webpage_uri will be better
   return document.body.innerText.substring(0, 1000);
+}
+
+function get_webpage_uri() {
+  return window.location.href;
 }
 
 const location_types = [
@@ -60,7 +65,7 @@ function get_api_reponse(text) {
     const params =
       "&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5";
     const url =
-      "https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=" +
+      "https://api.dandelion.eu/datatxt/nex/v1/?lang=en&url=" +
       encodeURI(text) +
       params;
     Http.open("GET", url);
@@ -80,7 +85,7 @@ function get_api_reponse(text) {
 }
 
 function get_locations() {
-  var text = get_webpage_text();
+  var text = get_webpage_uri();
   get_api_reponse(text).then(JSON.parse).then(
     function(response) {
       console.log("Success!", response);

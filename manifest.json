@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "RaterFox",
-  "description": "The most popular movies and TV shows in your   default tab. Includes ratings, summaries and the ability to watch trailers.",
-  "version": "1",
-  "author": "Jake Prins",
+  "name": "HelpMeTravel!",
+  "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
+  "version": "0.0.1",
+  "author": "Josiah Coad",
   "content_scripts": [
     {
       "css": ["main.css"],
@@ -12,13 +12,17 @@
       "run_at": "document_end"
     }
   ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "browser_action": {
     "default_icon": "tab-icon.png",
-    "default_title": "Have a good day",
+    "default_title": "Let Me Travel",
     "default_popup": "popup.html"
   },
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
-  "permissions": ["activeTab"]
+  "permissions": ["activeTab", "declarativeContent", "storage"]
 }
