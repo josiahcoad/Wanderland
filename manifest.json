@@ -13,8 +13,7 @@
   ],
   "browser_action": {
     "default_icon": "tab-icon.png",
-    "default_title": "Let Me Travel",
-    "default_popup": "popup.html"
+    "default_title": "Let Me Travel"
   },
   "permissions": ["activeTab", "declarativeContent", "storage"]
 }
