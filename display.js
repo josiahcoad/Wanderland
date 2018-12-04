@@ -31,8 +31,8 @@ function createExtract(result) {
   image.className = "resultImg";
   image.src = result.image.thumbnail;
   var wikiLink = document.createElement("a");
-  wikiLink.title = result.spot + " wikipedia";
-  var linkText = document.createTextNode(result.spot + " wikipedia");
+  wikiLink.title = result.spot;
+  var linkText = document.createTextNode(result.spot);
   wikiLink.appendChild(linkText);
   wikiLink.href = result.lod.wikipedia;
   extract.appendChild(image);
