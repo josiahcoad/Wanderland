@@ -1,19 +1,18 @@
 {
-  "manifest_version": 2,
-  "name": "SeeTheWorld",
-  "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
-  "version": "0.0.1",
-  "author": "Josiah Coad",
-  "content_scripts": [
-    {
-      "css": ["main.css"],
-      "js": ["jquery-3.3.1.min.js", "search.js", "logic.js", "display.js"],
-      "matches": ["<all_urls>"]
-    }
-  ],
-  "browser_action": {
-    "default_icon": "tab-icon.png",
-    "default_title": "SeeTheWorld"
-  },
-  "permissions": ["activeTab", "declarativeContent", "storage"]
+    "manifest_version": 2,
+    "name": "SeeTheWorld",
+    "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
+    "version": "0.0.1",
+    "author": "Josiah Coad",
+    "content_scripts": [{
+        "css": ["main.css"],
+        "js": ["jquery-3.3.1.min.js", "search.js", "logic.js", "display.js"],
+        "matches": ["<all_urls>"]
+    }],
+    "browser_action": {
+        "default_icon": "tab-icon.png",
+        "default_title": "SeeTheWorld",
+        "default_popup": "extension.html"
+    },
+    "permissions": ["activeTab", "declarativeContent", "storage"]
 }
