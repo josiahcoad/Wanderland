@@ -23,7 +23,7 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 
 ### How to Run:
 - download/clone the repo
-- go to [chrome://extensions/](chrome://extensions/) in chrome browser
+- go to ```chrome://extensions/``` in chrome browser
 - click "Load Unpacked" and select the repo folder
 - go to any site with locations mentioned to see results pop up at the top of the page
 
