@@ -12,6 +12,9 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 - Perhaps we could allow the user to assign a rough date/orderings to their locations
 - Definitely expandable if you have any other ideas!
 
+
+![example screenshot](assets/readme_example.png)
+
 ### Todo:
 - Tie in the Google Maps API to display where the location is on a thumbnail map
 - Use chrome extension storage to allow users to save locations easily and see them on the map
@@ -19,10 +22,15 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 - Add button in extension-icon-popup so that user can manually choose if they want to run the extension on the page
 - Remove dandelion API key from the source code.
 
-### How to Run
+### How to Run:
 - download/clone the repo
 - go to chrome://extensions/ in chrome browser
 - click "Load Unpacked" and select the repo folder
 - go to any site with locations mentioned to see results pop up at the top of the page
+
+### How to Contribute:
+- So you like the idea and want to be part of it? Awesome! Do whatever seems interesting to you!
+- Please submit your changes as a pull request. Idealy a pull request represents a complete feature you're adding.
+- For GUI related, a useful place for brainstorming is [draw.io](https://drive.google.com/file/d/1-qyOF1iSzyxsx16Yxgx-hzV8WLq0Mt1d/view?usp=sharing) where you are free to edit. Hopefull we can use this to agree on the GUI will look/behave before putting too much effort into the coding of it.
 
 Peace out and happy travelling :v: :yum:

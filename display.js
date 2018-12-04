@@ -62,7 +62,7 @@ if (document.querySelector("body") != null) {
       }
     },
     error => {
-      allert("Error! " + error);
+      alert("Error! " + error);
     }
   );
 }
