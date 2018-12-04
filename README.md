@@ -6,8 +6,8 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 
 ### Technical Details:
 - We use an API [dandelion](https://dandelion.eu/docs/api/datatxt/nex/v1/) to do entity extraction on a web page HTML that the user is visiting.
-- The API returns to us every entity (including locations), also the Wikipedia link, abstract and image link
-- We use the chrome extension to manipulate the HTML DOM of whatever page is of interest, feeding the entire page HTML to the API and then using the match indices returned by the API to highlight/underline the matches. When a user hovers over an underlined match, a popup appears. It can include a mini google-map, location abstract, previous notes on the place, wiki-link etc... (weather?, news?)
+- The API returns to us every entity (including locations), also the Wikipedia link, summary and image link
+- We use the chrome extension to manipulate the HTML DOM of whatever page is of interest, feeding the entire page HTML to the API and then using the match indices returned by the API to highlight/underline the matches. When a user hovers over an underlined match, a popup appears. It can include a mini google-map, location summary, previous notes on the place, wiki-link etc... (weather?, news?)
 - When the user wants to add location to list of their places, we can use the google-extension-storage to store users history
 - Perhaps we could allow the user to assign a rough date/orderings to their locations
 - Definitely expandable if you have any other ideas!

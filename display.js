@@ -1,27 +1,32 @@
-var RESULTSBOX, SPINNER;
+var RESULTSBOX;
 
 // this is the box at the top of the page that the extracts appear in
 function makeResultsBox() {
   var RESULTSBOX = document.createElement("div");
-  RESULTSBOX.id = "RESULTSBOX";
+  var header = document.createElement("h2");
+  var button = document.createElement("button");
+  button.innerHTML = "See the World.";
+  button.onclick = activatePage;
+  RESULTSBOX.appendChild(header);
+  RESULTSBOX.appendChild(button);
+  return RESULTSBOX;
+}
+
+function createSpinner() {
   var spinner = document.createElement("div");
   spinner.classList += "spinner";
   spinner.innerHTML =
     '<div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div>';
-
-  RESULTSBOX.innerHTML = "<h2>Getting some cool things for you...</h2>";
-  RESULTSBOX.classList += " rec-group ";
-  RESULTSBOX.appendChild(spinner);
-  return RESULTSBOX;
+  return spinner;
 }
 
-// create a summary of a result with an img, abstract and wiki link
+// create a summary of a result with an img, summary and wiki link
 function createExtract(result) {
   var extract = document.createElement("div");
   extract.className = "extract";
-  var abstract = document.createElement("div");
-  abstract.classList.add("abstract");
-  abstract.innerText = result.abstract.substring(0, 15) + "...";
+  var summary = document.createElement("div");
+  summary.classList.add("summary");
+  summary.innerText = result.abstract.substring(0, 15) + "...";
   var image = document.createElement("img");
   image.className = "resultImg";
   image.src = result.image.thumbnail;
@@ -32,7 +37,7 @@ function createExtract(result) {
   wikiLink.href = result.lod.wikipedia;
   extract.appendChild(image);
   extract.appendChild(wikiLink);
-  extract.appendChild(abstract);
+  extract.appendChild(summary);
   return extract;
 }
 
@@ -44,18 +49,19 @@ function createExtracts(results) {
   return extracts;
 }
 
-// ***************** EXECUTE THIS ON LOAD ***************** //
-if (document.querySelector("body") != null) {
-  RESULTSBOX = makeResultsBox();
-  document.body.prepend(RESULTSBOX);
-  SPINNER = RESULTSBOX.querySelector(".spinner");
+function activatePage() {
+  var spinner = createSpinner();
+  RESULTSBOX.appendChild(spinner);
   getLocations().then(
     results => {
-      SPINNER.style.display = "none";
+      spinner.style.display = "none";
       if (results.length != 0) {
         RESULTSBOX.querySelector("h2").innerText =
           "Here are the locations mentioned on the page.";
         RESULTSBOX.appendChild(createExtracts(results));
+        // results.forEach(x =>
+        //   searchAndReplace(document.body, x.spot, x.lod.wikipedia, createExtract(x))
+        // );
       } else {
         RESULTSBOX.querySelector("h2").innerText =
           "Sorry we couldn't find any results for this page.";
@@ -65,4 +71,10 @@ if (document.querySelector("body") != null) {
       alert("Error! " + error);
     }
   );
+}
+
+// ***************** EXECUTE THIS ON LOAD ***************** //
+if (document.querySelector("body") != null) {
+  RESULTSBOX = makeResultsBox();
+  $("body").prepend(RESULTSBOX);
 }

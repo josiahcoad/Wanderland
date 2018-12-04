@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "css": ["main.css"],
-      "js": ["logic.js", "display.js"],
+      "js": ["jquery-3.3.1.min.js", "logic.js", "display.js"],
       "matches": ["<all_urls>"]
     }
   ],
