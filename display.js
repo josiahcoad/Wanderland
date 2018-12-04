@@ -12,6 +12,7 @@ function makeResultsBox() {
   return RESULTSBOX;
 }
 
+// create a icon that shows the user results are loading
 function createSpinner() {
   var spinner = document.createElement("div");
   spinner.classList += "spinner";
@@ -59,9 +60,9 @@ function activatePage() {
         RESULTSBOX.querySelector("h2").innerText =
           "Here are the locations mentioned on the page.";
         RESULTSBOX.appendChild(createExtracts(results));
-        // results.forEach(x =>
-        //   searchAndReplace(document.body, x.spot, x.lod.wikipedia, createExtract(x))
-        // );
+        results.forEach(x =>
+          searchAndReplace(document.body, x.spot, x.lod.wikipedia, createExtract(x))
+        );
       } else {
         RESULTSBOX.querySelector("h2").innerText =
           "Sorry we couldn't find any results for this page.";
