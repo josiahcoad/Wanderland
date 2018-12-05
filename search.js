@@ -4,17 +4,14 @@
 function searchAndReplace(node, search, link) {
     var next;
 
-    if (node.nodeType === 1) {
+    if ((node.nodeType === 1) && (node = node.firstChild)) {
         // (Element node)
-
-        if ((node = node.firstChild)) {
-            do {
-                // Recursively call traverseChildNodes
-                // on each child node
-                next = node.nextSibling;
-                searchAndReplace(node, search, link);
-            } while ((node = next));
-        }
+        do {
+            // Recursively call traverseChildNodes
+            // on each child node
+            next = node.nextSibling;
+            searchAndReplace(node, search, link);
+        } while ((node = next));
     } else if (node.nodeType === 3) {
         // (Text node)
         if (new RegExp(search, "gi").test(node.data)) {
@@ -41,17 +38,14 @@ function searchAndReplaceWithTooltip(node, data) {
     var next;
     var search = data.search
     var link = data.link
-    if (node.nodeType === 1) {
+    if ((node.nodeType === 1) && (node = node.firstChild)) {
         // (Element node)
-
-        if ((node = node.firstChild)) {
-            do {
-                // Recursively call traverseChildNodes
-                // on each child node
-                next = node.nextSibling;
-                searchAndReplaceWithTooltip(node, data);
-            } while ((node = next));
-        }
+        do {
+            // Recursively call traverseChildNodes
+            // on each child node
+            next = node.nextSibling;
+            searchAndReplaceWithTooltip(node, data);
+        } while ((node = next));
     } else if (node.nodeType === 3) {
         // (Text node)
         if (new RegExp(search, "gi").test(node.data)) {
