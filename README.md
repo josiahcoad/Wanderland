@@ -31,5 +31,7 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 - So you like the idea and want to be part of it? Awesome! Do whatever seems interesting to you!
 - Please submit your changes as a pull request. Idealy a pull request represents a complete feature you're adding.
 - For GUI related, a useful place for brainstorming is [draw.io](https://drive.google.com/file/d/1-qyOF1iSzyxsx16Yxgx-hzV8WLq0Mt1d/view?usp=sharing) where you are free to edit. Hopefull we can use this to agree on the GUI will look/behave before putting too much effort into the coding of it.
+- Every pull request is run through a rigourous stlylistic auto-checker called codebeat. Before any PR can be merged, it should not raise any issues on codebeat. Our "GPA" for the code base right now is 3.98 ([see whole report here](https://codebeat.co/projects/github-com-josiahcoad-seetheworld-master)). Thank you for doing your part to keep it that way!
+- We use the *Beautify* VS Code Extension to maintain the formatting standard for the repo. Please make sure you have this extension installed and run auto-formatter on your documents before submitting a PR.
 
 Peace out and happy travelling :v: :yum:
