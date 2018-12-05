@@ -53,9 +53,6 @@ function activatePage() {
         results => {
             spinner.style.display = "none";
             if (results.length != 0) {
-                RESULTSBOX.querySelector("h2").innerText =
-                    "Here are the locations mentioned on the page.";
-                RESULTSBOX.appendChild(createExtracts(results));
                 results.forEach(x => {
                     searchAndReplaceWithTooltip(document.body, {
                                             search: x.spot,
