@@ -53,17 +53,14 @@ function activatePage() {
         results => {
             spinner.style.display = "none";
             if (results.length != 0) {
-                RESULTSBOX.querySelector("h2").innerText =
-                    "Here are the locations mentioned on the page.";
-                RESULTSBOX.appendChild(createExtracts(results));
-                results.forEach(x =>
-                    searchAndReplace(
-                        document.body,
-                        x.spot,
-                        x.lod.wikipedia,
-                        createExtract(x)
-                    )
-                );
+                results.forEach(x => {
+                    searchAndReplaceWithTooltip(document.body, {
+                                            search: x.spot,
+                                            link: x.lod.wikipedia,
+                                            image: x.image.thumbnail,
+                                            summary: x.abstract
+                   });
+                });
             } else {
                 RESULTSBOX.querySelector("h2").innerText =
                     "Sorry we couldn't find any results for this page.";
@@ -90,7 +87,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             () => sendResponse({
                 message: "FAILED"
             })
-        )
+        );
     }
     return true;
 });
