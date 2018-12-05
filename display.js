@@ -63,7 +63,12 @@ function activatePage() {
                         image: x.image.thumbnail,
                         summary: x.abstract
                     };
-                    searchAndReplaceWithTooltip(document.body, dataDict);
+                    searchAndReplaceWithTooltip(document.body, {
+                                            search: x.spot,
+                                            link: x.lod.wikipedia,
+                                            image: x.image.thumbnail,
+                                            summary: x.abstract
+                   });
                 });
             } else {
                 RESULTSBOX.querySelector("h2").innerText =
