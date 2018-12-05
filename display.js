@@ -57,12 +57,6 @@ function activatePage() {
                     "Here are the locations mentioned on the page.";
                 RESULTSBOX.appendChild(createExtracts(results));
                 results.forEach(x => {
-                    var dataDict = {
-                        search: x.spot,
-                        link: x.lod.wikipedia,
-                        image: x.image.thumbnail,
-                        summary: x.abstract
-                    };
                     searchAndReplaceWithTooltip(document.body, {
                                             search: x.spot,
                                             link: x.lod.wikipedia,
