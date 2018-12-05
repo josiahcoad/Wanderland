@@ -49,7 +49,7 @@ function createExtracts(results) {
 function activatePage() {
     var spinner = createSpinner();
     RESULTSBOX.appendChild(spinner);
-    getLocations().then(
+    return getLocations().then(
         results => {
             spinner.style.display = "none";
             if (results.length != 0) {
