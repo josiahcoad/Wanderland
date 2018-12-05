@@ -6,8 +6,8 @@
   "author": "Josiah Coad",
   "content_scripts": [
     {
-      "css": ["main.css"],
-      "js": ["jquery-3.3.1.min.js", "search.js", "logic.js", "display.js"],
+      "css": ["includes/css/bootstrap.min.css", "includes/css/tippy-light-theme.css", "main.css", "tooltip.css"],
+      "js": ["includes/js/jquery-3.3.1.min.js", "includes/js/bootstrap.min.js", "search.js", "logic.js", "display.js", "includes/js/tippy.all.min.js", "tooltip.js"],
       "matches": ["<all_urls>"]
     }
   ],

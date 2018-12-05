@@ -53,15 +53,22 @@ function createExtracts(results) {
 function activatePage() {
   var spinner = createSpinner();
   RESULTSBOX.appendChild(spinner);
-  getLocations().then(
+  getLocations().then( 
     results => {
       spinner.style.display = "none";
       if (results.length != 0) {
         RESULTSBOX.querySelector("h2").innerText =
           "Here are the locations mentioned on the page.";
         RESULTSBOX.appendChild(createExtracts(results));
-        results.forEach(x =>
-          searchAndReplace(document.body, x.spot, x.lod.wikipedia, createExtract(x))
+        results.forEach(x => {
+          var dataDict = {
+            search : x.spot,
+            link : x.lod.wikipedia, 
+            image : x.image.thumbnail,
+            summary : x.abstract
+          }
+          searchAndReplaceWithTooltip(document.body, dataDict)
+        }
         );
       } else {
         RESULTSBOX.querySelector("h2").innerText =
