@@ -1,10 +1,10 @@
 .tooltipdiv {
-    max-width : 15vw;
+    max-width: 15vw;
     background-color: white;
     margin: 1vw;
 }
 
-.tooltipdiv img{
+.tooltipdiv img {
     width: 100%;
     height: auto;
 }

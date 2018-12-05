@@ -1,4 +1,4 @@
-function InitializeTooltip(data, linkClass){
+function InitializeTooltip(data, linkClass) {
     console.log(data.image)
     content = `
     <div class = "tooltipdiv">
@@ -10,7 +10,7 @@ function InitializeTooltip(data, linkClass){
 
     tippy(`.${linkClass}`, {
         content: content,
-        theme : "light",
-        interactive : true
+        theme: "light",
+        interactive: true
     })
 }

@@ -4,8 +4,8 @@
 function filterLocations(response) {
   return response.annotations.filter(
     annotation =>
-      annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1)
-        .length !== 0
+    annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1)
+    .length !== 0
   );
 }
 
@@ -56,7 +56,7 @@ function getApiReponse(text) {
       }
     };
     // Handle network errors
-    Http.onerror = function() {
+    Http.onerror = function () {
       reject(Error("Network Error"));
     };
     Http.send();
@@ -70,10 +70,10 @@ function getLocations() {
     getApiReponse(text)
       .then(JSON.parse)
       .then(
-        function(response) {
+        function (response) {
           resolve(filterDuplicates(filterLocations(response), "spot"));
         },
-        function(error) {
+        function (error) {
           reject(Error(error));
         }
       );
