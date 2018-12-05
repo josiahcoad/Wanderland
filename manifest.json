@@ -1,17 +1,17 @@
 {
-  "manifest_version": 2,
-  "name": "SeeTheWorld",
-  "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
-  "version": "0.0.1",
-  "author": "Josiah Coad",
-  "content_scripts": [{
-    "css": ["includes/css/bootstrap.min.css", "includes/css/tippy-light-theme.css", "main.css", "tooltip.css"],
-    "js": ["includes/js/jquery-3.3.1.min.js", "includes/js/bootstrap.min.js", "search.js", "logic.js", "display.js", "includes/js/tippy.all.min.js", "tooltip.js"],
-    "matches": ["<all_urls>"]
-  }],
-  "browser_action": {
-    "default_icon": "tab-icon.png",
-    "default_title": "SeeTheWorld"
-  },
-  "permissions": ["activeTab", "declarativeContent", "storage"]
+    "manifest_version": 2,
+    "name": "SeeTheWorld",
+    "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
+    "version": "0.0.1",
+    "author": "Josiah Coad",
+    "content_scripts": [{
+        "css": ["includes/css/bootstrap.min.css", "includes/css/tippy-light-theme.css", "main.css", "tooltip.css"],
+        "js": ["includes/js/jquery-3.3.1.min.js", "includes/js/bootstrap.min.js", "search.js", "logic.js", "display.js", "includes/js/tippy.all.min.js", "tooltip.js"],
+        "matches": ["<all_urls>"]
+    }],
+    "browser_action": {
+        "default_icon": "tab-icon.png",
+        "default_title": "SeeTheWorld"
+    },
+    "permissions": ["activeTab", "declarativeContent", "storage"]
 }
