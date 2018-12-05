@@ -1,5 +1,4 @@
 function InitializeTooltip(data, linkClass) {
-    console.log(data.image)
     content = `
     <div class = "tooltipdiv">
         <img src="${data.image}"/> 

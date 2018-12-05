@@ -49,7 +49,7 @@ function createExtracts(results) {
 function activatePage() {
     var spinner = createSpinner();
     RESULTSBOX.appendChild(spinner);
-    getLocations().then(
+    return getLocations().then(
         results => {
             spinner.style.display = "none";
             if (results.length != 0) {
@@ -63,7 +63,12 @@ function activatePage() {
                         image: x.image.thumbnail,
                         summary: x.abstract
                     };
-                    searchAndReplaceWithTooltip(document.body, dataDict);
+                    searchAndReplaceWithTooltip(document.body, {
+                                            search: x.spot,
+                                            link: x.lod.wikipedia,
+                                            image: x.image.thumbnail,
+                                            summary: x.abstract
+                   });
                 });
             } else {
                 RESULTSBOX.querySelector("h2").innerText =
