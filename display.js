@@ -82,7 +82,6 @@ if (document.querySelector("body") != null) {
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  console.log(request.message);
     if (request.message == "ACTIVATE") {
         activatePage().then(
             () => sendResponse({
