@@ -24,7 +24,8 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 ### How to Run:
 - download/clone the repo
 - go to ```chrome://extensions/``` in chrome browser
-- click "Load Unpacked" and select the repo folder
+- toggle Developer Mode (switch in top right corner of page)
+- click "Load Unpacked" and select the repo folder (button in top left corner of page)
 - go to any site with locations mentioned to see results pop up at the top of the page
 
 ### How to Contribute:
