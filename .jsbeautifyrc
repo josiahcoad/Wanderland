@@ -1,11 +1,4 @@
 {
-    // The plugin looks for a .jsbeautifyrc file in the same directory as the
-    // source file you're prettifying (or any directory above if it doesn't exist,
-    // or in your home folder if everything else fails) and uses those options
-    // along the default ones.
-
-    // Details: https://github.com/victorporof/Sublime-HTMLPrettify#using-your-own-jsbeautifyrc-options
-    // Documentation: https://github.com/einars/js-beautify/
     "html": {
         "allowed_file_extensions": ["htm", "html", "xhtml", "shtml", "xml", "svg", "dust"],
         "brace_style": "collapse",
@@ -40,17 +33,17 @@
         "indent_char": " ",
         "indent_level": 0,
         "indent_size": 4,
-        "indent_with_tabs": false, 
+        "indent_with_tabs": false,
         "jslint_happy": false,
-        "keep_array_indentation": false, 
+        "keep_array_indentation": false,
         "keep_function_indentation": false,
         "max_preserve_newlines": 0,
         "preserve_newlines": true,
-        "space_after_anon_function": false, 
-        "space_before_conditional": true, 
+        "space_after_anon_function": false,
+        "space_before_conditional": true,
         "space_in_empty_paren": false,
-        "space_in_paren": false, 
+        "space_in_paren": false,
         "unescape_strings": false,
-        "wrap_line_length": 0 
+        "wrap_line_length": 0
     }
 }
