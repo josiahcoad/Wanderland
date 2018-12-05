@@ -57,12 +57,6 @@ function activatePage() {
                     "Here are the locations mentioned on the page.";
                 RESULTSBOX.appendChild(createExtracts(results));
                 results.forEach(x => {
-                    var dataDict = {
-                        search: x.spot,
-                        link: x.lod.wikipedia,
-                        image: x.image.thumbnail,
-                        summary: x.abstract
-                    };
                     searchAndReplaceWithTooltip(document.body, {
                                             search: x.spot,
                                             link: x.lod.wikipedia,
@@ -88,6 +82,7 @@ if (document.querySelector("body") != null) {
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  console.log(request.message);
     if (request.message == "ACTIVATE") {
         activatePage().then(
             () => sendResponse({

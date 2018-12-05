@@ -11,7 +11,8 @@
     }],
     "browser_action": {
         "default_icon": "tab-icon.png",
-        "default_title": "SeeTheWorld"
+        "default_title": "SeeTheWorld",
+        "default_popup": "extension.html"
     },
     "permissions": ["activeTab", "declarativeContent", "storage"]
 }
