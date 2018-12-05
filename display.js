@@ -84,8 +84,12 @@ if (document.querySelector("body") != null) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.message == "ACTIVATE") {
         activatePage().then(
-            () => sendResponse({ message: "SUCCESS" }),
-            () => sendResponse({ message: "FAILED" })
+            () => sendResponse({
+                message: "SUCCESS"
+            }),
+            () => sendResponse({
+                message: "FAILED"
+            })
         )
     }
     return true;
