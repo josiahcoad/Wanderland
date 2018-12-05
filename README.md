@@ -19,12 +19,11 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 - Tie in the Google Maps API to display where the location is on a thumbnail map
 - Use chrome extension storage to allow users to save locations easily and see them on the map
 - Make the info pop up in-line with the text, meaning we should underline/highlight the text and show the info-popup when the user hovers over the text (we need to know what our entity-extraction API considers **main content**)
-- Add button in extension-icon-popup so that user can manually choose if they want to run the extension on the page
 - Remove dandelion API key from the source code.
 
 ### How to Run:
 - download/clone the repo
-- go to [chrome://extensions/](chrome://extensions/) in chrome browser
+- go to ```chrome://extensions/``` in chrome browser
 - click "Load Unpacked" and select the repo folder
 - go to any site with locations mentioned to see results pop up at the top of the page
 
