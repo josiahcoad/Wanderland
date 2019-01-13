@@ -24,4 +24,4 @@ function sendMessage() {
 }
 
 // add an event listener to the button with id "activate"
-$("#activate").click(sendMessage);  
+$("#activate").click(sendMessage);
