@@ -6,7 +6,8 @@ function InitializeTooltip(data, linkClass) {
         <a href="${data.link}" class="badge badge-info mx-auto">Wiki</a>
     </div>
     `
-
+    // the function tippy is defined here because the sourcecode for tippy
+    // is already included in the manifest.json before including tooltip.js
     tippy(`.${linkClass}`, {
         content: content,
         theme: "light",

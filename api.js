@@ -1,6 +1,17 @@
-// ***************** COMMON LOGIC ***************** //
+// This code gets injected automatically into every page you go onto in Google Chrome.
+// The functions here are specifically for calling the dandelion api which does the entity
+// extraction on the webpage text.
+
+var LOCATION_TYPES = [
+    "http://dbpedia.org/ontology/City",
+    "http://dbpedia.org/ontology/Settlement",
+    "http://dbpedia.org/ontology/PopulatedPlace",
+    "http://dbpedia.org/ontology/Place",
+    "http://dbpedia.org/ontology/Location"
+];
 
 // return results whose "types" are at least one of the LOCATION_TYPES
+// NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
     return response.annotations.filter(
         annotation =>
@@ -23,32 +34,26 @@ function filterDuplicates(array, field) {
     return distinctObjects;
 }
 
-// ***************** API CALLS ***************** //
+function getCurrentPageUrl() {
+    return window.location.href;
+}
 
-var LOCATION_TYPES = [
-    "http://dbpedia.org/ontology/City",
-    "http://dbpedia.org/ontology/Settlement",
-    "http://dbpedia.org/ontology/PopulatedPlace",
-    "http://dbpedia.org/ontology/Place",
-    "http://dbpedia.org/ontology/Location"
-];
 
 var PARAMS =
     "&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5";
 
-function getWebpageUri() {
-    return window.location.href;
-}
-
-function getApiReponse(text) {
+// send the webpage Url to the Dandelion API along with the params that tell
+// the api what we want to get back. On successful response, return the response,
+// otherwise return the status.
+function getEntitiesFromWebpage(webpageUrl) {
     return new Promise((resolve, reject) => {
         const Http = new XMLHttpRequest();
         const url =
             "https://api.dandelion.eu/datatxt/nex/v1/?lang=en&url=" +
-            encodeURI(text) +
+            encodeURI(webpageUrl) +
             PARAMS;
         Http.open("GET", url);
-        Http.onloadend = e => {
+        Http.onloadend = () => {
             if (Http.status == 200) {
                 resolve(Http.responseText);
             } else {
@@ -63,17 +68,22 @@ function getApiReponse(text) {
     });
 }
 
-// query the api to return all unique locations from the current page
-function getLocations() {
-    var text = getWebpageUri();
+// query Dandelion for all unique locations from the text on the current page
+function getUniqueLocationsFromCurrentPage() {
+    var currentPageUrl = getCurrentPageUrl();
     return new Promise((resolve, reject) => {
-        getApiReponse(text)
+        getEntitiesFromWebpage(currentPageUrl)
             .then(JSON.parse)
             .then(
                 function(response) {
+                    console.log("success");
+                    console.log(response);
+                    // filter the reponse for all entities that are locations
+                    // then remove duplicate locations... ones that have the same "spot"
                     resolve(filterDuplicates(filterLocations(response), "spot"));
                 },
                 function(error) {
+                    console.log("error yo");
                     reject(Error(error));
                 }
             );

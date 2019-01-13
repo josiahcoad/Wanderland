@@ -12,7 +12,6 @@ function searchAndReplaceWithTooltip(node, data) {
     } else if (node.nodeType === 3) {
         // (Text node)
         if (new RegExp(search, "gi").test(node.data)) {
-            // Do something interesting here
             wrapMatchesInNodeWithTooltip(node, data);
         }
     }
@@ -40,5 +39,5 @@ function wrapMatchesInNodeWithTooltip(textNode, data) {
         textNode.parentNode.insertBefore(temp.firstChild, null);
     }
     textNode.parentNode.removeChild(textNode);
-    InitializeTooltip(data, linkClass)
+    initializeTooltip(data, linkClass)
 }
