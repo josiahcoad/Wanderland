@@ -1,3 +1,6 @@
+// This code gets injected automatically into every page you go onto in Google Chrome.
+// The functions here dynamically build dom elements that are used to insert into the page.
+
 var RESULTSBOX;
 
 // this is the box at the top of the page that the extracts appear in
@@ -7,16 +10,6 @@ function makeResultsBox() {
     RESULTSBOX.appendChild(header);
     return RESULTSBOX;
 }
-
-// create a icon that shows the user results are loading
-function createSpinner() {
-    var spinner = document.createElement("div");
-    spinner.classList += "spinner";
-    spinner.innerHTML =
-        '<div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div>';
-    return spinner;
-}
-
 // create a summary of a result with an img, summary and wiki link
 function createExtract(result) {
     var extract = document.createElement("div");
@@ -47,19 +40,16 @@ function createExtracts(results) {
 }
 
 function activatePage() {
-    var spinner = createSpinner();
-    RESULTSBOX.appendChild(spinner);
-    return getLocations().then(
+    return getUniqueLocationsFromCurrentPage().then(
         results => {
-            spinner.style.display = "none";
             if (results.length != 0) {
-                results.forEach(x => {
+                results.forEach(result => {
                     searchAndReplaceWithTooltip(document.body, {
-                                            search: x.spot,
-                                            link: x.lod.wikipedia,
-                                            image: x.image.thumbnail,
-                                            summary: x.abstract
-                   });
+                        search: result.spot,
+                        link: result.lod.wikipedia,
+                        image: result.image.thumbnail,
+                        summary: result.abstract
+                    });
                 });
             } else {
                 RESULTSBOX.querySelector("h2").innerText =
@@ -72,14 +62,16 @@ function activatePage() {
     );
 }
 
-// ***************** EXECUTE THIS ON LOAD ***************** //
-if (document.querySelector("body") != null) {
-    RESULTSBOX = makeResultsBox();
-    $("body").prepend(RESULTSBOX);
-}
-
+// ***************** EXECUTE THIS ON PAGE LOAD ***************** //
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    // add a results box to the top of the page
+    // add an event listener to wait for a button press of the
+    // activate button in the extension.js code.
     if (request.message == "ACTIVATE") {
+        // if (document.querySelector("body") != null) {
+        //     RESULTSBOX = makeResultsBox();
+        //     $("body").prepend(RESULTSBOX);
+        // }
         activatePage().then(
             () => sendResponse({
                 message: "SUCCESS"
