@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/josiahcoad/SeeTheWorld#readme",
   "dependencies": {
+    "findandreplacedomtext": "^0.4.6",
     "fs": "0.0.1-security",
     "tippy": "0.0.0",
     "tippy.js": "^3.4.1",

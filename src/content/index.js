@@ -2,23 +2,29 @@
 import {
     getUniqueLocationsFromCurrentPage
 } from './api'
+import findAndReplaceDOMText from 'findandreplacedomtext'
 import {
-    searchAndReplaceWithTooltip
-} from './search'
+    initializeTooltip
+} from './tooltip'
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage().then(
         results => {
-            console.log("success");
-            console.log(results);
             if (results.length != 0) {
                 results.forEach(result => {
-                    searchAndReplaceWithTooltip(document.body, {
+                    var linkClass = result.spot.replace(" ", "_") + "_tooltip";
+                    findAndReplaceDOMText(document.body, {
+                        find: result.spot,
+                        replace: 'spam' + result.spot,
+                        wrap: 'a',
+                        wrapClass: linkClass
+                    });
+                    initializeTooltip({
                         search: result.spot,
                         link: result.lod.wikipedia,
                         image: result.image.thumbnail,
                         summary: result.abstract
-                    });
+                    }, linkClass);
                 });
             } else {
                 alert("Sorry we couldn't find any results for this page.");
