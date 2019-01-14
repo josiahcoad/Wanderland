@@ -15,7 +15,6 @@ function activatePage() {
                     const linkClass = `${result.spot.replace(' ', '_')}_tooltip`;
                     findAndReplaceDOMText(document.body, {
                         find: result.spot,
-                        replace: `${result.spot}`,
                         wrap: 'a',
                         wrapClass: linkClass,
                     });
