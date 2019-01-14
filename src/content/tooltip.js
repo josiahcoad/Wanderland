@@ -1,6 +1,7 @@
 import './tooltip.css';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
+import './tippy-light-theme.css';
 
 export function initializeTooltip(data, linkClass) {
     const tooltipNode = `

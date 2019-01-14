@@ -79,7 +79,7 @@ export function getUniqueLocationsFromCurrentPage() {
                     resolve(filterDuplicates(filterLocations(response), 'spot'));
                 },
                 (error) => {
-                    alert('error yo');
+                    alert('Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n');
                     reject(Error(error));
                 },
             );

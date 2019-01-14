@@ -1,18 +1,45 @@
 const path = require('path');
+const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
 
 module.exports = {
-    entry: './src/content/index.js',
+    context: __dirname,
+    entry: {
+        content: [
+            './src/content/index.js',
+        ],
+        background: [
+            './src/background/background.js',
+        ],
+    },
     output: {
-        filename: 'contentBundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name]Bundle.js',
+        path: path.resolve(__dirname, 'dist'),
     },
     module: {
         rules: [{
+            test: /\.js$/,
+            loader: 'babel-loader',
+        },
+        {
             test: /\.css$/,
-            use: [
-                'style-loader',
-                'css-loader'
-            ]
-        }]
-    }
+            loader: 'style-loader!css-loader',
+        },
+        {
+            test: /\.html$/,
+            loader: 'html-loader',
+            exclude: /node_modules/,
+        },
+        ],
+    },
+    resolve: {
+        modules: [
+            path.join(__dirname, 'node_modules'),
+        ],
+    },
+    plugins: [
+        new ChromeExtensionReloader({
+            reloadPage: true,
+            background: 'background',
+        }),
+    ],
 };

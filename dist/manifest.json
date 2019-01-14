@@ -9,6 +9,10 @@
         "js": ["contentBundle.js"],
         "matches": ["<all_urls>"]
     }],
+    "background": {
+        "scripts" : ["backgroundBundle.js"],
+        "persistent": false
+    },
     "browser_action": {
         "default_icon": "popup/popup-icon.png",
         "default_title": "See The World",

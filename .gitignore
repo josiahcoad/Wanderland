@@ -1,5 +1,6 @@
 # Generic Files
 *.txt
 node_modules
-**/contentBundle.js
-**/contentBundle.js.map
+dist
+!dist/manifest.json
+!dist/popup/*

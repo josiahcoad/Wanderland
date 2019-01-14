@@ -2,10 +2,10 @@
 import findAndReplaceDOMText from 'findandreplacedomtext';
 import {
     getUniqueLocationsFromCurrentPage,
-} from './api';
+} from './api.js';
 import {
     initializeTooltip,
-} from './tooltip';
+} from './tooltip.js';
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage().then(
@@ -15,7 +15,7 @@ function activatePage() {
                     const linkClass = `${result.spot.replace(' ', '_')}_tooltip`;
                     findAndReplaceDOMText(document.body, {
                         find: result.spot,
-                        replace: `spam ${result.spot}`,
+                        replace: `${result.spot}`,
                         wrap: 'a',
                         wrapClass: linkClass,
                     });
@@ -37,6 +37,7 @@ function activatePage() {
 }
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
+console.log('Activating SeeTheWorld');
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the
