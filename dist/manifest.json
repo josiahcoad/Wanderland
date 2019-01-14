@@ -6,7 +6,7 @@
     "author": "Josiah Coad",
     "content_scripts": [{
         "css": [],
-        "js": ["content.js"],
+        "js": ["contentBundle.js"],
         "matches": ["<all_urls>"]
     }],
     "browser_action": {
