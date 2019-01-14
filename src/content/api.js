@@ -69,21 +69,19 @@ function getEntitiesFromWebpage(webpageUrl) {
 }
 
 // query Dandelion for all unique locations from the text on the current page
-function getUniqueLocationsFromCurrentPage() {
+export function getUniqueLocationsFromCurrentPage() {
     var currentPageUrl = getCurrentPageUrl();
     return new Promise((resolve, reject) => {
         getEntitiesFromWebpage(currentPageUrl)
             .then(JSON.parse)
             .then(
                 function(response) {
-                    console.log("success");
-                    console.log(response);
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
                     resolve(filterDuplicates(filterLocations(response), "spot"));
                 },
                 function(error) {
-                    console.log("error yo");
+                    alert("error yo");
                     reject(Error(error));
                 }
             );

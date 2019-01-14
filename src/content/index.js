@@ -1,8 +1,16 @@
 // This code gets injected automatically into every page you go onto in Google Chrome.
+import {
+    getUniqueLocationsFromCurrentPage
+} from './api'
+import {
+    searchAndReplaceWithTooltip
+} from './search'
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage().then(
         results => {
+            console.log("success");
+            console.log(results);
             if (results.length != 0) {
                 results.forEach(result => {
                     searchAndReplaceWithTooltip(document.body, {
@@ -28,10 +36,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     // add an event listener to wait for a button press of the
     // activate button in the extension.js code.
     if (request.message == "ACTIVATE") {
-        // if (document.querySelector("body") != null) {
-        //     RESULTSBOX = makeResultsBox();
-        //     $("body").prepend(RESULTSBOX);
-        // }
         activatePage().then(
             () => sendResponse({
                 message: "SUCCESS"

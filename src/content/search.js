@@ -1,12 +1,16 @@
+import {
+    initializeTooltip
+} from './tooltip'
+
 // traverse the node (i.e. document.body) to find every place there
 // is text matching the search term and then replace it with an anchor
 // tag with "link" and the search term as the clickable text.
 
-function searchAndReplaceWithTooltip(node, data) {
+export function searchAndReplaceWithTooltip(node, data) {
     var search = data.search
-    if (node.nodeType === 1){
+    if (node.nodeType === 1) {
         // (Element node)
-        if(node = node.firstChild) {
+        if (node = node.firstChild) {
             traverseNodeAndReplace(node, data)
         }
     } else if (node.nodeType === 3) {
@@ -17,7 +21,7 @@ function searchAndReplaceWithTooltip(node, data) {
     }
 }
 
-function traverseNodeAndReplace(node, data){
+function traverseNodeAndReplace(node, data) {
     do {
         // Recursively call traverseChildNodes
         // on each child node

@@ -1,4 +1,8 @@
-function InitializeTooltip(data, linkClass) {
+import './tooltip.css'
+import tippy from 'tippy.js'
+import 'tippy.js/dist/tippy.css'
+
+export function initializeTooltip(data, linkClass) {
     content = `
     <div class = "tooltipdiv">
         <img src="${data.image}"/> 
