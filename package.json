@@ -1,0 +1,42 @@
+{
+  "name": "seetheworld",
+  "version": "1.0.0",
+  "description": "I love planning travel and seeing new places to go in the world :earth_africa:. There is a recurrent problem with internet wanderlust though. :grimacing: Right now I'm planning a trip to India and googling queries such as *\"best hill stations in the himalayas\"* or *\"best national parks in central india\"*. I get back results like **\"7 Best National Parks in Central India\"**. Normally, it is a list of places that I have never heard of before and have literally no point of reference for the place. :hear_no_evil: So what do I do when I see a name like **Bandhavgarh National Park**? Open up another tab, copy/paste the name into google maps. And I have to do that for *every place* that sounds interesting :expressionless:. And then I start forgetting places or maybe I write them down somewhere but a little while later forget why I wrote it down, and now lost the website that I first found it on. :man_facepalming: With *SeeTheWorld* you can track places that interest you across web pages. You can add places of interest to your saved places by just clicking on the name of the place when it appears on the site. The idea is that you can easily see a short blurb about any place you added at any time, take notes and see pictures all within your workflow looking through a web page like the **\"7 Best National Parks in Central India\"**! :sunglasses:",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode development --devtool source-map",
+    "watch": "webpack --mode development --devtool source-map --watch --info-verbosity verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josiahcoad/SeeTheWorld.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josiahcoad/SeeTheWorld/issues"
+  },
+  "homepage": "https://github.com/josiahcoad/SeeTheWorld#readme",
+  "dependencies": {
+    "findandreplacedomtext": "^0.4.6",
+    "fs": "0.0.1-security",
+    "tippy": "0.0.0",
+    "tippy.js": "^3.4.1",
+    "unfluff": "^3.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "babel-loader": "^8.0.5",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.12.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.28.4",
+    "webpack-chrome-extension-reloader": "^1.1.1",
+    "webpack-cli": "^3.2.1"
+  }
+}

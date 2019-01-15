@@ -1,2 +1,6 @@
 # Generic Files
 *.txt
+node_modules
+dist
+!dist/manifest.json
+!dist/popup/*

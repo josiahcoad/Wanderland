@@ -5,14 +5,18 @@
     "version": "0.0.1",
     "author": "Josiah Coad",
     "content_scripts": [{
-        "css": ["includes/css/bootstrap.min.css", "includes/css/tippy-light-theme.css", "main.css", "tooltip.css"],
-        "js": ["includes/js/jquery-3.3.1.min.js", "includes/js/bootstrap.min.js", "search.js", "logic.js", "display.js", "includes/js/tippy.all.min.js", "tooltip.js"],
+        "css": [],
+        "js": ["contentBundle.js"],
         "matches": ["<all_urls>"]
     }],
+    "background": {
+        "scripts" : ["backgroundBundle.js"],
+        "persistent": false
+    },
     "browser_action": {
-        "default_icon": "tab-icon.png",
-        "default_title": "SeeTheWorld",
-        "default_popup": "extension.html"
+        "default_icon": "popup/popup-icon.png",
+        "default_title": "See The World",
+        "default_popup": "popup/popup.html"
     },
     "permissions": ["activeTab", "declarativeContent", "storage"]
 }
