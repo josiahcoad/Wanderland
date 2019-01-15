@@ -25,11 +25,11 @@ function sendMessage() {
 }
 
 class ActivateButton extends Component {
-  render() {
-    return (
-      <button className="activateButton" onClick={sendMessage}>See The World</button>
-    );
-  }
+    render() {
+        return (
+            <button className="activateButton" onClick={sendMessage}>See The World</button>
+        );
+    }
 }
 
 export default ActivateButton;
