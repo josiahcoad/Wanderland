@@ -14,9 +14,9 @@
         "persistent": false
     },
     "browser_action": {
-        "default_icon": "popup/popup-icon.png",
+        "default_icon": "popup-icon.png",
         "default_title": "See The World",
-        "default_popup": "popup/popup.html"
+        "default_popup": "popup.html"
     },
     "permissions": ["activeTab", "declarativeContent", "storage"]
 }

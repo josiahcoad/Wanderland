@@ -8,7 +8,10 @@ module.exports = {
             './src/content/index.js',
         ],
         background: [
-            './src/background/background.js',
+            './src/background/index.js',
+        ],
+        popup: [
+            './src/popup/index.js',
         ],
     },
     output: {
