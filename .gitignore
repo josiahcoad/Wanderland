@@ -1,6 +1,6 @@
 # Generic Files
 *.txt
 node_modules
-dist
+dist/*Bundle*
 !dist/manifest.json
 !dist/popup.html
