@@ -3,4 +3,4 @@
 node_modules
 dist
 !dist/manifest.json
-!dist/popup/*
+!dist/popup.html
