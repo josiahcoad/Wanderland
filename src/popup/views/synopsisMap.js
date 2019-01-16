@@ -1,23 +1,22 @@
-
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-import uuid from 'uuid';
-import { Grid } from '@material-ui/core';
+import React, { Component } from "react";
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
+import uuid from "uuid";
+import { Grid } from "@material-ui/core";
 
 const mapStyles = {
-    width: '95%',
-    height: '95%',
+    width: "95%",
+    height: "95%"
 };
-
 
 function googleGeometryAPIGet(location) {
     return new Promise((resolve, reject) => {
         const Http = new XMLHttpRequest();
-        Http.responseType = 'json';
+        Http.responseType = "json";
 
-        const url =
-        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(location)}&inputtype=textquery&fields=geometry`;
-        Http.open('GET', url);
+        const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
+            location
+        )}&inputtype=textquery&fields=geometry`;
+        Http.open("GET", url);
         Http.onloadend = () => {
             if (Http.status === 200) {
                 resolve(Http.response.candidates[0].geometry.location);
@@ -27,7 +26,7 @@ function googleGeometryAPIGet(location) {
         };
         // Handle network errors
         Http.onerror = () => {
-            reject(Error('Network Error'));
+            reject(Error("Network Error"));
         };
         Http.send();
     });
@@ -37,34 +36,39 @@ export class SynopsisMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showingInfoWindow: false,  // Hides or the shows the infoWindow
-            activeMarker: {},          // Shows the active marker upon click
-            selectedPlace: {},         // Shows the infoWindow to the selected place upon a marker
+            showingInfoWindow: false, // Hides or the shows the infoWindow
+            activeMarker: {}, // Shows the active marker upon click
+            selectedPlace: {}, // Shows the infoWindow to the selected place upon a marker
             places: [],
-            _map: null,
+            _map: null
         };
         this.onMarkerClick = this.onMarkerClick.bind(this);
         this.onClose = this.onClose.bind(this);
     }
 
     componentDidMount() {
-        this.props.placesScraped.forEach((location) =>
-            googleGeometryAPIGet(location)
-                .then((response) => {
-                    this.setState(prevState => ({
-                        places: [...prevState.places, {
+        this.props.placesScraped.forEach(location =>
+            googleGeometryAPIGet(location).then(response => {
+                this.setState(prevState => ({
+                    places: [
+                        ...prevState.places,
+                        {
                             name: location,
                             lat: response.lat,
-                            lng: response.lng,
-                        }],
-                    }));
+                            lng: response.lng
+                        }
+                    ]
                 }));
+            })
+        );
     }
 
     componentDidUpdate() {
         const bounds = new this.props.google.maps.LatLngBounds();
         this.state.places.forEach(place => {
-            bounds.extend(new this.props.google.maps.LatLng(place.lat, place.lng));
+            bounds.extend(
+                new this.props.google.maps.LatLng(place.lat, place.lng)
+            );
         });
         if (typeof this.state._map !== "undefined") {
             this.state._map.fitBounds(bounds);
@@ -90,26 +94,26 @@ export class SynopsisMap extends Component {
 
     render() {
         return (
-            <Grid
-                container
-                justify="center"
-            >
+            <Grid container justify="center">
                 <Grid item xs={12}>
                     <Map
                         google={this.props.google}
                         style={mapStyles}
                         onReady={(props, map) => this.setState({ _map: map })}
                     >
-                        {
-                            this.state.places.map(place => (
-                                <Marker
-                                    onClick={this.onMarkerClick}
-                                    name={place.name}
-                                    position={new this.props.google.maps.LatLng(place.lat, place.lng)}
-                                    key={uuid.v4()}
-                                />
-                            ))
-                        }
+                        {this.state.places.map(place => (
+                            <Marker
+                                onClick={this.onMarkerClick}
+                                name={place.name}
+                                position={
+                                    new this.props.google.maps.LatLng(
+                                        place.lat,
+                                        place.lng
+                                    )
+                                }
+                                key={uuid.v4()}
+                            />
+                        ))}
                         <InfoWindow
                             marker={this.state.activeMarker}
                             visible={this.state.showingInfoWindow}
@@ -126,8 +130,6 @@ export class SynopsisMap extends Component {
     }
 }
 
-
-
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8'
+    apiKey: "AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8"
 })(SynopsisMap);

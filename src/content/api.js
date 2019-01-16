@@ -3,20 +3,20 @@
 // extraction on the webpage text.
 
 const LOCATION_TYPES = [
-    'http://dbpedia.org/ontology/City',
-    'http://dbpedia.org/ontology/Settlement',
-    'http://dbpedia.org/ontology/PopulatedPlace',
-    'http://dbpedia.org/ontology/Place',
-    'http://dbpedia.org/ontology/Location',
+    "http://dbpedia.org/ontology/City",
+    "http://dbpedia.org/ontology/Settlement",
+    "http://dbpedia.org/ontology/PopulatedPlace",
+    "http://dbpedia.org/ontology/Place",
+    "http://dbpedia.org/ontology/Location"
 ];
 
 // return results whose "types" are at least one of the LOCATION_TYPES
 // NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
     return response.annotations.filter(
-        annotation => annotation.types
-            .filter(type => LOCATION_TYPES.indexOf(type) !== -1)
-            .length !== 0,
+        annotation =>
+            annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1)
+                .length !== 0
     );
 }
 
@@ -38,8 +38,8 @@ function getCurrentPageUrl() {
     return window.location.href;
 }
 
-
-const PARAMS = '&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5';
+const PARAMS =
+    "&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5";
 
 // send the webpage Url to the Dandelion API along with the params that tell
 // the api what we want to get back. On successful response, return the response,
@@ -47,10 +47,10 @@ const PARAMS = '&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategorie
 function getEntitiesFromWebpage(webpageUrl) {
     return new Promise((resolve, reject) => {
         const Http = new XMLHttpRequest();
-        const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&url=${
-            encodeURI(webpageUrl)
-        }${PARAMS}`;
-        Http.open('GET', url);
+        const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&url=${encodeURI(
+            webpageUrl
+        )}${PARAMS}`;
+        Http.open("GET", url);
         Http.onloadend = () => {
             if (Http.status === 200) {
                 resolve(Http.responseText);
@@ -60,7 +60,7 @@ function getEntitiesFromWebpage(webpageUrl) {
         };
         // Handle network errors
         Http.onerror = () => {
-            reject(Error('Network Error'));
+            reject(Error("Network Error"));
         };
         Http.send();
     });
@@ -73,15 +73,19 @@ export function getUniqueLocationsFromCurrentPage() {
         getEntitiesFromWebpage(currentPageUrl)
             .then(JSON.parse)
             .then(
-                (response) => {
+                response => {
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
-                    resolve(filterDuplicates(filterLocations(response), 'spot'));
+                    resolve(
+                        filterDuplicates(filterLocations(response), "spot")
+                    );
                 },
-                (error) => {
-                    alert('Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n');
+                error => {
+                    alert(
+                        "Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n"
+                    );
                     reject(Error(error));
-                },
+                }
             );
     });
 }

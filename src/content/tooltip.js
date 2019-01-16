@@ -1,7 +1,7 @@
-import './tooltip.css';
-import tippy from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
-import './tippy-light-theme.css';
+import "./tooltip.css";
+import tippy from "tippy.js";
+import "tippy.js/dist/tippy.css";
+import "./tippy-light-theme.css";
 
 export function initializeTooltip(data, linkClass) {
     const tooltipNode = `
@@ -12,7 +12,7 @@ export function initializeTooltip(data, linkClass) {
     </div>`;
     tippy(`.${linkClass}`, {
         content: tooltipNode,
-        theme: 'light',
-        interactive: true,
+        theme: "light",
+        interactive: true
     });
 }

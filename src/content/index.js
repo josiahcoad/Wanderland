@@ -1,57 +1,62 @@
 // This code gets injected automatically into every page you go onto in Google Chrome.
-import findAndReplaceDOMText from 'findandreplacedomtext';
-import {
-    getUniqueLocationsFromCurrentPage,
-} from './api.js';
-import {
-    initializeTooltip,
-} from './tooltip.js';
+import findAndReplaceDOMText from "findandreplacedomtext";
+import { getUniqueLocationsFromCurrentPage } from "./api.js";
+import { initializeTooltip } from "./tooltip.js";
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage().then(
-        (results) => {
+        results => {
             if (results.length !== 0) {
-                results.forEach((result) => {
-                    const linkClass = `${result.spot.replace(' ', '_')}_tooltip`;
+                results.forEach(result => {
+                    const linkClass = `${result.spot.replace(
+                        " ",
+                        "_"
+                    )}_tooltip`;
                     findAndReplaceDOMText(document.body, {
                         find: result.spot,
-                        wrap: 'a',
-                        wrapClass: linkClass,
+                        wrap: "a",
+                        wrapClass: linkClass
                     });
-                    initializeTooltip({
-                        search: result.spot,
-                        link: result.lod.wikipedia,
-                        image: result.image.thumbnail,
-                        summary: result.abstract,
-                    }, linkClass);
+                    initializeTooltip(
+                        {
+                            search: result.spot,
+                            link: result.lod.wikipedia,
+                            image: result.image.thumbnail,
+                            summary: result.abstract
+                        },
+                        linkClass
+                    );
                 });
             } else {
                 alert("Sorry we couldn't find any results for this page.");
             }
             return results;
         },
-        (error) => {
+        error => {
             alert(`Error! ${error}`);
-        },
+        }
     );
 }
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
-console.log('Activating SeeTheWorld');
+// eslint-disable-next-line no-console
+console.log("Activating SeeTheWorld");
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the
     // activate button in the extension.js code.
-    if (request.message === 'ACTIVATE') {
+    if (request.message === "ACTIVATE") {
         activatePage().then(
-            (results) => sendResponse({
-                message: 'SUCCESS',
-                placesScraped: results.map(result => result.spot),
-            }),
-            () => sendResponse({
-                message: 'FAILED',
-                placesScraped: []
-            }),
+            results =>
+                sendResponse({
+                    message: "SUCCESS",
+                    placesScraped: results.map(result => result.spot)
+                }),
+            () =>
+                sendResponse({
+                    message: "FAILED",
+                    placesScraped: []
+                })
         );
     }
     return true;
