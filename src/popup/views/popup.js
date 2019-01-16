@@ -6,7 +6,7 @@ class Popup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            placesScraped: false,
+            placesScraped: [],
         };
         this.setPlacesScraped = this.setPlacesScraped.bind(this);
     }
@@ -19,7 +19,7 @@ class Popup extends Component {
         return (
             <div>
                 <ActivateButton setPlacesScraped={this.setPlacesScraped} />
-                {this.state.placesScraped && <SynopsisMap />}
+                {this.state.placesScraped.length !== 0 && <SynopsisMap placesScraped={this.state.placesScraped} />}
             </div>
         );
     }

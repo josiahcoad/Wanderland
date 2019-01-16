@@ -28,6 +28,7 @@ function activatePage() {
             } else {
                 alert("Sorry we couldn't find any results for this page.");
             }
+            return results;
         },
         (error) => {
             alert(`Error! ${error}`);
@@ -43,11 +44,13 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // activate button in the extension.js code.
     if (request.message === 'ACTIVATE') {
         activatePage().then(
-            () => sendResponse({
+            (results) => sendResponse({
                 message: 'SUCCESS',
+                placesScraped: results.map(result => result.spot),
             }),
             () => sendResponse({
                 message: 'FAILED',
+                placesScraped: []
             }),
         );
     }

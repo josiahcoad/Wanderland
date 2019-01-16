@@ -37,7 +37,7 @@ class ActivateButton extends Component {
                         loading: false,
                         loaded: true,
                     })
-                    this.props.setPlacesScraped(true);
+                    this.props.setPlacesScraped(response.placesScraped);
                 } else {
                     this.setState({
                         loading: false,

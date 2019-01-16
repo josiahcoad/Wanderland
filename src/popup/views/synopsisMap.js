@@ -8,13 +8,6 @@ const mapStyles = {
     height: '80%',
 };
 
-const locations = [
-    'Bondi Beach',
-    'Coogee Beach',
-    'Cronulla Beach',
-    'Manly Beach',
-    'Maroubra Beach',
-];
 
 function googleGeometryAPIGet(location) {
     return new Promise((resolve, reject) => {
@@ -54,7 +47,7 @@ export class SynopsisMap extends Component {
     }
 
     componentDidMount() {
-        locations.forEach((location) =>
+        this.props.placesScraped.forEach((location) =>
             googleGeometryAPIGet(location)
                 .then((response) => {
                     this.setState(prevState => ({
