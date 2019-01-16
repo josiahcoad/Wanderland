@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './activateButton.css';
+import { Button, LinearProgress } from '@material-ui/core';
 
 const SUCCESS = 'SUCCESS';
 const ACTIVATE = 'ACTIVATE';
@@ -19,15 +20,14 @@ class ActivateButton extends Component {
     getLoadingStatusText() {
         if (this.state.error) return "Error";
         if (this.state.loaded) return "Loaded";
-        if (this.state.loading) return "Loading";
-        return "See the World";
+        return "Activate";
     }
 
     // Use google's extension api to send an "ACTIVATE" message to the page/tab you're currently on.
     // Wait for a reponse and if the reponse is a SUCCESS then set the button with id "activate" to
     // show "loaded". Until a response is received, set the button text to "loading".
     sendMessage() {
-        chrome.tabs.query({
+        chrome.tabs.query({ 
             active: true,
             currentWindow: true,
         }, (tabs) => {
@@ -50,16 +50,17 @@ class ActivateButton extends Component {
     }
 
     render() {
-        return ( 
-            <button 
+        return this.state.loading ? (
+            <LinearProgress />
+        ) : (
+            <Button
                 className="activateButton"
                 onClick={this.sendMessage}
-                disabled={this.state.loading || this.state.loaded}
-                type="submit"
+                color='primary'
             >
                 {this.getLoadingStatusText()}
-            </button>
-        );
+            </Button>
+        )
     }
 }
 

@@ -2,10 +2,11 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import uuid from 'uuid';
+import { Grid } from '@material-ui/core';
 
 const mapStyles = {
-    width: '80%',
-    height: '80%',
+    width: '95%',
+    height: '95%',
 };
 
 
@@ -65,7 +66,7 @@ export class SynopsisMap extends Component {
         this.state.places.forEach(place => {
             bounds.extend(new this.props.google.maps.LatLng(place.lat, place.lng));
         });
-        if (this.state._map !== undefined) {
+        if (typeof this.state._map !== "undefined") {
             this.state._map.fitBounds(bounds);
         }
     }
@@ -89,31 +90,38 @@ export class SynopsisMap extends Component {
 
     render() {
         return (
-            <Map
-                google={this.props.google}
-                style={mapStyles}
-                onReady={(props, map) => this.setState({ _map: map })}
+            <Grid
+                container
+                justify="center"
             >
-                {
-                    this.state.places.map(place => (
-                        <Marker
-                            onClick={this.onMarkerClick}
-                            name={place.name}
-                            position={new this.props.google.maps.LatLng(place.lat, place.lng)}
-                            key={uuid.v4()}
-                        />
-                    ))
-                }
-                <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}
-                    onClose={this.onClose}
-                >
-                    <div>
-                        <h4>{this.state.selectedPlace.name}</h4>
-                    </div>
-                </InfoWindow>
-            </Map>
+                <Grid item xs={12}>
+                    <Map
+                        google={this.props.google}
+                        style={mapStyles}
+                        onReady={(props, map) => this.setState({ _map: map })}
+                    >
+                        {
+                            this.state.places.map(place => (
+                                <Marker
+                                    onClick={this.onMarkerClick}
+                                    name={place.name}
+                                    position={new this.props.google.maps.LatLng(place.lat, place.lng)}
+                                    key={uuid.v4()}
+                                />
+                            ))
+                        }
+                        <InfoWindow
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}
+                            onClose={this.onClose}
+                        >
+                            <div>
+                                <h4>{this.state.selectedPlace.name}</h4>
+                            </div>
+                        </InfoWindow>
+                    </Map>
+                </Grid>
+            </Grid>
         );
     }
 }

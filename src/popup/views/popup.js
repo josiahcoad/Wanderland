@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
+import { Typography } from '@material-ui/core';
 import ActivateButton from './activateButton';
 import SynopsisMap from './synopsisMap';
 
@@ -11,15 +13,28 @@ class Popup extends Component {
         this.setPlacesScraped = this.setPlacesScraped.bind(this);
     }
 
+    componentDidUpdate() {
+        if (this.state.placesScraped.length !== 0) {
+            $("body").animate({ width: '800px', height: '400px'});
+        }
+    }
+
     setPlacesScraped(value) {
         this.setState({ placesScraped: value });
     }
 
+
     render() {
         return (
             <div>
-                <ActivateButton setPlacesScraped={this.setPlacesScraped} />
-                {this.state.placesScraped.length !== 0 && <SynopsisMap placesScraped={this.state.placesScraped} />}
+                <Typography variant="h6" align="center">
+                    See The World
+                </Typography>
+                <hr />
+                {this.state.placesScraped.length === 0 ?
+                    <ActivateButton setPlacesScraped={this.setPlacesScraped} /> :
+                    <SynopsisMap placesScraped={this.state.placesScraped} />
+                }
             </div>
         );
     }

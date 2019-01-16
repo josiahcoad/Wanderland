@@ -2,8 +2,8 @@
     "manifest_version": 2,
     "name": "SeeTheWorld",
     "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
-    "version": "0.0.1",
-    "author": "Josiah Coad",
+    "version": "0.1.0",
+    "author": "Josiah Coad, Chimnay Phulse",
     "content_scripts": [{
         "css": [],
         "js": ["contentBundle.js"],
