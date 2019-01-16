@@ -10,7 +10,7 @@
         "matches": ["<all_urls>"]
     }],
     "background": {
-        "scripts" : ["backgroundBundle.js"],
+        "scripts": ["backgroundBundle.js"],
         "persistent": false
     },
     "browser_action": {
@@ -18,5 +18,6 @@
         "default_title": "See The World",
         "default_popup": "popup.html"
     },
-    "permissions": ["activeTab", "declarativeContent", "storage"]
+    "permissions": ["activeTab", "declarativeContent", "storage"],
+    "content_security_policy": "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'"
 }

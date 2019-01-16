@@ -20,9 +20,11 @@
   "dependencies": {
     "findandreplacedomtext": "^0.4.6",
     "fs": "0.0.1-security",
+    "google-maps-react": "^2.0.2",
     "tippy": "0.0.0",
     "tippy.js": "^3.4.1",
-    "unfluff": "^3.2.0"
+    "unfluff": "^3.2.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

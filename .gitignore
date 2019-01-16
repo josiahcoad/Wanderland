@@ -2,5 +2,3 @@
 *.txt
 node_modules
 dist/*Bundle*
-!dist/manifest.json
-!dist/popup.html

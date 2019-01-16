@@ -1,6 +1,4 @@
-import React, {
-    Component
-} from 'react';
+import React, { Component } from 'react';
 import './activateButton.css';
 
 const SUCCESS = 'SUCCESS';
@@ -12,8 +10,17 @@ class ActivateButton extends Component {
         this.state = {
             loading: false,
             loaded: false,
+            error: false,
         };
         this.sendMessage = this.sendMessage.bind(this);
+        this.getLoadingStatusText = this.getLoadingStatusText.bind(this);
+    }
+
+    getLoadingStatusText() {
+        if (this.state.error) return "Error";
+        if (this.state.loaded) return "Loaded";
+        if (this.state.loading) return "Loading";
+        return "See the World";
     }
 
     // Use google's extension api to send an "ACTIVATE" message to the page/tab you're currently on.
@@ -24,13 +31,17 @@ class ActivateButton extends Component {
             active: true,
             currentWindow: true,
         }, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                message: ACTIVATE,
-            }, (response) => {
+            chrome.tabs.sendMessage(tabs[0].id, { message: ACTIVATE }, (response) => {
                 if (response && response.message === SUCCESS) {
                     this.setState({
                         loading: false,
                         loaded: true,
+                    })
+                    this.props.setPlacesScraped(true);
+                } else {
+                    this.setState({
+                        loading: false,
+                        error: true,
                     })
                 }
             });
@@ -46,7 +57,7 @@ class ActivateButton extends Component {
                 disabled={this.state.loading || this.state.loaded}
                 type="submit"
             >
-                {this.state.loaded ? 'Loaded' : (this.state.loading ? 'Loading' : 'See The World')}
+                {this.getLoadingStatusText()}
             </button>
         );
     }
