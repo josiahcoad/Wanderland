@@ -5,9 +5,9 @@ import { initializeTooltip } from './tooltip.js';
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage().then(
-        results => {
+        (results) => {
             if (results.length !== 0) {
-                results.forEach(result => {
+                results.forEach((result) => {
                     const linkClass = `${result.spot.replace(
                         ' ',
                         '_'
@@ -32,7 +32,7 @@ function activatePage() {
             }
             return results;
         },
-        error => {
+        (error) => {
             alert(`Error! ${error}`);
         }
     );
@@ -47,10 +47,10 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // activate button in the extension.js code.
     if (request.message === 'ACTIVATE') {
         activatePage().then(
-            results =>
+            (results) =>
                 sendResponse({
                     message: 'SUCCESS',
-                    placesScraped: results.map(result => result.spot)
+                    placesScraped: results.map((result) => result.spot)
                 }),
             () =>
                 sendResponse({

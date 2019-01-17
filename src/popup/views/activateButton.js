@@ -32,11 +32,11 @@ class ActivateButton extends Component {
                 active: true,
                 currentWindow: true
             },
-            tabs => {
+            (tabs) => {
                 chrome.tabs.sendMessage(
                     tabs[0].id,
                     { message: ACTIVATE },
-                    response => {
+                    (response) => {
                         if (response && response.message === SUCCESS) {
                             this.setState({
                                 loading: false,

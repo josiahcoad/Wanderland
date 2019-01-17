@@ -60,10 +60,10 @@ export class PopupMap extends Component {
     }
 
     componentDidMount() {
-        this.props.placesScraped.forEach(location =>
+        this.props.placesScraped.forEach((location) =>
             googleGeometryAPIGet(location)
-                .then(response => {
-                    this.setState(prevState => ({
+                .then((response) => {
+                    this.setState((prevState) => ({
                         places: [
                             ...prevState.places,
                             {
@@ -81,7 +81,7 @@ export class PopupMap extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (arraysEqual(prevState.places, this.state.places)) return;
         const bounds = new this.props.google.maps.LatLngBounds();
-        this.state.places.forEach(place => {
+        this.state.places.forEach((place) => {
             bounds.extend(
                 new this.props.google.maps.LatLng(place.lat, place.lng)
             );
@@ -115,7 +115,7 @@ export class PopupMap extends Component {
                 style={mapStyles}
                 onReady={(props, map) => this.setState({ _map: map })}
             >
-                {this.state.places.map(place => (
+                {this.state.places.map((place) => (
                     <Marker
                         onClick={this.onMarkerClick}
                         name={place.name}
