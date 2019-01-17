@@ -32,7 +32,7 @@ function googleGeometryAPIGet(location) {
     });
 }
 
-export class SynopsisMap extends Component {
+export class PopupMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -132,4 +132,4 @@ export class SynopsisMap extends Component {
 
 export default GoogleApiWrapper({
     apiKey: "AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8"
-})(SynopsisMap);
+})(PopupMap);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import $ from "jquery";
 import { Typography } from "@material-ui/core";
 import ActivateButton from "./activateButton";
-import SynopsisMap from "./synopsisMap";
+import PopupMap from "./popupMap";
 
 class Popup extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class Popup extends Component {
                 {this.state.placesScraped.length === 0 ? (
                     <ActivateButton setPlacesScraped={this.setPlacesScraped} />
                 ) : (
-                    <SynopsisMap placesScraped={this.state.placesScraped} />
+                    <PopupMap placesScraped={this.state.placesScraped} />
                 )}
             </div>
         );
