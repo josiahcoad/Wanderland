@@ -1,7 +1,7 @@
 // This code gets injected automatically into every page you go onto in Google Chrome.
-import findAndReplaceDOMText from "findandreplacedomtext";
-import { getUniqueLocationsFromCurrentPage } from "./api.js";
-import { initializeTooltip } from "./tooltip.js";
+import findAndReplaceDOMText from 'findandreplacedomtext';
+import { getUniqueLocationsFromCurrentPage } from './api.js';
+import { initializeTooltip } from './tooltip.js';
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage().then(
@@ -9,12 +9,12 @@ function activatePage() {
             if (results.length !== 0) {
                 results.forEach(result => {
                     const linkClass = `${result.spot.replace(
-                        " ",
-                        "_"
+                        ' ',
+                        '_'
                     )}_tooltip`;
                     findAndReplaceDOMText(document.body, {
                         find: result.spot,
-                        wrap: "a",
+                        wrap: 'a',
                         wrapClass: linkClass
                     });
                     initializeTooltip(
@@ -40,21 +40,21 @@ function activatePage() {
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
 // eslint-disable-next-line no-console
-console.log("Activating SeeTheWorld");
+console.log('Activating SeeTheWorld');
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the
     // activate button in the extension.js code.
-    if (request.message === "ACTIVATE") {
+    if (request.message === 'ACTIVATE') {
         activatePage().then(
             results =>
                 sendResponse({
-                    message: "SUCCESS",
+                    message: 'SUCCESS',
                     placesScraped: results.map(result => result.spot)
                 }),
             () =>
                 sendResponse({
-                    message: "FAILED",
+                    message: 'FAILED',
                     placesScraped: []
                 })
         );

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import $ from "jquery";
-import { Typography } from "@material-ui/core";
-import ActivateButton from "./activateButton";
-import PopupMap from "./popupMap";
+import React, { Component } from 'react';
+import $ from 'jquery';
+import { Typography } from '@material-ui/core';
+import ActivateButton from './activateButton';
+import PopupMap from './popupMap';
 
 class Popup extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class Popup extends Component {
 
     componentDidUpdate() {
         if (this.state.placesScraped.length !== 0) {
-            $("body").animate({ width: "800px", height: "400px" });
+            $('body').animate({ width: '800px', height: '400px' });
         }
     }
 

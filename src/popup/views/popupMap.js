@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-import uuid from "uuid";
+import React, { Component } from 'react';
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import uuid from 'uuid';
 
 const mapStyles = {
-    width: "95%",
-    height: "95%"
+    width: '95%',
+    height: '95%'
 };
 
 function googleGeometryAPIGet(location) {
     return new Promise((resolve, reject) => {
         const Http = new XMLHttpRequest();
-        Http.responseType = "json";
+        Http.responseType = 'json';
 
         const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
             location
         )}&inputtype=textquery&fields=geometry`;
-        Http.open("GET", url);
+        Http.open('GET', url);
         Http.onloadend = () => {
             if (Http.status === 200) {
                 if (Http.response.candidates.length === 0) {
@@ -29,7 +29,7 @@ function googleGeometryAPIGet(location) {
         };
         // Handle network errors
         Http.onerror = () => {
-            reject(Error("Network Error"));
+            reject(Error('Network Error'));
         };
         Http.send();
     });
@@ -143,5 +143,5 @@ export class PopupMap extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8"
+    apiKey: 'AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8'
 })(PopupMap);

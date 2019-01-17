@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import "./activateButton.css";
-import { Button, LinearProgress } from "@material-ui/core";
+import React, { Component } from 'react';
+import './activateButton.css';
+import { Button, LinearProgress } from '@material-ui/core';
 
-const SUCCESS = "SUCCESS";
-const ACTIVATE = "ACTIVATE";
+const SUCCESS = 'SUCCESS';
+const ACTIVATE = 'ACTIVATE';
 
 class ActivateButton extends Component {
     constructor(props) {
@@ -18,9 +18,9 @@ class ActivateButton extends Component {
     }
 
     getLoadingStatusText() {
-        if (this.state.error) return "Error";
-        if (this.state.loaded) return "Loaded";
-        return "Activate";
+        if (this.state.error) return 'Error';
+        if (this.state.loaded) return 'Loaded';
+        return 'Activate';
     }
 
     // Use google's extension api to send an "ACTIVATE" message to the page/tab you're currently on.
