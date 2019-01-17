@@ -13,14 +13,23 @@ class Popup extends Component {
         this.setPlacesScraped = this.setPlacesScraped.bind(this);
     }
 
+    componentDidMount() {
+        chrome.storage.local.get(['lastPlacesScraped'], (result) => {
+            if (result.lastPlacesScraped !== undefined && result.lastPlacesScraped !== null) {
+                this.setState({ placesScraped: result.lastPlacesScraped });
+            }
+        });
+    }
+
     componentDidUpdate() {
         if (this.state.placesScraped.length !== 0) {
             $('body').animate({ width: '800px', height: '400px' });
         }
     }
 
-    setPlacesScraped(value) {
-        this.setState({ placesScraped: value });
+    setPlacesScraped(places) {
+        this.setState({ placesScraped: places });
+        chrome.storage.local.set({ lastPlacesScraped: places });
     }
 
     render() {
@@ -30,11 +39,9 @@ class Popup extends Component {
                     See The World
                 </Typography>
                 <hr />
-                {this.state.placesScraped.length === 0 ? (
-                    <ActivateButton setPlacesScraped={this.setPlacesScraped} />
-                ) : (
-                    <PopupMap placesScraped={this.state.placesScraped} />
-                )}
+                <ActivateButton setPlacesScraped={this.setPlacesScraped} />
+                {this.state.placesScraped.length !== 0
+                && <PopupMap placesScraped={this.state.placesScraped} />}
             </div>
         );
     }

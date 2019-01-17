@@ -9,34 +9,6 @@ const mapStyles = {
     height: '95%',
 };
 
-function googleGeometryAPIGet(location) {
-    return new Promise((resolve, reject) => {
-        const Http = new XMLHttpRequest();
-        Http.responseType = 'json';
-
-        const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
-            location,
-        )}&inputtype=textquery&fields=geometry`;
-        Http.open('GET', url);
-        Http.onloadend = () => {
-            if (Http.status === 200) {
-                if (Http.response.candidates.length === 0) {
-                    reject(Error(`No geolocation was found for ${location}`));
-                } else {
-                    resolve(Http.response.candidates[0].geometry.location);
-                }
-            } else {
-                reject(Error(Http.status));
-            }
-        };
-        // Handle network errors
-        Http.onerror = () => {
-            reject(Error('Network Error'));
-        };
-        Http.send();
-    });
-}
-
 function arraysEqual(a, b) {
     if (a === b) return true;
     if (a == null || b == null) return false;
@@ -54,38 +26,16 @@ export class PopupMap extends Component {
             showingInfoWindow: false, // Hides or the shows the infoWindow
             activeMarker: {}, // Shows the active marker upon click
             selectedPlace: {}, // Shows the infoWindow to the selected place upon a marker
-            places: [],
             map: null,
         };
         this.onMarkerClick = this.onMarkerClick.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.setBounds = this.setBounds.bind(this);
     }
 
-    componentDidMount() {
-        this.props.placesScraped.forEach(location => googleGeometryAPIGet(location)
-            .then((response) => {
-                this.setState(prevState => ({
-                    places: [
-                        ...prevState.places,
-                        {
-                            name: location,
-                            lat: response.lat,
-                            lng: response.lng,
-                        },
-                    ],
-                }));
-            })
-            .catch(alert));
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (arraysEqual(prevState.places, this.state.places)) return;
-        const bounds = new this.props.google.maps.LatLngBounds();
-        this.state.places.forEach((place) => {
-            bounds.extend(new this.props.google.maps.LatLng(place.lat, place.lng));
-        });
-        if (this.state.map !== undefined && this.state.map !== null) {
-            this.state.map.fitBounds(bounds);
+    componentDidUpdate(prevProps) {
+        if (!arraysEqual(prevProps.placesScraped, this.props.placesScraped)) {
+            this.setBounds();
         }
     }
 
@@ -106,21 +56,36 @@ export class PopupMap extends Component {
         }
     }
 
+    setBounds() {
+        const bounds = new this.props.google.maps.LatLngBounds();
+        this.props.placesScraped.forEach((place) => {
+            bounds.extend(new this.props.google.maps.LatLng(place.lat, place.lng));
+        });
+        if (this.state.map !== undefined && this.state.map !== null) {
+            this.state.map.fitBounds(bounds);
+        }
+    }
+
     render() {
         return (
             <Map
                 google={this.props.google}
                 style={mapStyles}
-                onReady={(props, map) => this.setState({ map })}
+                onReady={(props, map) => {
+                    this.setState({ map });
+                    this.setBounds();
+                }}
             >
-                {this.state.places.map(place => (
-                    <Marker
-                        onClick={this.onMarkerClick}
-                        name={place.name}
-                        position={new this.props.google.maps.LatLng(place.lat, place.lng)}
-                        key={uuid.v4()}
-                    />
-                ))}
+                {this.props.placesScraped
+                    .filter(place => place.lat !== null && place.lng !== null)
+                    .map(place => (
+                        <Marker
+                            onClick={this.onMarkerClick}
+                            name={place.name}
+                            position={new this.props.google.maps.LatLng(place.lat, place.lng)}
+                            key={uuid.v4()}
+                        />
+                    ))}
                 <InfoWindow
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}

@@ -57,7 +57,7 @@ class ActivateButton extends Component {
             <LinearProgress />
         ) : (
             <Button className="activateButton" onClick={this.sendMessage} color="primary">
-                {this.getLoadingStatusText()}
+                Activate
             </Button>
         );
     }
