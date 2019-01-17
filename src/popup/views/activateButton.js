@@ -11,7 +11,7 @@ class ActivateButton extends Component {
         this.state = {
             loading: false,
             loaded: false,
-            error: false
+            error: false,
         };
         this.sendMessage = this.sendMessage.bind(this);
         this.getLoadingStatusText = this.getLoadingStatusText.bind(this);
@@ -30,24 +30,24 @@ class ActivateButton extends Component {
         chrome.tabs.query(
             {
                 active: true,
-                currentWindow: true
+                currentWindow: true,
             },
             (tabs) => {
                 chrome.tabs.sendMessage(tabs[0].id, { message: ACTIVATE }, (response) => {
                     if (response && response.message === SUCCESS) {
                         this.setState({
                             loading: false,
-                            loaded: true
+                            loaded: true,
                         });
                         this.props.setPlacesScraped(response.placesScraped);
                     } else {
                         this.setState({
                             loading: false,
-                            error: true
+                            error: true,
                         });
                     }
                 });
-            }
+            },
         );
         this.setState({ loading: true });
     }

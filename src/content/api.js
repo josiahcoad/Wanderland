@@ -7,16 +7,14 @@ const LOCATION_TYPES = [
     'http://dbpedia.org/ontology/Settlement',
     'http://dbpedia.org/ontology/PopulatedPlace',
     'http://dbpedia.org/ontology/Place',
-    'http://dbpedia.org/ontology/Location'
+    'http://dbpedia.org/ontology/Location',
 ];
 
 // return results whose "types" are at least one of the LOCATION_TYPES
 // NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
-    return response.annotations.filter(
-        (annotation) =>
-            annotation.types.filter((type) => LOCATION_TYPES.indexOf(type) !== -1).length !== 0
-    );
+    // eslint-disable-next-line
+    return response.annotations.filter(annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0);
 }
 
 // remove objects from an array who have the same value
@@ -37,8 +35,7 @@ function getCurrentPageUrl() {
     return window.location.href;
 }
 
-const PARAMS =
-    '&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5';
+const PARAMS = '&include=image%2Calternate_labels%2Ctypes%2Cabstract%2Ccategories%2Clod&token=7a037e59dae14528905d167a365da3a5';
 
 // send the webpage Url to the Dandelion API along with the params that tell
 // the api what we want to get back. On successful response, return the response,
@@ -47,7 +44,7 @@ function getEntitiesFromWebpage(webpageUrl) {
     return new Promise((resolve, reject) => {
         const Http = new XMLHttpRequest();
         const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&url=${encodeURI(
-            webpageUrl
+            webpageUrl,
         )}${PARAMS}`;
         Http.open('GET', url);
         Http.onloadend = () => {
@@ -79,10 +76,10 @@ export function getUniqueLocationsFromCurrentPage() {
                 },
                 (error) => {
                     alert(
-                        'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n'
+                        'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
                     );
                     reject(Error(error));
-                }
+                },
             );
     });
 }

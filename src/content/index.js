@@ -12,16 +12,16 @@ function activatePage() {
                     findAndReplaceDOMText(document.body, {
                         find: result.spot,
                         wrap: 'a',
-                        wrapClass: linkClass
+                        wrapClass: linkClass,
                     });
                     initializeTooltip(
                         {
                             search: result.spot,
                             link: result.lod.wikipedia,
                             image: result.image.thumbnail,
-                            summary: result.abstract
+                            summary: result.abstract,
                         },
-                        linkClass
+                        linkClass,
                     );
                 });
             } else {
@@ -31,7 +31,7 @@ function activatePage() {
         },
         (error) => {
             alert(`Error! ${error}`);
-        }
+        },
     );
 }
 
@@ -44,16 +44,14 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // activate button in the extension.js code.
     if (request.message === 'ACTIVATE') {
         activatePage().then(
-            (results) =>
-                sendResponse({
-                    message: 'SUCCESS',
-                    placesScraped: results.map((result) => result.spot)
-                }),
-            () =>
-                sendResponse({
-                    message: 'FAILED',
-                    placesScraped: []
-                })
+            results => sendResponse({
+                message: 'SUCCESS',
+                placesScraped: results.map(result => result.spot),
+            }),
+            () => sendResponse({
+                message: 'FAILED',
+                placesScraped: [],
+            }),
         );
     }
     return true;

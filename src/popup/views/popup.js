@@ -8,7 +8,7 @@ class Popup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            placesScraped: []
+            placesScraped: [],
         };
         this.setPlacesScraped = this.setPlacesScraped.bind(this);
     }

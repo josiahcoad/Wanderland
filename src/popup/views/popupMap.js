@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import {
+    Map, GoogleApiWrapper, InfoWindow, Marker,
+} from 'google-maps-react';
 import uuid from 'uuid';
 
 const mapStyles = {
     width: '95%',
-    height: '95%'
+    height: '95%',
 };
 
 function googleGeometryAPIGet(location) {
@@ -13,7 +15,7 @@ function googleGeometryAPIGet(location) {
         Http.responseType = 'json';
 
         const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
-            location
+            location,
         )}&inputtype=textquery&fields=geometry`;
         Http.open('GET', url);
         Http.onloadend = () => {
@@ -38,8 +40,8 @@ function googleGeometryAPIGet(location) {
 function arraysEqual(a, b) {
     if (a === b) return true;
     if (a == null || b == null) return false;
-    if (a.length != b.length) return false;
-    for (var i = 0; i < a.length; ++i) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i += 1) {
         if (a[i] !== b[i]) return false;
     }
     return true;
@@ -53,29 +55,27 @@ export class PopupMap extends Component {
             activeMarker: {}, // Shows the active marker upon click
             selectedPlace: {}, // Shows the infoWindow to the selected place upon a marker
             places: [],
-            _map: null
+            map: null,
         };
         this.onMarkerClick = this.onMarkerClick.bind(this);
         this.onClose = this.onClose.bind(this);
     }
 
     componentDidMount() {
-        this.props.placesScraped.forEach((location) =>
-            googleGeometryAPIGet(location)
-                .then((response) => {
-                    this.setState((prevState) => ({
-                        places: [
-                            ...prevState.places,
-                            {
-                                name: location,
-                                lat: response.lat,
-                                lng: response.lng
-                            }
-                        ]
-                    }));
-                })
-                .catch(alert)
-        );
+        this.props.placesScraped.forEach(location => googleGeometryAPIGet(location)
+            .then((response) => {
+                this.setState(prevState => ({
+                    places: [
+                        ...prevState.places,
+                        {
+                            name: location,
+                            lat: response.lat,
+                            lng: response.lng,
+                        },
+                    ],
+                }));
+            })
+            .catch(alert));
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -84,8 +84,8 @@ export class PopupMap extends Component {
         this.state.places.forEach((place) => {
             bounds.extend(new this.props.google.maps.LatLng(place.lat, place.lng));
         });
-        if (this.state._map !== undefined && this.state._map !== null) {
-            this.state._map.fitBounds(bounds);
+        if (this.state.map !== undefined && this.state.map !== null) {
+            this.state.map.fitBounds(bounds);
         }
     }
 
@@ -93,7 +93,7 @@ export class PopupMap extends Component {
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
-            showingInfoWindow: true
+            showingInfoWindow: true,
         });
     }
 
@@ -101,7 +101,7 @@ export class PopupMap extends Component {
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
-                activeMarker: null
+                activeMarker: null,
             });
         }
     }
@@ -111,9 +111,9 @@ export class PopupMap extends Component {
             <Map
                 google={this.props.google}
                 style={mapStyles}
-                onReady={(props, map) => this.setState({ _map: map })}
+                onReady={(props, map) => this.setState({ map })}
             >
-                {this.state.places.map((place) => (
+                {this.state.places.map(place => (
                     <Marker
                         onClick={this.onMarkerClick}
                         name={place.name}
@@ -136,5 +136,5 @@ export class PopupMap extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8'
+    apiKey: 'AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8',
 })(PopupMap);

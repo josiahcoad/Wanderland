@@ -13,6 +13,6 @@ export function initializeTooltip(data, linkClass) {
     tippy(`.${linkClass}`, {
         content: tooltipNode,
         theme: 'light',
-        interactive: true
+        interactive: true,
     });
 }
