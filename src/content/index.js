@@ -8,10 +8,7 @@ function activatePage() {
         (results) => {
             if (results.length !== 0) {
                 results.forEach((result) => {
-                    const linkClass = `${result.spot.replace(
-                        ' ',
-                        '_'
-                    )}_tooltip`;
+                    const linkClass = `${result.spot.replace(' ', '_')}_tooltip`;
                     findAndReplaceDOMText(document.body, {
                         find: result.spot,
                         wrap: 'a',

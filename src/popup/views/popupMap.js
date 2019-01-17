@@ -82,9 +82,7 @@ export class PopupMap extends Component {
         if (arraysEqual(prevState.places, this.state.places)) return;
         const bounds = new this.props.google.maps.LatLngBounds();
         this.state.places.forEach((place) => {
-            bounds.extend(
-                new this.props.google.maps.LatLng(place.lat, place.lng)
-            );
+            bounds.extend(new this.props.google.maps.LatLng(place.lat, place.lng));
         });
         if (this.state._map !== undefined && this.state._map !== null) {
             this.state._map.fitBounds(bounds);
@@ -119,12 +117,7 @@ export class PopupMap extends Component {
                     <Marker
                         onClick={this.onMarkerClick}
                         name={place.name}
-                        position={
-                            new this.props.google.maps.LatLng(
-                                place.lat,
-                                place.lng
-                            )
-                        }
+                        position={new this.props.google.maps.LatLng(place.lat, place.lng)}
                         key={uuid.v4()}
                     />
                 ))}

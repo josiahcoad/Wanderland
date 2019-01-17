@@ -15,9 +15,7 @@ const LOCATION_TYPES = [
 function filterLocations(response) {
     return response.annotations.filter(
         (annotation) =>
-            annotation.types.filter(
-                (type) => LOCATION_TYPES.indexOf(type) !== -1
-            ).length !== 0
+            annotation.types.filter((type) => LOCATION_TYPES.indexOf(type) !== -1).length !== 0
     );
 }
 
@@ -77,9 +75,7 @@ export function getUniqueLocationsFromCurrentPage() {
                 (response) => {
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
-                    resolve(
-                        filterDuplicates(filterLocations(response), 'spot')
-                    );
+                    resolve(filterDuplicates(filterLocations(response), 'spot'));
                 },
                 (error) => {
                     alert(

@@ -33,24 +33,20 @@ class ActivateButton extends Component {
                 currentWindow: true
             },
             (tabs) => {
-                chrome.tabs.sendMessage(
-                    tabs[0].id,
-                    { message: ACTIVATE },
-                    (response) => {
-                        if (response && response.message === SUCCESS) {
-                            this.setState({
-                                loading: false,
-                                loaded: true
-                            });
-                            this.props.setPlacesScraped(response.placesScraped);
-                        } else {
-                            this.setState({
-                                loading: false,
-                                error: true
-                            });
-                        }
+                chrome.tabs.sendMessage(tabs[0].id, { message: ACTIVATE }, (response) => {
+                    if (response && response.message === SUCCESS) {
+                        this.setState({
+                            loading: false,
+                            loaded: true
+                        });
+                        this.props.setPlacesScraped(response.placesScraped);
+                    } else {
+                        this.setState({
+                            loading: false,
+                            error: true
+                        });
                     }
-                );
+                });
             }
         );
         this.setState({ loading: true });
@@ -60,11 +56,7 @@ class ActivateButton extends Component {
         return this.state.loading ? (
             <LinearProgress />
         ) : (
-            <Button
-                className="activateButton"
-                onClick={this.sendMessage}
-                color="primary"
-            >
+            <Button className="activateButton" onClick={this.sendMessage} color="primary">
                 {this.getLoadingStatusText()}
             </Button>
         );
