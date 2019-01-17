@@ -32,6 +32,16 @@ function googleGeometryAPIGet(location) {
     });
 }
 
+function arraysEqual(a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+
 export class PopupMap extends Component {
     constructor(props) {
         super(props);
@@ -63,7 +73,8 @@ export class PopupMap extends Component {
         );
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
+        if (arraysEqual(prevState.places, this.state.places)) return;
         const bounds = new this.props.google.maps.LatLngBounds();
         this.state.places.forEach(place => {
             bounds.extend(
