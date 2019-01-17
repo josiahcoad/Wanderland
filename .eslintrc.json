@@ -1,5 +1,10 @@
 {
-    "extends": "airbnb",
+
+    "extends": [
+        "airbnb",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "rules": {
         "react/jsx-filename-extension": [
             1,
@@ -39,6 +44,9 @@
         ],
         "no-alert": [
             "off"
+        ],
+        "react/destructuring-assignment": [
+            "off"
         ]
     },
     "env": {
@@ -54,5 +62,6 @@
         "window": false,
         "render": false,
         "chrome": false
-    }
+    },
+    "parser": "babel-eslint"
 }
