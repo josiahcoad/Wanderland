@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import uuid from "uuid";
-import { Grid } from "@material-ui/core";
 
 const mapStyles = {
     width: "95%",
@@ -19,7 +18,11 @@ function googleGeometryAPIGet(location) {
         Http.open("GET", url);
         Http.onloadend = () => {
             if (Http.status === 200) {
-                resolve(Http.response.candidates[0].geometry.location);
+                if (Http.response.candidates.length === 0) {
+                    reject(Error(`No geolocation was found for ${location}`));
+                } else {
+                    resolve(Http.response.candidates[0].geometry.location);
+                }
             } else {
                 reject(Error(Http.status));
             }
@@ -37,7 +40,7 @@ function arraysEqual(a, b) {
     if (a == null || b == null) return false;
     if (a.length != b.length) return false;
     for (var i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false;
+        if (a[i] !== b[i]) return false;
     }
     return true;
 }
@@ -58,18 +61,20 @@ export class PopupMap extends Component {
 
     componentDidMount() {
         this.props.placesScraped.forEach(location =>
-            googleGeometryAPIGet(location).then(response => {
-                this.setState(prevState => ({
-                    places: [
-                        ...prevState.places,
-                        {
-                            name: location,
-                            lat: response.lat,
-                            lng: response.lng
-                        }
-                    ]
-                }));
-            })
+            googleGeometryAPIGet(location)
+                .then(response => {
+                    this.setState(prevState => ({
+                        places: [
+                            ...prevState.places,
+                            {
+                                name: location,
+                                lat: response.lat,
+                                lng: response.lng
+                            }
+                        ]
+                    }));
+                })
+                .catch(alert)
         );
     }
 
@@ -81,7 +86,7 @@ export class PopupMap extends Component {
                 new this.props.google.maps.LatLng(place.lat, place.lng)
             );
         });
-        if (typeof this.state._map !== "undefined") {
+        if (this.state._map !== undefined && this.state._map !== null) {
             this.state._map.fitBounds(bounds);
         }
     }
@@ -105,38 +110,34 @@ export class PopupMap extends Component {
 
     render() {
         return (
-            <Grid container justify="center">
-                <Grid item xs={12}>
-                    <Map
-                        google={this.props.google}
-                        style={mapStyles}
-                        onReady={(props, map) => this.setState({ _map: map })}
-                    >
-                        {this.state.places.map(place => (
-                            <Marker
-                                onClick={this.onMarkerClick}
-                                name={place.name}
-                                position={
-                                    new this.props.google.maps.LatLng(
-                                        place.lat,
-                                        place.lng
-                                    )
-                                }
-                                key={uuid.v4()}
-                            />
-                        ))}
-                        <InfoWindow
-                            marker={this.state.activeMarker}
-                            visible={this.state.showingInfoWindow}
-                            onClose={this.onClose}
-                        >
-                            <div>
-                                <h4>{this.state.selectedPlace.name}</h4>
-                            </div>
-                        </InfoWindow>
-                    </Map>
-                </Grid>
-            </Grid>
+            <Map
+                google={this.props.google}
+                style={mapStyles}
+                onReady={(props, map) => this.setState({ _map: map })}
+            >
+                {this.state.places.map(place => (
+                    <Marker
+                        onClick={this.onMarkerClick}
+                        name={place.name}
+                        position={
+                            new this.props.google.maps.LatLng(
+                                place.lat,
+                                place.lng
+                            )
+                        }
+                        key={uuid.v4()}
+                    />
+                ))}
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                    <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                    </div>
+                </InfoWindow>
+            </Map>
         );
     }
 }
