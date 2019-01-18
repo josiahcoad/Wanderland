@@ -1,13 +1,13 @@
 import React from 'react';
-import { PropagateLoader } from 'react-spinners';
+import { PulseLoader } from 'react-spinners';
 import './loader.css';
 
 const Loader = () => (
     <div className="loader">
-        <PropagateLoader
+        <PulseLoader
             className="loader"
             sizeUnit="px"
-            size={60}
+            size={50}
             color="#36D7B7"
             loading
         />

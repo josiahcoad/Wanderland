@@ -13,7 +13,7 @@ function getButtonText(loading, error) {
 }
 
 const ActivateButton = ({ loading, error, onClick }) => (
-    <Button onClick={onClick} color="primary" disabled={loading || error}>
+    <Button onClick={onClick} disabled={loading || error} className="activate-button">
         {getButtonText(loading, error)}
     </Button>
 );

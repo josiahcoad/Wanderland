@@ -1,6 +1,8 @@
 import React from 'react';
-import { Navbar, Glyphicon } from 'react-bootstrap';
+import { Navbar, Glyphicon, Nav } from 'react-bootstrap';
 import ActivateButton from './activateButton';
+import './navbar.css';
+import CollectionsList from './collectionsList';
 
 const PopupNavbar = ({ onActivate, loading, error }) => (
     <Navbar>
@@ -10,20 +12,19 @@ const PopupNavbar = ({ onActivate, loading, error }) => (
                     href="https://github.com/josiahcoad/seetheworld"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="navbar-brand"
                 >
                     <Glyphicon glyph="globe" />
                     {' '}
-                    See The World
+See The World
                 </a>
             </Navbar.Brand>
         </Navbar.Header>
+        <Nav>
+            <CollectionsList />
+        </Nav>
         <Navbar.Form pullRight>
-            <ActivateButton
-                bsStyle="primary"
-                onClick={onActivate}
-                loading={loading}
-                error={error}
-            >
+            <ActivateButton bsStyle="primary" onClick={onActivate} loading={loading} error={error}>
                 Activate Page
             </ActivateButton>
         </Navbar.Form>

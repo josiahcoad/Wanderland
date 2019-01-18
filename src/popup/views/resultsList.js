@@ -9,13 +9,13 @@ const ResultsList = ({ places, setPlaces, setSelectedPlace }) => (
     <ListGroup className="results-list">
         {places.map(place => (
             <ResultItem key={uuid.v4()} onClick={() => setSelectedPlace(place)} place={place}>
-                <button
+                {/* <button
                     type="button"
                     className="icon-button add-button"
                     onClick={() => setPlaces(removeWhere(places, 'name', place.name))}
                 >
                     <span className="glyphicon glyphicon-ok-circle" />
-                </button>
+                </button> */}
                 <button
                     type="button"
                     className="icon-button remove-button"
