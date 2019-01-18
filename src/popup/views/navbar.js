@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Glyphicon } from 'react-bootstrap';
 import ActivateButton from './activateButton';
 
-const PopupNavbar = ({ setLastPlacesScraped }) => (
+const PopupNavbar = ({ onActivate, loading, error }) => (
     <Navbar>
         <Navbar.Header>
             <Navbar.Brand>
@@ -18,7 +18,12 @@ const PopupNavbar = ({ setLastPlacesScraped }) => (
             </Navbar.Brand>
         </Navbar.Header>
         <Navbar.Form pullRight>
-            <ActivateButton bsStyle="primary" setLastPlacesScraped={setLastPlacesScraped}>
+            <ActivateButton
+                bsStyle="primary"
+                onClick={onActivate}
+                loading={loading}
+                error={error}
+            >
                 Activate Page
             </ActivateButton>
         </Navbar.Form>

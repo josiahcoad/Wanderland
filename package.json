@@ -23,6 +23,7 @@
     "fs": "0.0.1-security",
     "google-maps-react": "^2.0.2",
     "react-bootstrap": "^0.32.4",
+    "react-spinners": "^0.5.1",
     "tippy": "0.0.0",
     "tippy.js": "^3.4.1",
     "unfluff": "^3.2.0",

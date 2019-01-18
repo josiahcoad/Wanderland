@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './activateButton.css';
 import { Button } from 'react-bootstrap';
-
-const SUCCESS = 'SUCCESS';
-const ACTIVATE = 'ACTIVATE';
 
 function getButtonText(loading, error) {
     if (loading) {
@@ -15,64 +12,10 @@ function getButtonText(loading, error) {
     return 'Activate Page';
 }
 
-class ActivateButton extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            loaded: false,
-            error: false,
-        };
-        this.sendMessage = this.sendMessage.bind(this);
-        this.getLoadingStatusText = this.getLoadingStatusText.bind(this);
-    }
-
-    getLoadingStatusText() {
-        if (this.state.error) return 'Error';
-        if (this.state.loaded) return 'Loaded';
-        return 'Activate';
-    }
-
-    // Use google's extension api to send an "ACTIVATE" message to the page/tab you're currently on.
-    // Wait for a reponse and if the reponse is a SUCCESS then set the button with id "activate" to
-    // show "loaded". Until a response is received, set the button text to "loading".
-    sendMessage() {
-        chrome.tabs.query(
-            {
-                active: true,
-                currentWindow: true,
-            },
-            (tabs) => {
-                chrome.tabs.sendMessage(tabs[0].id, { message: ACTIVATE }, (response) => {
-                    if (response && response.message === SUCCESS) {
-                        this.setState({
-                            loading: false,
-                            loaded: true,
-                        });
-                        this.props.setLastPlacesScraped(response.placesScraped);
-                    } else {
-                        this.setState({
-                            loading: false,
-                            error: true,
-                        });
-                    }
-                });
-            },
-        );
-        this.setState({ loading: true });
-    }
-
-    render() {
-        return (
-            <Button
-                onClick={this.sendMessage}
-                color="primary"
-                disabled={this.state.loading || this.state.error}
-            >
-                {getButtonText(this.state.loading, this.state.error)}
-            </Button>
-        );
-    }
-}
+const ActivateButton = ({ loading, error, onClick }) => (
+    <Button onClick={onClick} color="primary" disabled={loading || error}>
+        {getButtonText(loading, error)}
+    </Button>
+);
 
 export default ActivateButton;
