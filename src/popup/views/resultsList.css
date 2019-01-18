@@ -1,6 +1,11 @@
-.icon-button:hover {
+.remove-button:hover {
     color: red;
 }
+
+.add-button:hover {
+    color: #0F4ECD;
+}
+
 .icon-button {
     appearance: none;
     -webkit-appearance: none;
@@ -10,15 +15,16 @@
     background: transparent;
 }
 
-.list-item {
+.result-item {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
     cursor: pointer;
+    box-shadow: 0px -2px 20px #888;
 }
 
-.list-item:hover {
+.result-item:hover {
     background-color: #bbb;
 }
 
@@ -29,4 +35,19 @@
 .results-list {
     height: 400px;
     overflow-y: scroll;
+}
+
+.result-item-expansion img {
+    width: 100%;
+    height: auto;
+}
+
+.result-item-expansion {
+    height: 0px;
+    transition: height 0.5s;
+    -webkit-transition: height 0.5s;
+}
+
+.result-item:hover .result-item-expansion {
+    height: 150px;
 }

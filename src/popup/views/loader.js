@@ -1,10 +1,10 @@
 import React from 'react';
-import { GridLoader } from 'react-spinners';
+import { PropagateLoader } from 'react-spinners';
 import './loader.css';
 
 const Loader = () => (
     <div className="loader">
-        <GridLoader
+        <PropagateLoader
             className="loader"
             sizeUnit="px"
             size={60}
