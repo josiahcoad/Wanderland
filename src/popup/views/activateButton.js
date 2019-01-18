@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import './activateButton.css';
-import { Button, LinearProgress } from '@material-ui/core';
+import { Button } from 'react-bootstrap';
 
 const SUCCESS = 'SUCCESS';
 const ACTIVATE = 'ACTIVATE';
+
+function getButtonText(loading, error) {
+    if (loading) {
+        return 'Loading...';
+    }
+    if (error) {
+        return 'Please Refresh';
+    }
+    return 'Activate Page';
+}
 
 class ActivateButton extends Component {
     constructor(props) {
@@ -39,7 +49,7 @@ class ActivateButton extends Component {
                             loading: false,
                             loaded: true,
                         });
-                        this.props.setPlacesScraped(response.placesScraped);
+                        this.props.setLastPlacesScraped(response.placesScraped);
                     } else {
                         this.setState({
                             loading: false,
@@ -53,11 +63,13 @@ class ActivateButton extends Component {
     }
 
     render() {
-        return this.state.loading ? (
-            <LinearProgress />
-        ) : (
-            <Button className="activateButton" onClick={this.sendMessage} color="primary">
-                Activate
+        return (
+            <Button
+                onClick={this.sendMessage}
+                color="primary"
+                disabled={this.state.loading || this.state.error}
+            >
+                {getButtonText(this.state.loading, this.state.error)}
             </Button>
         );
     }

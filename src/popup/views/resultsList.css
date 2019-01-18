@@ -1,0 +1,32 @@
+.icon-button:hover {
+    color: red;
+}
+.icon-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+}
+
+.list-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    cursor: pointer;
+}
+
+.list-item:hover {
+    background-color: #bbb;
+}
+
+.map-absent-box {
+    border-style: 2px solid #bbb;
+}
+
+.results-list {
+    height: 400px;
+    overflow-y: scroll;
+}

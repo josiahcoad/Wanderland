@@ -75,6 +75,12 @@ export class PopupMap extends Component {
                     this.setState({ map });
                     this.setBounds();
                 }}
+                zoomControl={false}
+                mapTypeControl={false}
+                scaleControl={false}
+                streetViewControl={false}
+                rotateControl={false}
+                fullscreenControl={false}
             >
                 {this.props.placesScraped
                     .filter(place => place.lat !== null && place.lng !== null)
