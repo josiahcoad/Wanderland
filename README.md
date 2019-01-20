@@ -26,12 +26,13 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 - go to any site with locations mentioned to see results pop up at the top of the page
 
 ### How to Build:
-- run ```npm run watch``` in the terminal in the project directory
+- Please make sure you have the most recent versions of npm and node installed.
+- run ```npm install``` in the terminal in the project directory to install all dependencies
+- run ```npm run build``` in the terminal in the project directory. As you develop, ```npm run watch``` might be a handy command to automatically rebuild upon a save of a source file.
 
 ### How to Contribute:
-- So you like the idea and want to be part of it? Awesome! Do whatever seems interesting to you!
+- So you like the idea and want to be part of it? Awesome! I'd recomend starting with any issues with the tag **good first issue**.
 - Please submit your changes as a pull request. Idealy a pull request represents a complete feature you're adding.
-- Every pull request is run through a rigorous stylistic auto-checker called **codebeat**. Before any PR can be merged, it should not raise any issues on codebeat. Our "GPA" for the code base right now is 3.98 ([see whole report here](https://codebeat.co/projects/github-com-josiahcoad-seetheworld-master)). Thank you for doing your part to keep it that way!
-- We use eslint to maintain coding standards. Please make sure you have the **eslint** extention installed in vscode. You can also run the *Prettier* auto-formatter on your documents before submitting a PR. *Prettier* is a VS code extention as well. 
+- We use eslint to maintain coding standards. Please make sure you have the **eslint** extention installed in vscode. You can also run the *Prettier* auto-formatter on your documents before submitting a PR. *Prettier* is a VS code extention as well.
 
 Peace out and happy travelling :v: :yum:
