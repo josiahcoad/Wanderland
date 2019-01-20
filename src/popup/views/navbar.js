@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, Glyphicon, Nav } from 'react-bootstrap';
 import ActivateButton from './activateButton';
 import './navbar.css';
-import CollectionsList from './collectionsList';
 
 const PopupNavbar = ({ onActivate, loading, error }) => (
     <Navbar>
@@ -20,9 +19,6 @@ See The World
                 </a>
             </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
-            <CollectionsList />
-        </Nav>
         <Navbar.Form pullRight>
             <ActivateButton bsStyle="primary" onClick={onActivate} loading={loading} error={error} />
         </Navbar.Form>

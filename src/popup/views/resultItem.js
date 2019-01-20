@@ -3,7 +3,7 @@
 import React from 'react';
 import ResultItemExpantion from './resultItemExpantion';
 
-const ResultItem = ({ children, onClick, place }) => (
+const ResultItem = ({ onClick, place, onRemove }) => (
     <li
         className="list-group-item result-item"
         onClick={(ev) => {
@@ -12,7 +12,15 @@ const ResultItem = ({ children, onClick, place }) => (
             }
         }}
     >
-        {children}
+        <button
+            type="button"
+            className="icon-button remove-button"
+            onClick={onRemove}
+        >
+            <span className="glyphicon glyphicon-remove-circle" />
+        </button>
+        {' '}
+        {place.name}
         <ResultItemExpantion place={place} />
     </li>
 );
