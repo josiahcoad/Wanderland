@@ -8,7 +8,8 @@ export function initializeTooltip(data, linkClass) {
     <div class = "tooltipdiv">
         <img src="${data.image}"/> 
         <h6 class="text-center">${data.search}</h6>
-        <a href="${data.link}" class="badge badge-info mx-auto">Wiki</a>
+        <a href="${data.link}" class="badge badge-info mx-auto" target="_blank"
+        rel="noopener noreferrer">Wiki</a>
     </div>`;
     tippy(`.${linkClass}`, {
         content: tooltipNode,

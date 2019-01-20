@@ -1,28 +1,29 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { Panel } from 'react-bootstrap';
 import ResultItemExpantion from './resultItemExpantion';
 
-const ResultItem = ({ onClick, place, onRemove }) => (
-    <li
-        className="list-group-item result-item"
-        onClick={(ev) => {
-            if (ev.target.tagName === 'LI') {
-                onClick();
-            }
-        }}
+const ResultItem = ({ eventKey, place, onRemove }) => (
+    <Panel
+        eventKey={eventKey}
+        key={place.name}
     >
-        <button
-            type="button"
-            className="icon-button remove-button"
-            onClick={onRemove}
-        >
-            <span className="glyphicon glyphicon-remove-circle" />
-        </button>
-        {' '}
-        {place.name}
-        <ResultItemExpantion place={place} />
-    </li>
+        <Panel.Toggle>
+            <Panel.Heading>
+                <button type="button" className="icon-button remove-button" onClick={onRemove}>
+                    <span className="glyphicon glyphicon-remove-circle" />
+                </button>
+                <Panel.Title>
+                    {' '}
+                    {place.name}
+                </Panel.Title>
+            </Panel.Heading>
+        </Panel.Toggle>
+        <Panel.Collapse>
+            <Panel.Body>
+                <ResultItemExpantion place={place} />
+            </Panel.Body>
+        </Panel.Collapse>
+    </Panel>
 );
 
 export default ResultItem;

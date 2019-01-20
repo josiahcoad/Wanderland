@@ -95,6 +95,7 @@ class Popup extends Component {
                                             places={this.state.placesScraped}
                                             setPlaces={this.setLastPlacesScraped}
                                             setSelectedPlace={this.setSelectedPlace}
+                                            selectedPlace={this.state.selectedPlace}
                                         />
                                     </Col>
                                 </Row>

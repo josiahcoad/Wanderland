@@ -4,9 +4,16 @@ const ResultItemExpantion = ({ place }) => (
     <div className="result-item-expansion">
         <img src={place.image.thumbnail} alt="" />
         <hr />
-        <a href={place.link} className="badge badge-info mx-auto">
-            Wiki
-        </a>
+        {place.lod.wikipedia && (
+            <a
+                href={place.lod.wikipedia}
+                className="badge badge-info mx-auto"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Wiki
+            </a>
+        )}
         <p>{place.abstract}</p>
     </div>
 );

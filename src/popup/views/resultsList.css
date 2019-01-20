@@ -1,9 +1,5 @@
-.remove-button:hover {
+.icon-button.remove-button:hover {
     color: red;
-}
-
-.add-button:hover {
-    color: #0F4ECD;
 }
 
 .icon-button {
@@ -13,41 +9,32 @@
     outline: none;
     border: 0;
     background: transparent;
+    color: gray;
 }
 
-.result-item {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
-    cursor: pointer;
-    box-shadow: 0px -2px 20px #888;
-}
-
-.result-item:hover {
-    background-color: #bbb;
-}
-
-.map-absent-box {
-    border-style: 2px solid #bbb;
-}
-
-.results-list {
+#results-list {
     height: 400px;
     overflow-y: scroll;
 }
 
-.result-item-expansion img {
+.results-list-body-img {
     width: 100%;
     height: auto;
 }
 
-.result-item-expansion {
-    height: 0px;
-    transition: height 0.5s;
-    -webkit-transition: height 0.5s;
+.panel-heading {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+    padding: 5px 5px;
 }
 
-.result-item:hover .result-item-expansion {
-    height: 150px;
+.panel-title {
+    color: gray;
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+.panel-heading:hover .panel-title {
+    color: black;
 }
