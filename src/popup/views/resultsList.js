@@ -12,11 +12,11 @@ const ResultsList = props => (
         onSelect={props.setSelectedPlace}
         id="results-list"
     >
-        {props.places.map(place => (
+        {props.places.map((place, i) => (
             <ResultItem
                 // to get the accordian effect, we have to use key=index
                 // eslint-disable-next-line react/no-array-index-key
-                key={uuid.v4()}
+                key={i}
                 eventKey={place}
                 place={place}
                 onRemove={() => props.setPlaces(removeWhere(props.places, 'name', place.name))}

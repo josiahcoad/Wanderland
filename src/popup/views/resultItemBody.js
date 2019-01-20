@@ -1,7 +1,8 @@
 import React from 'react';
+import './resultItemBody.css';
 
-const ResultItemExpantion = ({ place }) => (
-    <div className="result-item-expansion">
+const ResultItemBody = ({ place }) => (
+    <div className="result-item-body">
         <img src={place.image.thumbnail} alt="" />
         <hr />
         {place.lod.wikipedia && (
@@ -18,4 +19,4 @@ const ResultItemExpantion = ({ place }) => (
     </div>
 );
 
-export default ResultItemExpantion;
+export default ResultItemBody;

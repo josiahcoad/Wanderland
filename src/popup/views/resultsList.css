@@ -1,40 +1,4 @@
-.icon-button.remove-button:hover {
-    color: red;
-}
-
-.icon-button {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    color: gray;
-}
-
 #results-list {
     height: 400px;
     overflow-y: scroll;
-}
-
-.results-list-body-img {
-    width: 100%;
-    height: auto;
-}
-
-.panel-heading {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: left;
-    padding: 5px 5px;
-}
-
-.panel-title {
-    color: gray;
-    text-decoration: none !important;
-    display: inline-block;
-}
-
-.panel-heading:hover .panel-title {
-    color: black;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
-import ResultItemExpantion from './resultItemExpantion';
+import ResultItemBody from './resultItemBody';
+import './resultItem.css';
 
 const ResultItem = ({ eventKey, place, onRemove }) => (
     <Panel
@@ -20,7 +21,7 @@ const ResultItem = ({ eventKey, place, onRemove }) => (
         </Panel.Toggle>
         <Panel.Collapse>
             <Panel.Body>
-                <ResultItemExpantion place={place} />
+                <ResultItemBody place={place} />
             </Panel.Body>
         </Panel.Collapse>
     </Panel>
