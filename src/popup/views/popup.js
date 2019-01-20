@@ -86,6 +86,7 @@ class Popup extends Component {
                                             <PopupMap
                                                 placesScraped={this.state.placesScraped}
                                                 selectedPlace={this.state.selectedPlace}
+                                                setLastPlacesScraped={this.setLastPlacesScraped}
                                             />
                                         )}
                                     </Col>

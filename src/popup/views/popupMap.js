@@ -3,6 +3,7 @@ import {
     Map, GoogleApiWrapper, InfoWindow, Marker,
 } from 'google-maps-react';
 import uuid from 'uuid';
+import { removeWhere } from '../../utils';
 
 const mapStyles = {
     width: '100%',
@@ -50,6 +51,9 @@ export class PopupMap extends Component {
     }
 
     onClose() {
+        this.props.setLastPlacesScraped(
+            removeWhere(this.props.placesScraped, 'name', this.state.selectedPlace.name),
+        );
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
