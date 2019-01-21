@@ -18,7 +18,10 @@ const ResultsList = props => (
                 key={i}
                 eventKey={place}
                 place={place}
-                onRemove={() => props.setPlaces(removeWhere(props.places, 'name', place.name))}
+                onRemove={() => {
+                    props.setSelectedPlace(null);
+                    props.setPlaces(removeWhere(props.places, 'name', place.name));
+                }}
             />
         ))}
     </PanelGroup>

@@ -9,7 +9,7 @@ function getButtonText(loading, error) {
     if (error) {
         return 'Please Refresh';
     }
-    return 'Scrape Page';
+    return 'Search Page';
 }
 
 const ActivateButton = ({ loading, error, onClick }) => (

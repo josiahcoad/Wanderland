@@ -3,6 +3,7 @@ import {
     Map, GoogleApiWrapper, InfoWindow, Marker,
 } from 'google-maps-react';
 import uuid from 'uuid';
+import InfoWindowExtention from './infoWindowExtention';
 import { removeWhere } from '../../utils';
 
 const mapStyles = {
@@ -33,6 +34,7 @@ export class PopupMap extends Component {
         };
         this.onMarkerClick = this.onMarkerClick.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onRemove = this.onRemove.bind(this);
         this.setBounds = this.setBounds.bind(this);
     }
 
@@ -51,11 +53,15 @@ export class PopupMap extends Component {
         });
     }
 
-    onClose() {
+    onRemove() {
         this.props.setSelectedPlace(null);
         this.props.setLastPlacesScraped(
             removeWhere(this.props.placesScraped, 'name', this.state.selectedPlace.name),
         );
+        this.onClose();
+    }
+
+    onClose() {
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
@@ -100,17 +106,24 @@ export class PopupMap extends Component {
                             key={uuid.v4()}
                         />
                     ))}
-                <InfoWindow
+                <InfoWindowExtention
                     marker={this.state.activeMarker}
                     visible={this.state.selectedPlace !== null && this.state.showingInfoWindow}
                     onClose={this.onClose}
                 >
-                    <div>
-                        <h4>
+                    <>
+                        <button
+                            type="button"
+                            className="icon-button remove-button"
+                            onClick={this.onRemove}
+                        >
+                            <span className="glyphicon glyphicon-remove-circle" />
+                        </button>
+                        <h4 style={{ display: 'inline-block' }}>
                             {this.state.selectedPlace === null ? '' : this.state.selectedPlace.name}
                         </h4>
-                    </div>
-                </InfoWindow>
+                    </>
+                </InfoWindowExtention>
             </Map>
         );
     }
