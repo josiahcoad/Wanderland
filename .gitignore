@@ -1,4 +1,5 @@
 # Generic Files
 *.txt
 node_modules
-dist/*Bundle*
+dist
+!dist/manifest.json
