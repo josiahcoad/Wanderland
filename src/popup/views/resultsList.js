@@ -1,5 +1,4 @@
 import React from 'react';
-import uuid from 'uuid';
 import { PanelGroup } from 'react-bootstrap';
 import ResultItem from './resultItem';
 import { removeWhere } from '../../utils';

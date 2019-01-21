@@ -28,8 +28,8 @@ export class PopupMap extends Component {
         this.state = {
             showingInfoWindow: false, // Hides or shows the infoWindow
             activeMarker: {}, // Shows the active marker upon click
-            selectedPlace: {}, // Shows the infoWindow to the selected place upon a marker
             map: null,
+            selectedPlace: null,
         };
         this.onMarkerClick = this.onMarkerClick.bind(this);
         this.onClose = this.onClose.bind(this);
@@ -43,6 +43,7 @@ export class PopupMap extends Component {
     }
 
     onMarkerClick(props, marker) {
+        this.props.setSelectedPlace(this.props.placesScraped.find(x => x.name === marker.name));
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
@@ -51,6 +52,7 @@ export class PopupMap extends Component {
     }
 
     onClose() {
+        this.props.setSelectedPlace(null);
         this.props.setLastPlacesScraped(
             removeWhere(this.props.placesScraped, 'name', this.state.selectedPlace.name),
         );
@@ -100,11 +102,13 @@ export class PopupMap extends Component {
                     ))}
                 <InfoWindow
                     marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}
+                    visible={this.state.selectedPlace !== null && this.state.showingInfoWindow}
                     onClose={this.onClose}
                 >
                     <div>
-                        <h4>{this.state.selectedPlace.name}</h4>
+                        <h4>
+                            {this.state.selectedPlace === null ? '' : this.state.selectedPlace.name}
+                        </h4>
                     </div>
                 </InfoWindow>
             </Map>

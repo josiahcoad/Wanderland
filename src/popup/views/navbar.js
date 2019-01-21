@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Glyphicon, Nav } from 'react-bootstrap';
+import { Navbar, Glyphicon } from 'react-bootstrap';
 import ActivateButton from './activateButton';
 import './navbar.css';
 
