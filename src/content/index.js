@@ -1,4 +1,4 @@
-// This code gets injected automatically into every page you go onto in Google Chrome.
+// Content code gets injected automatically into every page you go onto in Google Chrome.
 import findAndReplaceDOMText from 'findandreplacedomtext';
 import { getUniqueLocationsFromCurrentPage } from './api.js';
 import { initializeTooltip } from './tooltip.js';
@@ -7,7 +7,6 @@ function googleGeometryAPIGet(location) {
     return new Promise((resolve, reject) => {
         const Http = new XMLHttpRequest();
         Http.responseType = 'json';
-
         const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
             location,
         )}&inputtype=textquery&fields=geometry`;
@@ -32,15 +31,27 @@ function googleGeometryAPIGet(location) {
 }
 
 function addGeometryToObject({ spot, ...rest }) {
-    return googleGeometryAPIGet(spot)
-        .then(response => ({
-            name: spot,
-            lat: response.lat,
-            lng: response.lng,
-            ...rest,
-        }))
-        // eslint-disable-next-line no-console
-        .catch(console.log); // how to best handle error?
+    return (
+        googleGeometryAPIGet(spot)
+            .then(response => ({
+                name: spot,
+                lat: response.lat,
+                lng: response.lng,
+                ...rest,
+            }))
+            // an error will be raised here if there is a Network Error or
+            // if the response code from the Google Places API is not a 200
+            .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+                return {
+                    name: spot,
+                    lat: null,
+                    lng: null,
+                    ...rest,
+                };
+            })
+    );
 }
 
 function activatePage() {
@@ -70,9 +81,7 @@ function activatePage() {
             }
             return results;
         })
-        .catch((error) => {
-            alert(`Error! ${error}`);
-        });
+        .catch(error => alert(`Error! ${error}`));
 }
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //

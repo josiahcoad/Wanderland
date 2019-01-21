@@ -24,9 +24,7 @@ See The World
             <CollectionsList />
         </Nav>
         <Navbar.Form pullRight>
-            <ActivateButton bsStyle="primary" onClick={onActivate} loading={loading} error={error}>
-                Activate Page
-            </ActivateButton>
+            <ActivateButton bsStyle="primary" onClick={onActivate} loading={loading} error={error} />
         </Navbar.Form>
     </Navbar>
 );

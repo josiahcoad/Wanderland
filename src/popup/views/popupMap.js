@@ -25,7 +25,7 @@ export class PopupMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showingInfoWindow: false, // Hides or the shows the infoWindow
+            showingInfoWindow: false, // Hides or shows the infoWindow
             activeMarker: {}, // Shows the active marker upon click
             selectedPlace: {}, // Shows the infoWindow to the selected place upon a marker
             map: null,
