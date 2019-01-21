@@ -1,11 +1,7 @@
 // This code gets injected automatically into every page you go onto in Google Chrome.
 import findAndReplaceDOMText from 'findandreplacedomtext';
-import {
-    getUniqueLocationsFromCurrentPage,
-} from './api.js';
-import {
-    initializeTooltip,
-} from './tooltip.js';
+import { getUniqueLocationsFromCurrentPage } from './api.js';
+import { initializeTooltip } from './tooltip.js';
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage().then(
@@ -18,12 +14,15 @@ function activatePage() {
                         wrap: 'a',
                         wrapClass: linkClass,
                     });
-                    initializeTooltip({
-                        search: result.spot,
-                        link: result.lod.wikipedia,
-                        image: result.image.thumbnail,
-                        summary: result.abstract,
-                    }, linkClass);
+                    initializeTooltip(
+                        {
+                            search: result.spot,
+                            link: result.lod.wikipedia,
+                            image: result.image.thumbnail,
+                            summary: result.abstract,
+                        },
+                        linkClass,
+                    );
                 });
             } else {
                 alert("Sorry we couldn't find any results for this page.");
@@ -37,6 +36,7 @@ function activatePage() {
 }
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
+// eslint-disable-next-line no-console
 console.log('Activating SeeTheWorld');
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
@@ -44,13 +44,13 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // activate button in the extension.js code.
     if (request.message === 'ACTIVATE') {
         activatePage().then(
-            (results) => sendResponse({
+            results => sendResponse({
                 message: 'SUCCESS',
                 placesScraped: results.map(result => result.spot),
             }),
             () => sendResponse({
                 message: 'FAILED',
-                placesScraped: []
+                placesScraped: [],
             }),
         );
     }

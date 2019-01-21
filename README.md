@@ -16,22 +16,23 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 ![example screenshot](assets/readme_example.png)
 
 ### Todo:
-- Tie in the Google Maps API to display where the location is on a thumbnail map
-- Use chrome extension storage to allow users to save locations easily and see them on the map
-- Make the info pop up in-line with the text, meaning we should underline/highlight the text and show the info-popup when the user hovers over the text (we need to know what our entity-extraction API considers **main content**)
+- We are using github issues to track to-dos for this project.
 
-### How to Run:
+### How to Test:
 - download/clone the repo
 - go to ```chrome://extensions/``` in chrome browser
 - toggle Developer Mode (switch in top right corner of page)
 - click "Load Unpacked" and select the repo folder (button in top left corner of page)
 - go to any site with locations mentioned to see results pop up at the top of the page
 
+### How to Build:
+- Please make sure you have the most recent versions of npm and node installed.
+- run ```npm install``` in the terminal in the project directory to install all dependencies
+- run ```npm run build``` in the terminal in the project directory. As you develop, ```npm run watch``` might be a handy command to automatically rebuild upon a save of a source file.
+
 ### How to Contribute:
-- So you like the idea and want to be part of it? Awesome! Do whatever seems interesting to you!
+- So you like the idea and want to be part of it? Awesome! I'd recomend starting with any issues with the tag **good first issue**.
 - Please submit your changes as a pull request. Idealy a pull request represents a complete feature you're adding.
-- For GUI related, a useful place for brainstorming is [draw.io](https://drive.google.com/file/d/1-qyOF1iSzyxsx16Yxgx-hzV8WLq0Mt1d/view?usp=sharing) where you are free to edit. Hopefull we can use this to agree on the GUI will look/behave before putting too much effort into the coding of it.
-- Every pull request is run through a rigorous stylistic auto-checker called **codebeat**. Before any PR can be merged, it should not raise any issues on codebeat. Our "GPA" for the code base right now is 3.98 ([see whole report here](https://codebeat.co/projects/github-com-josiahcoad-seetheworld-master)). Thank you for doing your part to keep it that way!
-- We use the *Beautify* VS Code Extension to maintain the formatting standard for the repo. Please make sure you have this extension installed and run auto-formatter on your documents before submitting a PR.
+- We use eslint to maintain coding standards. Please make sure you have the **eslint** extention installed in vscode. You can also run the *Prettier* auto-formatter on your documents before submitting a PR. *Prettier* is a VS code extention as well.
 
 Peace out and happy travelling :v: :yum:
