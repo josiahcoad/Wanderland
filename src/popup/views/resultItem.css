@@ -1,0 +1,35 @@
+.panel-heading {
+    text-align: left;
+    padding: 5px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.panel-title {
+    color: gray;
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+.panel-heading:hover {
+    background-color: #8deedb;
+}
+
+.panel-heading:hover .panel-title {
+    color: black;
+}
+
+.icon-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    color: gray;
+}
+
+.icon-button.remove-button:hover {
+    color: red;
+}

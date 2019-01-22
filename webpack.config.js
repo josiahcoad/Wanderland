@@ -15,24 +15,44 @@ module.exports = {
         ],
     },
     output: {
-        filename: '[name]Bundle.js',
+        filename: 'js/[name]Bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
         rules: [{
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-        },
-        {
-            test: /\.css$/,
-            loader: 'style-loader!css-loader',
-        },
-        {
-            test: /\.html$/,
-            loader: 'html-loader',
-            exclude: /node_modules/,
-        },
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader',
+            },
+            {
+                test: /\.(png|jp(e*)g|svg)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8000, // If image is less than 8kb, convert to base64
+                        name: 'images/[name].[ext]'
+                    }
+                }]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    'file-loader?name=html/[name].[ext]', // Saves to html folder in dist
+                    'extract-loader',
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            minimize: true,
+                            removeComments: true,
+                            collapseWhitespace: true
+                        }
+                    }
+                ],
+            }
         ],
     },
     resolve: {

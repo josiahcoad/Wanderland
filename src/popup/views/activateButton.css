@@ -1,4 +1,13 @@
-.activateButton {
-    height: 30px;
-    width: 100px;
+.activate-button {
+    background-color: #5Ce2C8 !important;
+    border-color: #5Ce2C8 !important;
+    color: white !important;
+}
+
+.activate-button:hover,
+.activate-button:active,
+.activate-button:visited {
+    background-color: #13caa6 !important;
+    border-color: #13caa6 !important;
+    color: white !important;
 }

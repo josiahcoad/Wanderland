@@ -2,5 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Popup from './views/popup';
+import './images/popup-icon.png';
+import './popup.html'
 
 ReactDOM.render(<Popup />, document.getElementById('root'));
