@@ -1,5 +1,11 @@
 # See The World :airplane:
 
+> “You're off to Great Places!
+> Today is your day!
+> Your mountain is waiting,
+> So... get on your way!” 
+*― Dr. Seuss*
+
 I love planning travel and seeing new places to go in the world :earth_africa:. There is a recurrent problem with internet wanderlust though. :grimacing: Right now I'm planning a trip to India and googling queries such as *"best hill stations in the himalayas"* or *"best national parks in central india"*. I get back results like **"7 Best National Parks in Central India"**. Normally, it is a list of places that I have never heard of before and have literally no point of reference for the place. :hear_no_evil: So what do I do when I see a name like **Bandhavgarh National Park**? Open up another tab, copy/paste the name into google maps. And I have to do that for *every place* that sounds interesting :expressionless:. And then I start forgetting places or maybe I write them down somewhere but a little while later forget why I wrote it down, and now lost the website that I first found it on. :man_facepalming: With *SeeTheWorld* you can track places that interest you across web pages. You can add places of interest to your saved places by just clicking on the name of the place when it appears on the site. The idea is that you can easily see a short blurb about any place you added at any time, take notes and see pictures all within your workflow looking through a web page like the **"7 Best National Parks in Central India"**! :sunglasses:
 
 ![tigerrr](https://travel-blog.waytoindia.com/wp-content/uploads/Kanger-Ghati-National-Park.jpg)
@@ -32,7 +38,6 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 
 ### How to Contribute:
 - So you like the idea and want to be part of it? Awesome! I'd recomend starting with any issues with the tag **good first issue**.
-- Please submit your changes as a pull request. Idealy a pull request represents a complete feature you're adding.
 - We use eslint to maintain coding standards. Please make sure you have the **eslint** extention installed in vscode. You can also run the *Prettier* auto-formatter on your documents before submitting a PR. *Prettier* is a VS code extention as well.
 
 Peace out and happy travelling :v: :yum:
