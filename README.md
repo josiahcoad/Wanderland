@@ -1,4 +1,4 @@
-# See The World :airplane:
+# Wanderland :airplane:
 
 > “You're off to Great Places!
 > Today is your day!
@@ -6,9 +6,28 @@
 > So... get on your way!” 
 *― Dr. Seuss*
 
-I love planning travel and seeing new places to go in the world :earth_africa:. There is a recurrent problem with internet wanderlust though. :grimacing: Right now I'm planning a trip to India and googling queries such as *"best hill stations in the himalayas"* or *"best national parks in central india"*. I get back results like **"7 Best National Parks in Central India"**. Normally, it is a list of places that I have never heard of before and have literally no point of reference for the place. :hear_no_evil: So what do I do when I see a name like **Bandhavgarh National Park**? Open up another tab, copy/paste the name into google maps. And I have to do that for *every place* that sounds interesting :expressionless:. And then I start forgetting places or maybe I write them down somewhere but a little while later forget why I wrote it down, and now lost the website that I first found it on. :man_facepalming: With *SeeTheWorld* you can track places that interest you across web pages. You can add places of interest to your saved places by just clicking on the name of the place when it appears on the site. The idea is that you can easily see a short blurb about any place you added at any time, take notes and see pictures all within your workflow looking through a web page like the **"7 Best National Parks in Central India"**! :sunglasses:
+I love planning travel and seeing new places to go in the world :earth_africa:. There is a recurrent problem with internet wanderlust though. :grimacing: You probably know what I'm talking about if you've ever experienced something like this:
 
-![tigerrr](https://travel-blog.waytoindia.com/wp-content/uploads/Kanger-Ghati-National-Park.jpg)
+1. You decide your going travelling... 🥳 for whatever reason... to say *India*.
+2. So what should you do there? Well you know you want to see some tigers! :tiger: So you google *"where to see tigers in India"*.
+3. You get back results like this one: [holidify.com](https://www.holidify.com/pages/tiger-reserves-in-india-1333.html). It is a list of places that you've have never heard of before and have absolutely no point of reference for. :hear_no_evil:
+4. So what you do is...
+  a. Copy the name of a place that sounds interesting to you from holidify.com
+  b. Open up another tab and navigate to google maps
+  c. Paste the name of the place and search to see where it is :man_facepalming:
+  d. Repeat a-c **for every place you're interested in** :expressionless:
+5. Jot down in some notes somewhere the places your interested in to keep track of them
+6. Send the notes to your friends you're travelling with so they can add to it. They have to repeat the process you went through...
+7. Search across the web for more info on the places you're going to like pictures, facts, festivals ...
+
+*Wanderland* Solution (for steps 4-6)
+4i. A chrome extention that is instantly accessible across any webpage that allows you to see all the places mentioned on the page in a single embedded mini-map.
+4ii. All the places on the page magically highlighted, allowing you to hover over them to see info about the place.
+5. Add places of interest to your "wanderlist" by just clicking on the name of the place wherever it appears on the site.
+6. Easily share your wanderlists with others, collaborate and take notes on the places together all within a single workflow from any webpage. :sunglasses:
+7. Have the software retrieve all the information you care about for a place automatically and and make it easily accessible.
+
+![where to go art](assets/readme.jpg)
 
 ### Technical Details:
 - We use an API [dandelion](https://dandelion.eu/docs/api/datatxt/nex/v1/) to do entity extraction on a web page HTML that the user is visiting.
@@ -18,8 +37,6 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 - Perhaps we could allow the user to assign a rough date/orderings to their locations
 - Definitely expandable if you have any other ideas!
 
-
-![example screenshot](assets/readme_example.png)
 
 ### Todo:
 - We are using github issues to track to-dos for this project.
