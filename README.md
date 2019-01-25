@@ -26,19 +26,10 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
   * A chrome extention that is instantly accessible across any webpage that allows you to see all the places mentioned on the page in a single embedded mini-map.
   * All the places on the page magically highlighted, allowing you to hover over them to see info about the place.
 5. Add places of interest to your "wanderlist" by just clicking on the name of the place wherever it appears on the site.
-6. Easily share your wanderlists with others, collaborate and take notes on the places together all within a single workflow from any webpage. :sunglasses:
-7. Have the software retrieve all the information you care about for a place automatically and and make it easily accessible.
+6. Easily share your wanderlists with others, collaborate, assign the places dates and an ordering, and take notes on the places together all within a single workflow from any webpage. :sunglasses:
+7. Have the software retrieve all the information you care about for each place automatically and make it easily accessible in one spot.
 
 ![where to go art](assets/readme.jpg)
-
-### Technical Details:
-- We use an API [dandelion](https://dandelion.eu/docs/api/datatxt/nex/v1/) to do entity extraction on a web page HTML that the user is visiting.
-- The API returns to us every entity (including locations), also the Wikipedia link, summary and image link
-- We use the chrome extension to manipulate the HTML DOM of whatever page is of interest, feeding the entire page HTML to the API and then using the match indices returned by the API to highlight/underline the matches. When a user hovers over an underlined match, a popup appears. It can include a mini google-map, location summary, previous notes on the place, wiki-link etc... (weather?, news?)
-- When the user wants to add location to list of their places, we can use the google-extension-storage to store users history
-- Perhaps we could allow the user to assign a rough date/orderings to their locations
-- Definitely expandable if you have any other ideas!
-
 
 ### Todo:
 - We are using github issues to track to-dos for this project.
