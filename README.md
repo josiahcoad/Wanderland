@@ -9,20 +9,26 @@
 I love planning travel and seeing new places to go in the world :earth_africa:. There is a recurrent problem with internet wanderlust though. :grimacing: You probably know what I'm talking about if you've ever experienced something like this:
 
 1. You decide your going travelling... 🥳 for whatever reason... to say *India*.
+
 2. So what should you do there? Well you know you want to see some tigers! :tiger: So you google *"where to see tigers in India"*.
+
 3. You get back results like this one: [holidify.com](https://www.holidify.com/pages/tiger-reserves-in-india-1333.html). It is a list of places that you've have never heard of before and have absolutely no point of reference for. :hear_no_evil:
+
 4. So what you do is...
   a. Copy the name of a place that sounds interesting to you from holidify.com
   b. Open up another tab and navigate to google maps
   c. Paste the name of the place and search to see where it is :man_facepalming:
   d. Repeat a-c **for every place you're interested in** :expressionless:
+
 5. Jot down in some notes somewhere the places your interested in to keep track of them
+
 6. Send the notes to your friends you're travelling with so they can add to it. They have to repeat the process you went through...
+
 7. Search across the web for more info on the places you're going to like pictures, facts, festivals ...
 
 *Wanderland* Solution (for steps 4-6)
-4i. A chrome extention that is instantly accessible across any webpage that allows you to see all the places mentioned on the page in a single embedded mini-map.
-4ii. All the places on the page magically highlighted, allowing you to hover over them to see info about the place.
+4 i. A chrome extention that is instantly accessible across any webpage that allows you to see all the places mentioned on the page in a single embedded mini-map.
+4 ii. All the places on the page magically highlighted, allowing you to hover over them to see info about the place.
 5. Add places of interest to your "wanderlist" by just clicking on the name of the place wherever it appears on the site.
 6. Easily share your wanderlists with others, collaborate and take notes on the places together all within a single workflow from any webpage. :sunglasses:
 7. Have the software retrieve all the information you care about for a place automatically and and make it easily accessible.
