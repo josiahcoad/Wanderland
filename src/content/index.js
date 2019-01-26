@@ -81,7 +81,10 @@ function activatePage() {
             }
             return results;
         })
-        .catch(error => alert(`Error! ${error}`));
+        .catch((error) => {
+            alert(error);
+            return [];
+        });
 }
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //

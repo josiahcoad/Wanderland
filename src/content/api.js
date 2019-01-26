@@ -78,7 +78,7 @@ export function getUniqueLocationsFromCurrentPage() {
                     alert(
                         'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
                     );
-                    reject(Error(error));
+                    reject(error);
                 },
             );
     });
