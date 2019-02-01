@@ -8,7 +8,7 @@ const Loader = () => (
             className="loader"
             sizeUnit="px"
             size={50}
-            color="#36D7B7"
+            color="#ec7c93"
             loading
         />
     </div>

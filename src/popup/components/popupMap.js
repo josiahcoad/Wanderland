@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Map, GoogleApiWrapper, InfoWindow, Marker,
+    Map, GoogleApiWrapper, Marker,
 } from 'google-maps-react';
 import uuid from 'uuid';
 import InfoWindowExtention from './infoWindowExtention';

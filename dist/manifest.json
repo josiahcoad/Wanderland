@@ -5,8 +5,8 @@
     "version": "0.1.0",
     "author": "Josiah Coad, Chinmay Phulse",
     "content_scripts": [{
-        "css": [],
-        "js": ["js/contentBundle.js"],
+        "css": ["lib/bootstrap.min.css"],
+        "js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "js/contentBundle.js"],
         "matches": ["<all_urls>"]
     }],
     "background": {

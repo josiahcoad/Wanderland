@@ -1,5 +1,6 @@
 # Generic Files
 *.txt
 node_modules
-dist
-!dist/manifest.json
+dist/images
+dist/js
+dist/html
