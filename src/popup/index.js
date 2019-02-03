@@ -1,8 +1,14 @@
-// this is the js code for the little page that opens when you click on the extension icon
+/**
+ * This is the root js file that runs when that little popup page opens
+ * as you click on the extension icon. It will see
+ * that "Popup" is being included and look in that file next to see what code
+ * needs to be included.
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Popup from './views/popup';
+import Popup from './components/popup';
 import './images/popup-icon.png';
-import './popup.html'
+import './popup.html';
 
 ReactDOM.render(<Popup />, document.getElementById('root'));

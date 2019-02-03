@@ -8,14 +8,14 @@ const PopupNavbar = ({ onActivate, loading, error }) => (
         <Navbar.Header>
             <Navbar.Brand>
                 <a
-                    href="https://github.com/josiahcoad/seetheworld"
+                    href="https://github.com/josiahcoad/wanderland"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="navbar-brand"
                 >
                     <Glyphicon glyph="globe" />
                     {' '}
-See The World
+Wanderland
                 </a>
             </Navbar.Brand>
         </Navbar.Header>

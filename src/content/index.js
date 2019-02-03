@@ -1,7 +1,7 @@
 // Content code gets injected automatically into every page you go onto in Google Chrome.
 import findAndReplaceDOMText from 'findandreplacedomtext';
 import { getUniqueLocationsFromCurrentPage } from './api.js';
-import { initializeTooltip } from './tooltip.js';
+import { insertTooltips } from './tooltip';
 
 function googleGeometryAPIGet(location) {
     return new Promise((resolve, reject) => {
@@ -60,20 +60,20 @@ function activatePage() {
         .then((results) => {
             if (results.length !== 0) {
                 results.forEach((result) => {
-                    const linkClass = `${result.name.replace(' ', '_')}_tooltip`;
+                    const wrapClass = `${result.name.replace(' ', '_')}_tooltip`;
                     findAndReplaceDOMText(document.body, {
                         find: result.name,
-                        wrap: 'a',
-                        wrapClass: linkClass,
+                        wrap: 'span',
+                        wrapClass,
                     });
-                    initializeTooltip(
+                    insertTooltips(
                         {
-                            search: result.name,
+                            title: result.name,
                             link: result.lod.wikipedia,
                             image: result.image.thumbnail,
                             summary: result.abstract,
                         },
-                        linkClass,
+                        wrapClass,
                     );
                 });
             } else {
@@ -89,7 +89,7 @@ function activatePage() {
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
 // eslint-disable-next-line no-console
-console.log('Activating SeeTheWorld');
+console.log('Activating Wanderland');
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the

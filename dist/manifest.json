@@ -6,7 +6,7 @@
     "author": "Josiah Coad, Chinmay Phulse",
     "content_scripts": [{
         "css": [],
-        "js": ["js/contentBundle.js"],
+        "js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "js/contentBundle.js"],
         "matches": ["<all_urls>"]
     }],
     "background": {
