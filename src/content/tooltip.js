@@ -6,21 +6,10 @@ import TooltipNavbar from './components/tooltipNavbar';
 import './tooltip.css';
 
 const CustomPopover = place => (
-    <Popover id="popover-basic">
+    <Popover className="wanderland-popover">
         <TooltipNavbar />
         <div className="tooltipdiv">
             <TooltipMap title={place.title} />
-            {/* <img src={place.image} alt="" />
-            <a
-                href={place.link}
-                className="badge badge-info mx-auto"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Wiki
-            </a>
-            <hr />
-            <p>{place.summary}</p> */}
         </div>
     </Popover>
 );
