@@ -1,10 +1,19 @@
-.tooltipdiv p {
-  max-height: 200px;
+.wanderland-popover .tooltipdiv p {
+  max-height: 500px;
   overflow-y: scroll;
 }
 
+.popover {
+  max-width: 405px !important;
+  max-height: 399px !important;
+}
+
+.wanderland-popover .popover-content {
+  padding: 0px 0px !important;
+}
+
 .tooltipdiv img {
-  width: 100%;
+  width: 350%;
 }
 
 .anchor-like-button {
