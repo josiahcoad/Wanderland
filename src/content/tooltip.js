@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
+import TooltipMap from './tooltipMap';
+import TooltipNavbar from './components/tooltipNavbar';
 import './tooltip.css';
 
 const CustomPopover = place => (
-    <Popover id="popover-basic" title={place.title}>
+    <Popover id="popover-basic">
+        <TooltipNavbar />
         <div className="tooltipdiv">
-            <img src={place.image} alt="" />
+            <TooltipMap title={place.title} />
+            {/* <img src={place.image} alt="" />
             <a
                 href={place.link}
                 className="badge badge-info mx-auto"
@@ -16,7 +20,7 @@ const CustomPopover = place => (
                 Wiki
             </a>
             <hr />
-            <p>{place.summary}</p>
+            <p>{place.summary}</p> */}
         </div>
     </Popover>
 );
