@@ -1,26 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+import Popover from 'react-popover';
 import TooltipMap from './tooltipMap';
 import TooltipNavbar from './components/tooltipNavbar';
 import './tooltip.css';
 
-const CustomPopover = place => (
-    <Popover className="wanderland-popover">
+const PopoverContent = ({ title }) => (
+    <div className="wanderland-popover">
         <TooltipNavbar />
         <div className="tooltipdiv">
-            <TooltipMap title={place.title} />
+            <TooltipMap title={title} />
         </div>
-    </Popover>
+    </div>
 );
 
-const Tooltip = ({ place }) => (
-    <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={CustomPopover(place)}>
-        <button type="button" className="anchor-like-button">
-            {place.title}
-        </button>
-    </OverlayTrigger>
-);
+class Tooltip extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            show: false,
+        };
+        this.setShow = this.setShow.bind(this);
+        this.toggleShow = this.toggleShow.bind(this);
+    }
+
+    setShow(state) {
+        this.setState({ show: state });
+    }
+
+    toggleShow() {
+        this.setState(prevState => ({ show: !prevState.show }));
+    }
+
+    render() {
+        return (
+            <Popover
+                isOpen={this.state.show}
+                body={[<PopoverContent title={this.props.place.title} />]}
+                onOuterAction={() => this.setShow(false)}
+            >
+                <button type="button" className="anchor-like-button" onClick={this.toggleShow}>
+                    {this.props.place.title}
+                </button>
+            </Popover>
+        );
+    }
+}
 
 export function insertTooltips(place, wrapClass) {
     const elements = document.getElementsByClassName(wrapClass);

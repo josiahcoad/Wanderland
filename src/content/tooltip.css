@@ -1,19 +1,18 @@
-.wanderland-popover .tooltipdiv p {
-  max-height: 500px;
-  overflow-y: scroll;
-}
-
-.popover {
+.wanderland-popover {
   max-width: 405px !important;
   max-height: 399px !important;
+  background-color: white;
+  border-radius: 5px;
+  font-family: 'Indie Flower';
 }
 
 .wanderland-popover .popover-content {
   padding: 0px 0px !important;
 }
 
-.tooltipdiv img {
-  width: 350%;
+.wanderland-popover .navbar {
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
 }
 
 .anchor-like-button {
