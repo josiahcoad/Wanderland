@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import TooltipMap from './tooltipMap';
+import TooltipNavbar from './components/tooltipNavbar';
 import './tooltip.css';
 
 const CustomPopover = place => (
-    <Popover id="popover-basic" title={place.title} style={{ width: '600px' }}>
+    <Popover id="popover-basic">
+        <TooltipNavbar />
         <div className="tooltipdiv">
             <TooltipMap title={place.title} />
             {/* <img src={place.image} alt="" />
