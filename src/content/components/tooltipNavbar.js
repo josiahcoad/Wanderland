@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Glyphicon } from 'react-bootstrap';
+import './tooltipNavbar.css';
 
 const PopupNavbar = () => (
     <Navbar>

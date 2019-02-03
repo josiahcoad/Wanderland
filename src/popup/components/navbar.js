@@ -9,7 +9,7 @@ function getButtonText(loading, error) {
     if (error) {
         return 'Please Refresh';
     }
-    return 'Search Page';
+    return 'Scan Page';
 }
 
 const PopupNavbar = ({
@@ -31,17 +31,6 @@ Wanderland
             </Navbar.Brand>
         </Navbar.Header>
         <Navbar.Form pullRight>
-            {showFeedbackForm ? (
-                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
-                    Hide Feedback
-                </Button>
-            ) : (
-                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
-                    Give Feedback
-                </Button>
-            )}
-        </Navbar.Form>
-        <Navbar.Form pullRight>
             {!showFeedbackForm && (
                 <Button
                     bsStyle="primary"
@@ -50,6 +39,17 @@ Wanderland
                     className="activate-button"
                 >
                     {getButtonText(loading, error)}
+                </Button>
+            )}
+        </Navbar.Form>
+        <Navbar.Form pullRight>
+            {showFeedbackForm ? (
+                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
+                    Hide Feedback
+                </Button>
+            ) : (
+                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
+                    Give Feedback
                 </Button>
             )}
         </Navbar.Form>

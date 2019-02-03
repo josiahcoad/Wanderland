@@ -3,6 +3,10 @@
   border-color: #ec7c93 !important;
 }
 
+.wanderland-popover .navbar-default a {
+  color: white;
+}
+
 .wanderland-popover .navbar {
   margin-bottom: 0px !important;
 }
