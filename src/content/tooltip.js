@@ -1,21 +1,40 @@
 import findAndReplaceDOMText from 'findandreplacedomtext';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import './tooltip.css';
-import tippy from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
-import './tippy-light-theme.css';
 
-export function initializeTooltip(data, linkClass) {
-    const tooltipNode = `
-    <div class = "tooltipdiv">
-        <img src="${data.image}"/> 
-        <h6 class="text-center">${data.search}</h6>
-        <a href="${data.link}" class="badge badge-info mx-auto" target="_blank"
-        rel="noopener noreferrer">Wiki</a>
-    </div>`;
-    tippy(`.${linkClass}`, {
-        content: tooltipNode,
-        theme: 'light',
-        interactive: true,
+const CustomPopover = place => (
+    <Popover id="popover-basic" title={place.title}>
+        <div className="tooltipdiv">
+            <img src={place.image} alt="" />
+            <a
+                href={place.link}
+                className="badge badge-info mx-auto"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Wiki
+            </a>
+            <hr />
+            <p>{place.summary}</p>
+        </div>
+    </Popover>
+);
+
+const Tooltip = ({ place }) => (
+    <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={CustomPopover(place)}>
+        <button type="button" className="anchor-like-button">
+            {place.title}
+        </button>
+    </OverlayTrigger>
+);
+
+export function insertTooltips(place, wrapClass) {
+    const elements = document.getElementsByClassName(wrapClass);
+
+    [].forEach.call(elements, (container) => {
+        ReactDOM.render(<Tooltip place={place} />, container);
     });
 }
 
@@ -25,10 +44,10 @@ export const createTooltips = (results) => {
             const linkClass = `${result.name.replace(' ', '_')}_tooltip`;
             findAndReplaceDOMText(document.body, {
                 find: result.name,
-                wrap: 'a',
+                wrap: 'span',
                 wrapClass: linkClass,
             });
-            initializeTooltip(
+            insertTooltips(
                 {
                     search: result.name,
                     link: result.lod.wikipedia,

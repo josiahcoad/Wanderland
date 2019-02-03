@@ -23,12 +23,15 @@ function createTooltipsForText(textData) {
         .then((results) => {
             createTooltips(results);
         })
-        .catch(error => alert(`Error! ${error}`));
+        .catch((error) => {
+            alert(error);
+            return [];
+        });
 }
 
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
 // eslint-disable-next-line no-console
-console.log('Activating SeeTheWorld');
+console.log('Activating Wanderland');
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the

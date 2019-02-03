@@ -1,6 +1,3 @@
-import findAndReplaceDOMText from 'findandreplacedomtext';
-import { createTooltips } from '../content/tooltip.js';
-
 function selectionTextListener(info, tab) {
     chrome.tabs.query(
         {

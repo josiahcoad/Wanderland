@@ -1,19 +1,35 @@
-# See The World :airplane:
+# Wanderland ✈️
 
-I love planning travel and seeing new places to go in the world :earth_africa:. There is a recurrent problem with internet wanderlust though. :grimacing: Right now I'm planning a trip to India and googling queries such as *"best hill stations in the himalayas"* or *"best national parks in central india"*. I get back results like **"7 Best National Parks in Central India"**. Normally, it is a list of places that I have never heard of before and have literally no point of reference for the place. :hear_no_evil: So what do I do when I see a name like **Bandhavgarh National Park**? Open up another tab, copy/paste the name into google maps. And I have to do that for *every place* that sounds interesting :expressionless:. And then I start forgetting places or maybe I write them down somewhere but a little while later forget why I wrote it down, and now lost the website that I first found it on. :man_facepalming: With *SeeTheWorld* you can track places that interest you across web pages. You can add places of interest to your saved places by just clicking on the name of the place when it appears on the site. The idea is that you can easily see a short blurb about any place you added at any time, take notes and see pictures all within your workflow looking through a web page like the **"7 Best National Parks in Central India"**! :sunglasses:
+> “You're off to Great Places!
+> Today is your day!
+> Your mountain is waiting,
+> So... get on your way!” 
+*― Dr. Seuss*
 
-![tigerrr](https://travel-blog.waytoindia.com/wp-content/uploads/Kanger-Ghati-National-Park.jpg)
+I love planning travel and seeing new places to go in the world 🌍. There is a recurrent problem with internet wanderlust though. 😬 You probably know what I'm talking about if you've ever experienced something like this:
 
-### Technical Details:
-- We use an API [dandelion](https://dandelion.eu/docs/api/datatxt/nex/v1/) to do entity extraction on a web page HTML that the user is visiting.
-- The API returns to us every entity (including locations), also the Wikipedia link, summary and image link
-- We use the chrome extension to manipulate the HTML DOM of whatever page is of interest, feeding the entire page HTML to the API and then using the match indices returned by the API to highlight/underline the matches. When a user hovers over an underlined match, a popup appears. It can include a mini google-map, location summary, previous notes on the place, wiki-link etc... (weather?, news?)
-- When the user wants to add location to list of their places, we can use the google-extension-storage to store users history
-- Perhaps we could allow the user to assign a rough date/orderings to their locations
-- Definitely expandable if you have any other ideas!
+1. You decide your going travelling... 🥳 for whatever reason... to say *India*.
+2. So what should you do there? Well you know you want to see some tigers! 🐯 So you google *"where to see tigers in India"*.
+3. You get back results like this one: [holidify.com](https://www.holidify.com/pages/tiger-reserves-in-india-1333.html). It is a list of places that you've have never heard of before and have absolutely no point of reference for. :hear_no_evil:
+4. So what you do is...
+  * Copy the name of a place that sounds interesting to you from holidify.com
+  * Open up another tab and navigate to google maps
+  * Paste the name of the place and search to see where it is 🤦‍♂️
+  * Repeat a-c **for every place you're interested in** 😑
+5. Jot down in some notes somewhere the places your interested in to keep track of them
+6. Send the notes to your friends you're travelling with so they can add to it. They have to repeat the process you went through...
+7. Search across the web for more info on the places you're going to like pictures, facts, festivals ...
 
+### Wanderland Solution (for steps 4-6)
 
-![example screenshot](assets/readme_example.png)
+4. Embedded Maps
+  * A chrome extention that is instantly accessible across any webpage that allows you to see all the places mentioned on the page in a single embedded mini-map.
+  * All the places on the page magically highlighted, allowing you to hover over them to see info about the place.
+5. Add places of interest to your "wanderlist" by just clicking on the name of the place wherever it appears on the site.
+6. Easily share your wanderlists with others, collaborate, assign the places dates and an ordering, and take notes on the places together all within a single workflow from any webpage. 😎
+7. Have the software retrieve all the information you care about for each place automatically and make it easily accessible in one spot.
+
+![where to go art](assets/readme.jpg)
 
 ### Todo:
 - We are using github issues to track to-dos for this project.
@@ -26,12 +42,12 @@ I love planning travel and seeing new places to go in the world :earth_africa:. 
 - go to any site with locations mentioned to see results pop up at the top of the page
 
 ### How to Build:
-- run ```npm run watch``` in the terminal in the project directory
+- Please make sure you have the most recent versions of npm and node installed.
+- run ```npm install``` in the terminal in the project directory to install all dependencies
+- run ```npm run build``` in the terminal in the project directory. As you develop, ```npm run watch``` might be a handy command to automatically rebuild upon a save of a source file.
 
 ### How to Contribute:
-- So you like the idea and want to be part of it? Awesome! Do whatever seems interesting to you!
-- Please submit your changes as a pull request. Idealy a pull request represents a complete feature you're adding.
-- Every pull request is run through a rigorous stylistic auto-checker called **codebeat**. Before any PR can be merged, it should not raise any issues on codebeat. Our "GPA" for the code base right now is 3.98 ([see whole report here](https://codebeat.co/projects/github-com-josiahcoad-seetheworld-master)). Thank you for doing your part to keep it that way!
-- We use eslint to maintain coding standards. Please make sure you have the **eslint** extention installed in vscode. You can also run the *Prettier* auto-formatter on your documents before submitting a PR. *Prettier* is a VS code extention as well. 
+- So you like the idea and want to be part of it? Awesome! I'd recomend starting with any issues with the tag **good first issue**.
+- We use eslint to maintain coding standards. Please make sure you have the **eslint** extention installed in vscode. You can also run the *Prettier* auto-formatter on your documents before submitting a PR. *Prettier* is a VS code extention as well.
 
-Peace out and happy travelling :v: :yum:
+Peace out and happy travelling ✌️ 😋

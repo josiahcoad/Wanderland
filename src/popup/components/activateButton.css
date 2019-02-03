@@ -1,0 +1,13 @@
+.activate-button {
+    background-color: #3e678c !important;
+    border-color: #3e678c !important;
+    color: white !important;
+}
+
+.activate-button:hover,
+.activate-button:active,
+.activate-button:visited {
+    background-color: #3e678c !important;
+    border-color: #3e678c !important;
+    color: white !important;
+}
