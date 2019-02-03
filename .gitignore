@@ -1,6 +1,5 @@
 # Generic Files
 *.txt
 node_modules
-dist/images
 dist/js
 dist/html
