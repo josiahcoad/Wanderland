@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // This code gets injected automatically into every page you go onto in Google Chrome.
 // The functions here are specifically for calling the dandelion api which does the entity
 // extraction on the webpage text.
@@ -62,6 +64,49 @@ function getEntitiesFromWebpage(webpageUrl) {
     });
 }
 
+const getEntitiesFromText = (textData) => {
+    return new Promise((resolve, reject) => {
+        const Http = new XMLHttpRequest();
+        const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${textData}${PARAMS}`;
+        Http.open('GET', url);
+        Http.onloadend = () => {
+            if (Http.status === 200) {
+                resolve(Http.responseText);
+            } else {
+                reject(Error(Http.status));
+            }
+        };
+        // Handle network errors
+        Http.onerror = () => {
+            reject(Error('Network Error'));
+        };
+        Http.send();
+    });
+};
+
+export function getUniqueLocationsFromText(textData) {
+    return new Promise((resolve, reject) => {
+        getEntitiesFromText(textData)
+            .then(JSON.parse)
+            .then(
+                (response) => {
+                    console.log(response);
+                    // filter the reponse for all entities that are locations
+                    // then remove duplicate locations... ones that have the same "spot"
+                    const ret = filterDuplicates(filterLocations(response), 'spot');
+                    console.log(ret);
+                    resolve(ret);
+                },
+                (error) => {
+                    alert(
+                        'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
+                    );
+                    reject(Error(error));
+                },
+            );
+    });
+}
+
 // query Dandelion for all unique locations from the text on the current page
 export function getUniqueLocationsFromCurrentPage() {
     const currentPageUrl = getCurrentPageUrl();
@@ -72,6 +117,7 @@ export function getUniqueLocationsFromCurrentPage() {
                 (response) => {
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
+                    console.log(response);
                     resolve(filterDuplicates(filterLocations(response), 'spot'));
                 },
                 (error) => {
@@ -82,4 +128,55 @@ export function getUniqueLocationsFromCurrentPage() {
                 },
             );
     });
+}
+
+function googleGeometryAPIGet(location) {
+    return new Promise((resolve, reject) => {
+        const Http = new XMLHttpRequest();
+        Http.responseType = 'json';
+        const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
+            location,
+        )}&inputtype=textquery&fields=geometry`;
+        Http.open('GET', url);
+        Http.onloadend = () => {
+            if (Http.status === 200) {
+                resolve(
+                    Http.response.candidates.length === 0
+                        ? { lat: null, lng: null }
+                        : Http.response.candidates[0].geometry.location,
+                );
+            } else {
+                reject(Error(Http.status));
+            }
+        };
+        // Handle network errors
+        Http.onerror = () => {
+            reject(Error('Network Error'));
+        };
+        Http.send();
+    });
+}
+
+export function addGeometryToObject({ spot, ...rest }) {
+    return (
+        googleGeometryAPIGet(spot)
+            .then(response => ({
+                name: spot,
+                lat: response.lat,
+                lng: response.lng,
+                ...rest,
+            }))
+            // an error will be raised here if there is a Network Error or
+            // if the response code from the Google Places API is not a 200
+            .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+                return {
+                    name: spot,
+                    lat: null,
+                    lng: null,
+                    ...rest,
+                };
+            })
+    );
 }

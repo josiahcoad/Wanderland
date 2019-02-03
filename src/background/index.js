@@ -1,20 +1,33 @@
-listenerFunctionMap = {
-    selectionSTW : selectionTextListener
+import findAndReplaceDOMText from 'findandreplacedomtext';
+import { createTooltips } from '../content/tooltip.js';
+
+function selectionTextListener(info, tab) {
+    chrome.tabs.query(
+        {
+            active: true,
+            currentWindow: true,
+        },
+        (tabs) => {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                message: 'CREATE_TOOLTIPS',
+                data: info.selectionText,
+            }, (response) => {}); // Handle The Response
+        },
+    );
 }
 
-function selectionTextListener(info, tab){
-    selectionText = info.selectionText;
-    console.log(selectionText);
-}
+const listenerFunctionMap = {
+    selectionWanderland: selectionTextListener,
+};
 
-chrome.runtime.onInstalled.addListener(function () {
+chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
-        id: "selectionSTW",
-        title: "See The World",
-        contexts: ["selection"],
+        id: 'selectionWanderland',
+        title: 'Wanderland',
+        contexts: ['selection'],
     });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     listenerFunctionMap[info.menuItemId](info, tab);
-})
+});
