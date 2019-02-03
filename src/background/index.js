@@ -1,4 +1,4 @@
-function selectionTextListener(info, tab) {
+function selectionTextListener(info) {
     chrome.tabs.query(
         {
             active: true,
@@ -8,7 +8,7 @@ function selectionTextListener(info, tab) {
             chrome.tabs.sendMessage(tabs[0].id, {
                 message: 'CREATE_TOOLTIPS',
                 data: info.selectionText,
-            }, (response) => {}); // Handle The Response
+            }); // Handle The Response
         },
     );
 }

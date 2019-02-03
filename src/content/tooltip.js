@@ -49,7 +49,7 @@ export const createTooltips = (results) => {
             });
             insertTooltips(
                 {
-                    search: result.name,
+                    title: result.name,
                     link: result.lod.wikipedia,
                     image: result.image.thumbnail,
                     summary: result.abstract,

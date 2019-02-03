@@ -2,11 +2,9 @@
 import {
     getUniqueLocationsFromCurrentPage,
     addGeometryToObject,
-    getUniqueLocationsFromText
+    getUniqueLocationsFromText,
 } from './api.js';
-import {
-    createTooltips
-} from './tooltip.js';
+import { createTooltips } from './tooltip.js';
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage()
@@ -32,6 +30,7 @@ function createTooltipsForText(textData) {
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
 // eslint-disable-next-line no-console
 console.log('Activating Wanderland');
+
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the
@@ -50,4 +49,4 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
         createTooltipsForText(request.data);
     }
     return true;
-});
+})
