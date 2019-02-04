@@ -1,6 +1,6 @@
 // Content code gets injected automatically into every page you go onto in Google Chrome.
 import { getUniqueLocationsFromCurrentPage, addGeometryToObject, extractPlaces } from './api.js';
-import { createTooltips } from './tooltip.js';
+import { createTooltips } from './tooltipInsert.js';
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage()
