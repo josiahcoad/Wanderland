@@ -3,34 +3,42 @@ import { Grid, Col, Panel } from 'react-bootstrap';
 import { SocialIcon } from 'react-social-icons';
 import './aboutPerson.css';
 
-const AboutPerson = () => (
+const AboutPerson = ({ person }) => (
     <Panel className="about-person">
         <Panel.Heading>
-            <Panel.Title>Josiah Coad</Panel.Title>
+            <Panel.Title>{person.name}</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
             <Grid>
                 <Col xs={4}>
                     <img
-                        src="../images/josiah.jpg"
+                        src={`../images/${person.image}`}
                         alt="avatar"
                         className="profile-picture center-block"
                     />
                     <div className="social-container">
-                        <SocialIcon url="https://www.facebook.com/josiah.coad" />
-                        <SocialIcon url="http://github.com/josiahcoad" />
-                        <SocialIcon url="http://linkedin.com/in/josiahcoad" />
+                        <SocialIcon url={person.fblink} />
+                        <SocialIcon url={person.LinkedIn} />
+                        <SocialIcon url={person.Github} />
                     </div>
                 </Col>
-                <Col xs={9}>
-                    <ul>
+                <Col xs={8}>
+                    <ul className="person-description">
+                        <li>
+                            <strong>School: </strong>
+                            {person.school}
+                        </li>
                         <li>
                             <strong>Major: </strong>
-                            Computer Science and Applied Math (Graduating May 2020)
+                            {person.major}
                         </li>
                         <li>
                             <strong>Interests: </strong>
-                            Startups, Machine Learning Engineering, Teaching
+                            {person.interest}
+                        </li>
+                        <li>
+                            <strong>Favorite Place to Visit: </strong>
+                            {person.favoritePlace}
                         </li>
                     </ul>
                 </Col>

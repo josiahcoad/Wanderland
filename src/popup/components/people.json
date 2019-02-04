@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Josiah Coad",
+    "image": "josiah.jpg",
+    "school": "Texas A&M University",
+    "fblink": "https://www.facebook.com/josiah.coad",
+    "LinkedIn": "http://linkedin.com/in/josiahcoad",
+    "Github": "http://github.com/josiahcoad",
+    "major": "Hello",
+    "interest": "abc",
+    "favortitePlace": "def"
+  },
+  {
+    "name": "Josiah Coad",
+    "image": "josiah.jpg",
+    "school": "Texas A&M University",
+    "fblink": "https://www.facebook.com/josiah.coad",
+    "LinkedIn": "http://linkedin.com/in/josiahcoad",
+    "Github": "http://github.com/josiahcoad",
+    "major": "Hello",
+    "interest": "abc",
+    "favortitePlace": "def"
+  },
+  {
+    "name": "Josiah Coad",
+    "image": "josiah.jpg",
+    "school": "Texas A&M University",
+    "fblink": "https://www.facebook.com/josiah.coad",
+    "LinkedIn": "http://linkedin.com/in/josiahcoad",
+    "Github": "http://github.com/josiahcoad",
+    "major": "B.S. in Computer Science and Statistics, Class of 2020",
+    "interest": "abc",
+    "favortitePlace": "def"
+  },
+  {
+    "name": "Chinmay Phulse",
+    "image": "Chimnay.JPG",
+    "school": "Texas A&M University",
+    "fblink": " chinmayphulse.me",
+    "LinkedIn": "https://www.linkedin.com/in/chinmay-phulse-b33907135",
+    "Github": "GitHub.com/phulsechinmay",
+    "major": "B.S. in Computer Science with a Minor in Statistics & Cyber Security, Class of 2020",
+    "interest": "Artificial Intelligence, Cyber Security, Network Architecture & Distributed Programming",
+    "favortitePlace": "My favorite place to visit is Crete, an island in Greece"
+  },
+
+  {
+    "name": "Josiah Coad",
+    "image": "josiah.jpg",
+    "school": "Texas A&M University",
+    "fblink": "https://www.facebook.com/josiah.coad",
+    "LinkedIn": "http://linkedin.com/in/josiahcoad",
+    "Github": "http://github.com/josiahcoad",
+    "major": "Hello",
+    "interest": "abc",
+    "favortitePlace": "def"
+  }
+]

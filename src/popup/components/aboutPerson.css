@@ -1,12 +1,27 @@
 .about-person .profile-picture {
-    vertical-align: middle;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 
 .about-person .social-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.about-person .profile-picture {
+  vertical-align: baseline;
+  width: 125px !important;
+  height: 125px !important;
+}
+.about-person .person-description {
+  font-size: 14px;
+  align-content: initial !important;
+  color: rgb(54, 54, 54) !important;
+  text-align: left !important;
+  line-height: 1.5555 !important;
+  vertical-align: middle !important;
+  padding-top: 15px !important;
 }

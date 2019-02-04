@@ -1,35 +1,35 @@
 .result-item .panel-heading {
-    text-align: left;
-    padding: 5px 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  text-align: left;
+  padding: 5px 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .result-item .panel-title {
-    color: gray;
-    text-decoration: none !important;
-    display: inline-block;
+  color: gray;
+  text-decoration: none !important;
+  display: inline-block;
 }
 
 .result-item .panel-heading:hover {
-    background-color: #8deedb;
+  background-color: #ec7c93 !important;
 }
 
 .result-item .panel-heading:hover .panel-title {
-    color: black;
+  color: black;
 }
 
 .result-item .icon-button {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    color: gray;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  border: 0;
+  background: transparent;
+  color: gray;
 }
 
 .result-item .icon-button.remove-button:hover {
-    color: red;
+  color: red;
 }
