@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Wanderland",
-  "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
+  "description": "An app made by travellers for travellers. See maps of places mentioned on webpages.",
   "version": "0.1.0",
   "author": "Josiah Coad, Chinmay Phulse, Amir Karimloo",
   "content_scripts": [
