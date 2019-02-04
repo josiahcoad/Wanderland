@@ -1,81 +1,13 @@
 // Content code gets injected automatically into every page you go onto in Google Chrome.
-import findAndReplaceDOMText from 'findandreplacedomtext';
-import { getUniqueLocationsFromCurrentPage } from './api.js';
-import { insertTooltips } from './tooltip';
-
-function googleGeometryAPIGet(location) {
-    return new Promise((resolve, reject) => {
-        const Http = new XMLHttpRequest();
-        Http.responseType = 'json';
-        const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
-            location,
-        )}&inputtype=textquery&fields=geometry`;
-        Http.open('GET', url);
-        Http.onloadend = () => {
-            if (Http.status === 200) {
-                resolve(
-                    Http.response.candidates.length === 0
-                        ? { lat: null, lng: null }
-                        : Http.response.candidates[0].geometry.location,
-                );
-            } else {
-                reject(Error(Http.status));
-            }
-        };
-        // Handle network errors
-        Http.onerror = () => {
-            reject(Error('Network Error'));
-        };
-        Http.send();
-    });
-}
-
-function addGeometryToObject({ spot, ...rest }) {
-    return (
-        googleGeometryAPIGet(spot)
-            .then(response => ({
-                name: spot,
-                lat: response.lat,
-                lng: response.lng,
-                ...rest,
-            }))
-            // an error will be raised here if there is a Network Error or
-            // if the response code from the Google Places API is not a 200
-            .catch((error) => {
-                // eslint-disable-next-line no-console
-                console.log(error);
-                return {
-                    name: spot,
-                    lat: null,
-                    lng: null,
-                    ...rest,
-                };
-            })
-    );
-}
+import { getUniqueLocationsFromCurrentPage, addGeometryToObject, extractPlaces } from './api.js';
+import { createTooltips } from './tooltip.js';
 
 function activatePage() {
     return getUniqueLocationsFromCurrentPage()
         .then(results => Promise.all(results.map(addGeometryToObject)))
         .then((results) => {
-            if (results.length !== 0) {
-                results.forEach((result) => {
-                    const wrapClass = `${result.name.replace(' ', '_')}_tooltip`;
-                    findAndReplaceDOMText(document.body, {
-                        find: result.name,
-                        wrap: 'span',
-                        wrapClass,
-                    });
-                    insertTooltips(
-                        {
-                            title: result.name,
-                            link: result.lod.wikipedia,
-                            image: result.image.thumbnail,
-                            summary: result.abstract,
-                        },
-                        wrapClass,
-                    );
-                });
+            if (results.length > 0) {
+                createTooltips(results);
             } else {
                 alert("Sorry we couldn't find any results for this page.");
             }
@@ -87,9 +19,69 @@ function activatePage() {
         });
 }
 
+function singlePlaceLookup(textData) {
+    return new Promise((resolve) => {
+        addGeometryToObject({ spot: textData }).then((result) => {
+            if (result.lat && result.lng) {
+                const singlePlaceResult = {
+                    // Fill with dummy data
+                    ...result,
+                    lod: {
+                        wikipedia: '',
+                    },
+                    abstract: '',
+                    image: {
+                        thumbnail: '',
+                    },
+                };
+                createTooltips([singlePlaceResult]);
+                resolve([singlePlaceResult]);
+            }
+            resolve([]);
+        });
+    });
+}
+
+function updateStorageWithNewPlaces(newPlaces) {
+    chrome.storage.local.get(['lastPlacesScraped'], (storageResults) => {
+        let updatedPlaces = newPlaces;
+        if (storageResults.lastPlacesScraped !== undefined) {
+            updatedPlaces = storageResults.lastPlacesScraped.concat(newPlaces);
+        }
+        chrome.storage.local.set({ lastPlacesScraped: updatedPlaces });
+    });
+}
+
+function createTooltipsForText(textData) {
+    return extractPlaces(textData)
+        .then(results => Promise.all(results.map(addGeometryToObject)))
+        .then((extractedResults) => {
+            if ((!extractedResults) || (extractedResults === [])) {
+                singlePlaceLookup(textData)
+                    .then((singlePlaceResult) => {
+                        if (singlePlaceResult.length === 0) {
+                            alert("Sorry we couldn't find any results for this selection.");
+                        } else {
+                            updateStorageWithNewPlaces(singlePlaceResult);
+                        }
+                    })
+                    .catch((error) => {
+                        alert(error);
+                    });
+            } else {
+                createTooltips(extractedResults);
+                updateStorageWithNewPlaces(extractedResults);
+            }
+        })
+        .catch((error) => {
+            alert(error);
+        });
+}
+
 // ***************** EXECUTE THIS ON PAGE LOAD ***************** //
 // eslint-disable-next-line no-console
 console.log('Activating Wanderland');
+
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the
@@ -104,6 +96,11 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
                 message: 'FAILED',
                 placesScraped: [],
             }));
+    } else if (request.message === 'CREATE_TOOLTIPS') {
+        const textData = request.data;
+        createTooltipsForText(textData).catch((error) => {
+            alert(error);
+        });
     }
     return true;
 });

@@ -14,7 +14,9 @@ const LOCATION_TYPES = [
 // NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
     // eslint-disable-next-line
-    return response.annotations.filter(annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0);
+    return response.annotations.filter(
+        annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0,
+    );
 }
 
 // remove objects from an array who have the same value
@@ -62,6 +64,46 @@ function getEntitiesFromWebpage(webpageUrl) {
     });
 }
 
+const getEntitiesFromText = textData => new Promise((resolve, reject) => {
+    const Http = new XMLHttpRequest();
+    const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${encodeURI(
+        textData,
+    )}${PARAMS}`;
+    Http.open('GET', url);
+    Http.onloadend = () => {
+        if (Http.status === 200) {
+            resolve(Http.responseText);
+        } else {
+            reject(Error(Http.status));
+        }
+    };
+    // Handle network errors
+    Http.onerror = () => {
+        reject(Error('Network Error'));
+    };
+    Http.send();
+});
+
+export function extractPlaces(textData) {
+    return new Promise((resolve, reject) => {
+        getEntitiesFromText(textData)
+            .then(JSON.parse)
+            .then(
+                (response) => {
+                    // filter the reponse for all entities that are locations
+                    // then remove duplicate locations... ones that have the same "spot"
+                    resolve(filterDuplicates(filterLocations(response), 'spot'));
+                },
+                (error) => {
+                    alert(
+                        'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
+                    );
+                    reject(Error(error));
+                },
+            );
+    });
+}
+
 // query Dandelion for all unique locations from the text on the current page
 export function getUniqueLocationsFromCurrentPage() {
     const currentPageUrl = getCurrentPageUrl();
@@ -82,4 +124,58 @@ export function getUniqueLocationsFromCurrentPage() {
                 },
             );
     });
+}
+
+function googleGeometryAPIGet(location) {
+    return new Promise((resolve, reject) => {
+        const Http = new XMLHttpRequest();
+        Http.responseType = 'json';
+        const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8&input=${encodeURI(
+            location,
+        )}&inputtype=textquery&fields=geometry`;
+        Http.open('GET', url);
+        Http.onloadend = () => {
+            if (Http.status === 200) {
+                resolve(
+                    Http.response.candidates.length === 0
+                        ? {
+                            lat: null,
+                            lng: null,
+                        }
+                        : Http.response.candidates[0].geometry.location,
+                );
+            } else {
+                reject(Error(Http.status));
+            }
+        };
+        // Handle network errors
+        Http.onerror = () => {
+            reject(Error('Network Error'));
+        };
+        Http.send();
+    });
+}
+
+export function addGeometryToObject({ spot, ...rest }) {
+    return (
+        googleGeometryAPIGet(spot)
+            .then(response => ({
+                name: spot,
+                lat: response.lat,
+                lng: response.lng,
+                ...rest,
+            }))
+            // an error will be raised here if there is a Network Error or
+            // if the response code from the Google Places API is not a 200
+            .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+                return {
+                    name: spot,
+                    lat: null,
+                    lng: null,
+                    ...rest,
+                };
+            })
+    );
 }
