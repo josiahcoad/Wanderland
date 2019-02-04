@@ -42,32 +42,36 @@ function singlePlaceLookup(textData) {
     });
 }
 
+function updateStorageWithNewPlaces(newPlaces) {
+    chrome.storage.local.get(['lastPlacesScraped'], (storageResults) => {
+        let updatedPlaces = newPlaces;
+        if (storageResults.lastPlacesScraped !== undefined) {
+            updatedPlaces = storageResults.lastPlacesScraped.concat(newPlaces);
+        }
+        chrome.storage.local.set({ lastPlacesScraped: updatedPlaces });
+    });
+}
+
 function createTooltipsForText(textData) {
     return extractPlaces(textData)
         .then(results => Promise.all(results.map(addGeometryToObject)))
         .then((extractedResults) => {
-            if (extractedResults.length > 0) {
+            if ((!extractedResults) || (extractedResults === [])) {
+                singlePlaceLookup(textData)
+                    .then((singlePlaceResult) => {
+                        if (singlePlaceResult.length === 0) {
+                            alert("Sorry we couldn't find any results for this selection.");
+                        } else {
+                            updateStorageWithNewPlaces(singlePlaceResult);
+                        }
+                    })
+                    .catch((error) => {
+                        alert(error);
+                    });
+            } else {
                 createTooltips(extractedResults);
+                updateStorageWithNewPlaces(extractedResults);
             }
-            singlePlaceLookup(textData)
-                .then((singlePlaceResult) => {
-                    const chosenResults = extractedResults.length > 0 ? extractedResults : singlePlaceResult;
-                    if (chosenResults.length === 0) {
-                        alert("Sorry we couldn't find any results for this selection.");
-                    } else {
-                        chrome.storage.local.get(['lastPlacesScraped'], (storageResults) => {
-                            if (storageResults.lastPlacesScraped !== undefined) {
-                                const updated = storageResults.lastPlacesScraped.concat(
-                                    chosenResults,
-                                );
-                                chrome.storage.local.set({ lastPlacesScraped: updated });
-                            }
-                        });
-                    }
-                })
-                .catch((error) => {
-                    alert(error);
-                });
         })
         .catch((error) => {
             alert(error);
