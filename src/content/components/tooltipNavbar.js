@@ -12,7 +12,7 @@ const PopupNavbar = () => (
             <Glyphicon glyph="globe" />
 Wanderland
         </a> */}
-        <span className="navbar-brand">Wanderland</span>
+        <span className="wl-brand">Wanderland</span>
     </div>
 );
 

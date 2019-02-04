@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Popover from 'react-popover';
+import $ from 'jquery';
 import TooltipMap from './tooltipMap';
 import TooltipNavbar from './tooltipNavbar';
 import './tooltip.css';
@@ -21,6 +22,7 @@ class Tooltip extends Component {
         };
         this.setShow = this.setShow.bind(this);
         this.toggleShow = this.toggleShow.bind(this);
+        this.mouseLeft = this.mouseLeft.bind(this);
     }
 
     setShow(state) {
@@ -31,14 +33,25 @@ class Tooltip extends Component {
         this.setState(prevState => ({ show: !prevState.show }));
     }
 
+    mouseLeft() {
+        setTimeout(() => {
+            if ($('.Popover:hover').length === 0) {
+                this.setShow(false);
+            }
+        }, 300);
+        $('.Popover').on('mouseleave', () => {
+            this.setShow(false);
+        });
+    }
+
     render() {
         return (
             <Popover
                 isOpen={this.state.show}
-                body={[<PopoverContent title={this.props.place.title} />]}
+                body={<PopoverContent title={this.props.place.title} />}
                 onOuterAction={() => this.setShow(false)}
             >
-                <button type="button" className="anchor-like-button" onClick={this.toggleShow}>
+                <button type="button" className="anchor-like-button" onMouseEnter={this.toggleShow} onMouseLeave={this.mouseLeft}>
                     {this.props.place.title}
                 </button>
             </Popover>
