@@ -15,11 +15,51 @@ function activatePage() {
         .catch(error => alert(`Error! ${error}`));
 }
 
+function processRawTextForTooltips(textData) {
+    return new Promise((resolve, reject) => {
+        addGeometryToObject({ spot: textData })
+            .then((results) => {
+                const resultForTooltip = { // Fill with dummy data
+                    ...results,
+                    lod: {
+                        wikipedia: '',
+                    },
+                    abstract: '',
+                    image: {
+                        thumbnail: '',
+                    },
+                };
+                resolve(createTooltips([resultForTooltip]));
+            })
+            .catch((error) => {
+                reject(Error(error));
+            });
+    });
+}
+
 function createTooltipsForText(textData) {
-    getUniqueLocationsFromText(textData)
+    return getUniqueLocationsFromText(textData)
         .then(results => Promise.all(results.map(addGeometryToObject)))
         .then((results) => {
-            createTooltips(results);
+            const toolTipResults = createTooltips(results);
+            processRawTextForTooltips(textData)
+                .then((rawTextResults) => {
+                    let chosenResults = toolTipResults;
+                    if ((toolTipResults === []) || (!toolTipResults)) {
+                        chosenResults = rawTextResults;
+                    }
+                    chrome.storage.local.get(['lastPlacesScraped'], (storageResults) => {
+                        let finalResults = chosenResults;
+                        if ((storageResults.lastPlacesScraped !== []) && (storageResults.lastPlacesScraped !== undefined)) {
+                            finalResults = storageResults.lastPlacesScraped.concat(chosenResults);
+                        }
+                        chrome.storage.local.set({ lastPlacesScraped: finalResults });
+                    });
+                })
+                .catch((error) => {
+                    alert(error);
+                    return [];
+                });
         })
         .catch((error) => {
             alert(error);
@@ -46,7 +86,11 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
                 placesScraped: [],
             }));
     } else if (request.message === 'CREATE_TOOLTIPS') {
-        createTooltipsForText(request.data);
+        const textData = request.data;
+        createTooltipsForText(textData)
+            .catch((error) => {
+                alert(error);
+            });
     }
     return true;
 });
