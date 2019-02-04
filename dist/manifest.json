@@ -3,7 +3,7 @@
   "name": "Wanderland",
   "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
   "version": "0.1.0",
-  "author": "Josiah Coad, Chinmay Phulse",
+  "author": "Josiah Coad, Chinmay Phulse, Amir Karimloo",
   "content_scripts": [
     {
       "css": [
@@ -22,7 +22,7 @@
     "persistent": false
   },
   "browser_action": {
-    "default_icon": "images/popup-icon.png",
+    "default_icon": "images/icon48.png",
     "default_title": "Wanderland",
     "default_popup": "html/popup.html"
   },
