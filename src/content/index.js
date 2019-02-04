@@ -37,29 +37,35 @@ function processRawTextForTooltips(textData) {
     });
 }
 
+function updateCacheWithNewPlaces(newPlaces) {
+    chrome.storage.local.get(['lastPlacesScraped'], (storageResults) => {
+        let finalResults = newPlaces;
+        const previouslyScrapedPlaces = storageResults.lastPlacesScraped;
+        if ((previouslyScrapedPlaces !== []) && (previouslyScrapedPlaces !== undefined)) {
+            finalResults = previouslyScrapedPlaces.concat(newPlaces);
+        }
+        chrome.storage.local.set({ lastPlacesScraped: finalResults });
+    });
+}
+
 function createTooltipsForText(textData) {
     return getUniqueLocationsFromText(textData)
         .then(results => Promise.all(results.map(addGeometryToObject)))
         .then((results) => {
             const toolTipResults = createTooltips(results);
-            processRawTextForTooltips(textData)
-                .then((rawTextResults) => {
-                    let chosenResults = toolTipResults;
-                    if ((toolTipResults === []) || (!toolTipResults)) {
-                        chosenResults = rawTextResults;
-                    }
-                    chrome.storage.local.get(['lastPlacesScraped'], (storageResults) => {
-                        let finalResults = chosenResults;
-                        if ((storageResults.lastPlacesScraped !== []) && (storageResults.lastPlacesScraped !== undefined)) {
-                            finalResults = storageResults.lastPlacesScraped.concat(chosenResults);
-                        }
-                        chrome.storage.local.set({ lastPlacesScraped: finalResults });
+
+            if ((!toolTipResults) || (toolTipResults === [])) {
+                processRawTextForTooltips(textData)
+                    .then((rawTextResults) => {
+                        updateCacheWithNewPlaces(rawTextResults);
+                    })
+                    .catch((error) => {
+                        alert(error);
+                        return [];
                     });
-                })
-                .catch((error) => {
-                    alert(error);
-                    return [];
-                });
+            } else {
+                updateCacheWithNewPlaces(toolTipResults);
+            }
         })
         .catch((error) => {
             alert(error);
