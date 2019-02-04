@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import './tooltip.css';
 
+const TAGS_NOT_TO_COVER = ['a', 'span', 'button']; // Tags not to cover for tooltip wrapping
+const NUM_PARENTS_TO_CHECK = 2; // Number of parents of a node to check for tooltip wrapping
+
 const CustomPopover = place => (
     <Popover id="popover-basic" title={place.title}>
         <div className="tooltipdiv">
@@ -46,6 +49,22 @@ export const createTooltips = (results) => {
                 find: result.name,
                 wrap: 'span',
                 wrapClass: linkClass,
+                forceContext: (element) => {
+                    let tagsNotAllowed = false;
+
+                    TAGS_NOT_TO_COVER.forEach((tag) => {
+                        let elementToCheck = element;
+                        let i = 0;
+                        for (; i <= NUM_PARENTS_TO_CHECK; i += 1) {
+                            if (elementToCheck.matches('html') || (!elementToCheck)) {
+                                break;
+                            }
+                            tagsNotAllowed = tagsNotAllowed || elementToCheck.matches(tag);
+                            elementToCheck = elementToCheck.parentElement;
+                        }
+                    });
+                    return !tagsNotAllowed;
+                },
             });
             insertTooltips(
                 {

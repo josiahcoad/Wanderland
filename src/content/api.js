@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 // This code gets injected automatically into every page you go onto in Google Chrome.
 // The functions here are specifically for calling the dandelion api which does the entity
 // extraction on the webpage text.
@@ -64,25 +62,23 @@ function getEntitiesFromWebpage(webpageUrl) {
     });
 }
 
-const getEntitiesFromText = (textData) => {
-    return new Promise((resolve, reject) => {
-        const Http = new XMLHttpRequest();
-        const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${textData}${PARAMS}`;
-        Http.open('GET', url);
-        Http.onloadend = () => {
-            if (Http.status === 200) {
-                resolve(Http.responseText);
-            } else {
-                reject(Error(Http.status));
-            }
-        };
-        // Handle network errors
-        Http.onerror = () => {
-            reject(Error('Network Error'));
-        };
-        Http.send();
-    });
-};
+const getEntitiesFromText = textData => new Promise((resolve, reject) => {
+    const Http = new XMLHttpRequest();
+    const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${textData}${PARAMS}`;
+    Http.open('GET', url);
+    Http.onloadend = () => {
+        if (Http.status === 200) {
+            resolve(Http.responseText);
+        } else {
+            reject(Error(Http.status));
+        }
+    };
+    // Handle network errors
+    Http.onerror = () => {
+        reject(Error('Network Error'));
+    };
+    Http.send();
+});
 
 export function getUniqueLocationsFromText(textData) {
     return new Promise((resolve, reject) => {
@@ -90,12 +86,9 @@ export function getUniqueLocationsFromText(textData) {
             .then(JSON.parse)
             .then(
                 (response) => {
-                    console.log(response);
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
-                    const ret = filterDuplicates(filterLocations(response), 'spot');
-                    console.log(ret);
-                    resolve(ret);
+                    resolve(filterDuplicates(filterLocations(response), 'spot'));
                 },
                 (error) => {
                     alert(
@@ -117,7 +110,6 @@ export function getUniqueLocationsFromCurrentPage() {
                 (response) => {
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
-                    console.log(response);
                     resolve(filterDuplicates(filterLocations(response), 'spot'));
                 },
                 (error) => {
@@ -141,9 +133,11 @@ function googleGeometryAPIGet(location) {
         Http.onloadend = () => {
             if (Http.status === 200) {
                 resolve(
-                    Http.response.candidates.length === 0
-                        ? { lat: null, lng: null }
-                        : Http.response.candidates[0].geometry.location,
+                    Http.response.candidates.length === 0 ? {
+                        lat: null,
+                        lng: null,
+                    } :
+                        Http.response.candidates[0].geometry.location,
                 );
             } else {
                 reject(Error(Http.status));
@@ -157,7 +151,10 @@ function googleGeometryAPIGet(location) {
     });
 }
 
-export function addGeometryToObject({ spot, ...rest }) {
+export function addGeometryToObject({
+    spot,
+    ...rest
+}) {
     return (
         googleGeometryAPIGet(spot)
             .then(response => ({

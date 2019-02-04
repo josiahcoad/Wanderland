@@ -49,4 +49,4 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
         createTooltipsForText(request.data);
     }
     return true;
-})
+});
