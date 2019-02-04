@@ -14,7 +14,9 @@ const LOCATION_TYPES = [
 // NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
     // eslint-disable-next-line
-    return response.annotations.filter(annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0);
+    return response.annotations.filter(
+        annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0,
+    );
 }
 
 // remove objects from an array who have the same value
@@ -64,7 +66,9 @@ function getEntitiesFromWebpage(webpageUrl) {
 
 const getEntitiesFromText = textData => new Promise((resolve, reject) => {
     const Http = new XMLHttpRequest();
-    const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${textData}${PARAMS}`;
+    const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${encodeURI(
+        textData,
+    )}${PARAMS}`;
     Http.open('GET', url);
     Http.onloadend = () => {
         if (Http.status === 200) {
@@ -80,7 +84,7 @@ const getEntitiesFromText = textData => new Promise((resolve, reject) => {
     Http.send();
 });
 
-export function getUniqueLocationsFromText(textData) {
+export function extractPlaces(textData) {
     return new Promise((resolve, reject) => {
         getEntitiesFromText(textData)
             .then(JSON.parse)
@@ -133,11 +137,12 @@ function googleGeometryAPIGet(location) {
         Http.onloadend = () => {
             if (Http.status === 200) {
                 resolve(
-                    Http.response.candidates.length === 0 ? {
-                        lat: null,
-                        lng: null,
-                    } :
-                        Http.response.candidates[0].geometry.location,
+                    Http.response.candidates.length === 0
+                        ? {
+                            lat: null,
+                            lng: null,
+                        }
+                        : Http.response.candidates[0].geometry.location,
                 );
             } else {
                 reject(Error(Http.status));
@@ -151,10 +156,7 @@ function googleGeometryAPIGet(location) {
     });
 }
 
-export function addGeometryToObject({
-    spot,
-    ...rest
-}) {
+export function addGeometryToObject({ spot, ...rest }) {
     return (
         googleGeometryAPIGet(spot)
             .then(response => ({

@@ -42,41 +42,37 @@ export function insertTooltips(place, wrapClass) {
 }
 
 export const createTooltips = (results) => {
-    if (results.length !== 0) {
-        results.forEach((result) => {
-            const linkClass = `${result.name.replace(' ', '_')}_tooltip`;
-            findAndReplaceDOMText(document.body, {
-                find: result.name,
-                wrap: 'span',
-                wrapClass: linkClass,
-                forceContext: (element) => {
-                    let tagsNotAllowed = false;
+    results.forEach((result) => {
+        const linkClass = `${result.name.replace(' ', '_')}_tooltip`;
+        findAndReplaceDOMText(document.body, {
+            find: result.name,
+            wrap: 'span',
+            wrapClass: linkClass,
+            forceContext: (element) => {
+                let tagsNotAllowed = false;
 
-                    TAGS_NOT_TO_COVER.forEach((tag) => {
-                        let elementToCheck = element;
-                        let i = 0;
-                        for (; i <= NUM_PARENTS_TO_CHECK; i += 1) {
-                            if (elementToCheck.matches('html') || (!elementToCheck)) {
-                                break;
-                            }
-                            tagsNotAllowed = tagsNotAllowed || elementToCheck.matches(tag);
-                            elementToCheck = elementToCheck.parentElement;
+                TAGS_NOT_TO_COVER.forEach((tag) => {
+                    let elementToCheck = element;
+                    let i = 0;
+                    for (; i <= NUM_PARENTS_TO_CHECK; i += 1) {
+                        if (elementToCheck.matches('html') || !elementToCheck) {
+                            break;
                         }
-                    });
-                    return !tagsNotAllowed;
-                },
-            });
-            insertTooltips(
-                {
-                    title: result.name,
-                    link: result.lod.wikipedia,
-                    image: result.image.thumbnail,
-                    summary: result.abstract,
-                },
-                linkClass,
-            );
+                        tagsNotAllowed = tagsNotAllowed || elementToCheck.matches(tag);
+                        elementToCheck = elementToCheck.parentElement;
+                    }
+                });
+                return !tagsNotAllowed;
+            },
         });
-    } else {
-        alert("Sorry we couldn't find any results for this.");
-    }
+        insertTooltips(
+            {
+                title: result.name,
+                link: result.lod.wikipedia,
+                image: result.image.thumbnail,
+                summary: result.abstract,
+            },
+            linkClass,
+        );
+    });
 };
