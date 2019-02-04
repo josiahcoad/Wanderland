@@ -4,20 +4,27 @@
     "description": "Explore new places in a convenient and exciting way. Learn more about the places you're going and see where all your places are easily.",
     "version": "0.1.0",
     "author": "Josiah Coad, Chinmay Phulse",
-    "content_scripts": [{
-        "css": [],
-        "js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "js/contentBundle.js"],
-        "matches": ["<all_urls>"]
-    }],
+    "content_scripts": [
+        {
+            "css": [],
+            "js": ["lib/jquery.min.js", "lib/bootstrap.min.js", "js/contentBundle.js"],
+            "matches": ["<all_urls>"]
+        }
+    ],
     "background": {
         "scripts": ["js/backgroundBundle.js"],
-        "persistent": false
+        "persistent": true
     },
     "browser_action": {
         "default_icon": "images/popup-icon.png",
         "default_title": "Wanderland",
         "default_popup": "html/popup.html"
     },
-    "permissions": ["activeTab", "declarativeContent", "storage"],
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "permissions": ["activeTab", "declarativeContent", "storage", "contextMenus"],
     "content_security_policy": "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'"
 }
