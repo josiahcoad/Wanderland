@@ -25,6 +25,7 @@
     "google-maps-react": "^2.0.2",
     "react-bootstrap": "^0.32.4",
     "react-popover": "^0.5.10",
+    "react-social-icons": "^4.1.0",
     "react-spinners": "^0.5.1",
     "unfluff": "^3.2.0",
     "uuid": "^3.3.2"
@@ -45,6 +46,7 @@
     "extract-loader": "^3.1.0",
     "file-loader": "^3.0.1",
     "html-loader": "^0.5.5",
+    "json-loader": "^0.5.7",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "style-loader": "^0.23.1",

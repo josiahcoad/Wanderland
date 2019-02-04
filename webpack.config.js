@@ -4,22 +4,17 @@ const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
 module.exports = {
     context: __dirname,
     entry: {
-        content: [
-            './src/content/index.js',
-        ],
-        background: [
-            './src/background/index.js',
-        ],
-        popup: [
-            './src/popup/index.js',
-        ],
+        content: ['./src/content/index.js'],
+        background: ['./src/background/index.js'],
+        popup: ['./src/popup/index.js'],
     },
     output: {
         filename: 'js/[name]Bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
@@ -31,12 +26,12 @@ module.exports = {
             {
                 test: /\.(png|jp(e*)g|svg)$/,
                 use: [{
-                    loader: 'url-loader',
+                    loader: 'file-loader',
                     options: {
                         limit: 8000, // If image is less than 8kb, convert to base64
-                        name: 'images/[name].[ext]'
-                    }
-                }]
+                        name: 'images/[name].[ext]',
+                    },
+                }],
             },
             {
                 test: /\.html$/,
@@ -48,17 +43,19 @@ module.exports = {
                         options: {
                             minimize: true,
                             removeComments: true,
-                            collapseWhitespace: true
-                        }
-                    }
+                            collapseWhitespace: true,
+                        },
+                    },
                 ],
-            }
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: ['file-loader'],
+            },
         ],
     },
     resolve: {
-        modules: [
-            path.join(__dirname, 'node_modules'),
-        ],
+        modules: [path.join(__dirname, 'node_modules')],
     },
     plugins: [
         new ChromeExtensionReloader({

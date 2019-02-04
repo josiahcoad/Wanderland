@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Loader from './loader';
 import PopupNavbar from './navbar';
 import ResultsPage from './resultsPage';
-import FeedbackForm from './feedbackForm';
+// import FeedbackForm from './feedbackForm';
+import AboutTeam from './aboutTeam';
 import './popup.css';
 
 const SUCCESS = 'SUCCESS';
@@ -87,7 +88,8 @@ class Popup extends Component {
                         showFeedbackForm={this.state.showFeedbackForm}
                     />
                     {this.state.showFeedbackForm ? (
-                        <FeedbackForm />
+                        // <FeedbackForm />
+                        <AboutTeam />
                     ) : (
                         <ResultsPage
                             placesScraped={this.state.placesScraped}

@@ -7,6 +7,7 @@ const ResultItem = ({ eventKey, place, onRemove }) => (
     <Panel
         eventKey={eventKey}
         key={place.name}
+        className="result-item"
     >
         <Panel.Toggle>
             <Panel.Heading>
