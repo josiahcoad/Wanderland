@@ -11,15 +11,17 @@ function activatePage() {
         .then(results => Promise.all(results.map(addGeometryToObject)))
         .then((results) => {
             createTooltips(results);
+            return results;
         })
         .catch(error => alert(`Error! ${error}`));
 }
 
-function processRawTextForTooltips(textData) {
+function singlePlaceLookup(textData) {
     return new Promise((resolve, reject) => {
         addGeometryToObject({ spot: textData })
             .then((results) => {
-                const resultForTooltip = { // Fill with dummy data
+                const singlePlaceResult = {
+                    // Fill with dummy data
                     ...results,
                     lod: {
                         wikipedia: '',
@@ -29,7 +31,11 @@ function processRawTextForTooltips(textData) {
                         thumbnail: '',
                     },
                 };
-                resolve(createTooltips([resultForTooltip]));
+                if (singlePlaceResult.lat && singlePlaceResult.lgn) {
+                    createTooltips([singlePlaceResult]);
+                    resolve([singlePlaceResult]);
+                }
+                resolve([]);
             })
             .catch((error) => {
                 reject(Error(error));
@@ -40,20 +46,22 @@ function processRawTextForTooltips(textData) {
 function createTooltipsForText(textData) {
     return getUniqueLocationsFromText(textData)
         .then(results => Promise.all(results.map(addGeometryToObject)))
-        .then((results) => {
-            const toolTipResults = createTooltips(results);
-            processRawTextForTooltips(textData)
-                .then((rawTextResults) => {
-                    let chosenResults = toolTipResults;
-                    if ((toolTipResults === []) || (!toolTipResults)) {
-                        chosenResults = rawTextResults;
+        .then((extractedResults) => {
+            createTooltips(extractedResults);
+            singlePlaceLookup(textData)
+                .then((singlePlaceResult) => {
+                    let chosenResults = extractedResults;
+                    if (extractedResults === [] || !extractedResults) {
+                        chosenResults = singlePlaceResult;
                     }
                     chrome.storage.local.get(['lastPlacesScraped'], (storageResults) => {
-                        let finalResults = chosenResults;
-                        if ((storageResults.lastPlacesScraped !== []) && (storageResults.lastPlacesScraped !== undefined)) {
-                            finalResults = storageResults.lastPlacesScraped.concat(chosenResults);
+                        if (
+                            storageResults.lastPlacesScraped !== []
+                            && storageResults.lastPlacesScraped !== undefined
+                        ) {
+                            const updated = storageResults.lastPlacesScraped.concat(chosenResults);
+                            chrome.storage.local.set({ lastPlacesScraped: updated });
                         }
-                        chrome.storage.local.set({ lastPlacesScraped: finalResults });
                     });
                 })
                 .catch((error) => {
@@ -87,10 +95,9 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
             }));
     } else if (request.message === 'CREATE_TOOLTIPS') {
         const textData = request.data;
-        createTooltipsForText(textData)
-            .catch((error) => {
-                alert(error);
-            });
+        createTooltipsForText(textData).catch((error) => {
+            alert(error);
+        });
     }
     return true;
 });

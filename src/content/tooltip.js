@@ -77,7 +77,6 @@ export const createTooltips = (results) => {
             );
         });
     } else {
-        alert("Sorry we couldn't find any results for this page.");
+        alert("Sorry we couldn't find any results for this.");
     }
-    return results;
 };
