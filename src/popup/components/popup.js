@@ -3,11 +3,17 @@
 import React, { Component } from 'react';
 import Loader from './loader';
 import PopupNavbar from './navbar';
-import ResultsPage from './resultsPage';
-// import FeedbackForm from './feedbackForm';
-import AboutTeam from './aboutTeam';
+import ResultsPage from './results/resultsPage';
+import FeedbackForm from './feedbackForm';
+import AboutTeam from './aboutUs/aboutPage';
 import './popup.css';
-import { PAGE_SCAN_SUCCESS, PAGE_SCAN } from '../../extensionMessageTypes';
+import { PAGE_SCAN, PAGE_SCAN_SUCCESS, PAGE_SCAN_FAILED } from '../../extensionMessageTypes';
+
+const pages = {
+    FEEDBACK: 'FEEDBACK',
+    RESULTS: 'RESULTS',
+    ABOUT_US: 'ABOUTUS',
+};
 
 class Popup extends Component {
     constructor(props) {
@@ -16,13 +22,13 @@ class Popup extends Component {
             placesScraped: [],
             selectedPlace: {},
             loading: false,
-            error: false,
-            showFeedbackForm: false,
+            reloadNeeded: false,
+            currentPage: pages.RESULTS,
         };
-        this.setLastPlacesScraped = this.setLastPlacesScraped.bind(this);
         this.setSelectedPlace = this.setSelectedPlace.bind(this);
+        this.setPage = this.setPage.bind(this);
         this.sendMessageToScrapePage = this.sendMessageToScrapePage.bind(this);
-        this.toggleShowFeedbackForm = this.toggleShowFeedbackForm.bind(this);
+        this.renderPage = this.renderPage.bind(this);
     }
 
     componentDidMount() {
@@ -33,19 +39,12 @@ class Popup extends Component {
         });
     }
 
-    setLastPlacesScraped(places) {
-        this.setState({ placesScraped: places });
-        chrome.storage.local.set({ lastPlacesScraped: places });
-    }
-
     setSelectedPlace(place) {
         this.setState({ selectedPlace: place });
     }
 
-    toggleShowFeedbackForm() {
-        this.setState(prevState => ({
-            showFeedbackForm: !prevState.showFeedbackForm,
-        }));
+    setPage(currentPage) {
+        this.setState({ currentPage });
     }
 
     // Use google's extension api to send an "PAGE_SCAN" to the page/tab you're currently on.
@@ -59,16 +58,24 @@ class Popup extends Component {
             },
             (tabs) => {
                 chrome.tabs.sendMessage(tabs[0].id, { message: PAGE_SCAN }, (response) => {
-                    if (response && response.message === PAGE_SCAN_SUCCESS) {
+                    if (!response) {
                         this.setState({
                             loading: false,
+                            reloadNeeded: true,
                         });
-                        this.setLastPlacesScraped(response.placesScraped);
+                    } else if (response.message === PAGE_SCAN_SUCCESS) {
+                        const { placesScraped } = response;
+                        this.setState({
+                            loading: false,
+                            placesScraped,
+                        });
+                        chrome.storage.local.set({ lastPlacesScraped: placesScraped });
+                    } else if (response.message === PAGE_SCAN_FAILED) {
+                        // eslint-disable-next-line no-console
+                        console.log('Error returned from content scripts!');
                     } else {
-                        this.setState({
-                            loading: false,
-                            error: true,
-                        });
+                        // eslint-disable-next-line no-console
+                        console.log(`Unknown message ${response} from content scripts!`);
                     }
                 });
             },
@@ -76,28 +83,34 @@ class Popup extends Component {
         this.setState({ loading: true });
     }
 
+    renderPage() {
+        const resultsPageProps = {
+            setLastPlacesScraped: this.setLastPlacesScraped,
+            setSelectedPlace: this.setSelectedPlace,
+            onActivate: this.sendMessageToScrapePage,
+            placesScraped: this.state.placesScraped,
+            selectedPlace: this.state.selectedPlace,
+            loading: this.state.loading,
+            reloadNeeded: this.state.reloadNeeded,
+        };
+
+        switch (this.state.currentPage) {
+            case pages.FEEDBACK:
+                return <FeedbackForm />;
+            case pages.ABOUT_US:
+                return <AboutTeam />;
+            default:
+                // case RESULTS:
+                return <ResultsPage {...resultsPageProps} />;
+        }
+    }
+
     render() {
         return (
             <>
                 <div className={this.state.loading ? 'popup-loading' : ''}>
-                    <PopupNavbar
-                        onActivate={this.sendMessageToScrapePage}
-                        loading={this.state.loading}
-                        error={this.state.error}
-                        toggleShowFeedbackForm={this.toggleShowFeedbackForm}
-                        showFeedbackForm={this.state.showFeedbackForm}
-                    />
-                    {this.state.showFeedbackForm ? (
-                        // <FeedbackForm />
-                        <AboutTeam />
-                    ) : (
-                        <ResultsPage
-                            placesScraped={this.state.placesScraped}
-                            setLastPlacesScraped={this.setLastPlacesScraped}
-                            setSelectedPlace={this.setSelectedPlace}
-                            selectedPlace={this.state.selectedPlace}
-                        />
-                    )}
+                    <PopupNavbar setPage={this.setPage} currentPage={this.state.currentPage} />
+                    {this.renderPage()}
                 </div>
                 {this.state.loading && <Loader />}
             </>

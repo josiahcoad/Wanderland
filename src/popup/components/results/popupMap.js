@@ -3,8 +3,8 @@ import {
     Map, GoogleApiWrapper, Marker,
 } from 'google-maps-react';
 import uuid from 'uuid';
-import InfoWindowExtention from './infoWindowExtention';
-import { removeWhere } from '../../utils';
+import InfoWindowExtention from '../infoWindowExtention';
+import { removeWhere } from '../../../utils';
 
 const mapStyles = {
     width: '100%',

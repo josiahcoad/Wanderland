@@ -2,56 +2,45 @@ import React from 'react';
 import { Navbar, Glyphicon, Button } from 'react-bootstrap';
 import './navbar.css';
 
-function getButtonText(loading, error) {
-    if (loading) {
-        return 'Loading...';
-    }
-    if (error) {
-        return 'Please Refresh';
-    }
-    return 'Scan Page';
-}
+const pages = {
+    FEEDBACK: 'FEEDBACK',
+    RESULTS: 'RESULTS',
+    ABOUT_US: 'ABOUTUS',
+};
 
-export default ({
-    onActivate, loading, error, toggleShowFeedbackForm, showFeedbackForm,
-}) => (
-    <Navbar>
-        <Navbar.Header>
-            <Navbar.Brand>
-                <a
-                    href="https://github.com/josiahcoad/wanderland"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="navbar-brand"
-                >
-                    <Glyphicon glyph="globe" />
-                    {' '}
+// decide what button to show on the navbar based on what page we're currently on
+const renderNavButtons = setPage => (
+    <span className="nav-buttons">
+        <Button bsStyle="primary" onClick={() => setPage(pages.FEEDBACK)}>
+            Feedback
+        </Button>
+        <Button bsStyle="primary" onClick={() => setPage(pages.ABOUT_US)}>
+            About Us
+        </Button>
+        <Button bsStyle="primary" onClick={() => setPage(pages.RESULTS)}>
+            Results
+        </Button>
+    </span>
+);
+
+const renderBrand = () => (
+    <Navbar.Brand>
+        <a
+            href="https://github.com/josiahcoad/wanderland"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar-brand"
+        >
+            <Glyphicon glyph="globe" />
+            {' '}
 Wanderland
-                </a>
-            </Navbar.Brand>
-        </Navbar.Header>
-        <Navbar.Form pullRight>
-            {!showFeedbackForm && (
-                <Button
-                    bsStyle="primary"
-                    onClick={onActivate}
-                    disabled={loading || error}
-                    className="activate-button"
-                >
-                    {getButtonText(loading, error)}
-                </Button>
-            )}
-        </Navbar.Form>
-        <Navbar.Form pullRight>
-            {showFeedbackForm ? (
-                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
-                    Hide Feedback
-                </Button>
-            ) : (
-                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
-                    Give Feedback
-                </Button>
-            )}
-        </Navbar.Form>
+        </a>
+    </Navbar.Brand>
+);
+
+export default ({ setPage }) => (
+    <Navbar>
+        <Navbar.Header>{renderBrand()}</Navbar.Header>
+        <Navbar.Form pullRight>{renderNavButtons(setPage)}</Navbar.Form>
     </Navbar>
 );

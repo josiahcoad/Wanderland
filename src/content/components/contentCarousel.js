@@ -21,7 +21,7 @@ class ContentCarousel extends Component {
                     <img src="https://s3.amazonaws.com/revsearch-assets/flights.gif" alt="flights" id="flights" />
                 </div>
                 <div className="carousel-item">
-                    <h3>Social Interaction Coming Soon!</h3>
+                    <h3>Social Coming Soon!</h3>
                     <img src="https://s3.amazonaws.com/revsearch-assets/fb.png" alt="facebook" id="facebook" />
                 </div>
             </Carousel>

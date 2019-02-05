@@ -9,3 +9,8 @@
 #basic-nav-dropdown {
     color: #3e678c !important;
 }
+
+.nav-buttons button {
+    margin-left: 5px;
+    margin-right: 5px;
+}

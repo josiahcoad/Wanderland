@@ -1,3 +1,7 @@
 .popup-loading {
     filter: blur(3px);
 }
+
+.popup-page {
+    height: 400px;
+}
