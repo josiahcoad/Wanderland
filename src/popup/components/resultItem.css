@@ -1,4 +1,4 @@
-.panel-heading {
+.result-item .panel-heading {
     text-align: left;
     padding: 5px 5px;
     overflow: hidden;
@@ -6,21 +6,21 @@
     text-overflow: ellipsis;
 }
 
-.panel-title {
+.result-item .panel-title {
     color: gray;
     text-decoration: none !important;
     display: inline-block;
 }
 
-.panel-heading:hover {
+.result-item .panel-heading:hover {
     background-color: #8deedb;
 }
 
-.panel-heading:hover .panel-title {
+.result-item .panel-heading:hover .panel-title {
     color: black;
 }
 
-.icon-button {
+.result-item .icon-button {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -30,6 +30,6 @@
     color: gray;
 }
 
-.icon-button.remove-button:hover {
+.result-item .icon-button.remove-button:hover {
     color: red;
 }

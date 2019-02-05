@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 // This code gets injected automatically into every page you go onto in Google Chrome.
 // The functions here are specifically for calling the dandelion api which does the entity
 // extraction on the webpage text.
@@ -16,7 +14,9 @@ const LOCATION_TYPES = [
 // NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
     // eslint-disable-next-line
-    return response.annotations.filter(annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0);
+    return response.annotations.filter(
+        annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0,
+    );
 }
 
 // remove objects from an array who have the same value
@@ -64,38 +64,35 @@ function getEntitiesFromWebpage(webpageUrl) {
     });
 }
 
-const getEntitiesFromText = (textData) => {
-    return new Promise((resolve, reject) => {
-        const Http = new XMLHttpRequest();
-        const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${textData}${PARAMS}`;
-        Http.open('GET', url);
-        Http.onloadend = () => {
-            if (Http.status === 200) {
-                resolve(Http.responseText);
-            } else {
-                reject(Error(Http.status));
-            }
-        };
-        // Handle network errors
-        Http.onerror = () => {
-            reject(Error('Network Error'));
-        };
-        Http.send();
-    });
-};
+const getEntitiesFromText = textData => new Promise((resolve, reject) => {
+    const Http = new XMLHttpRequest();
+    const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${encodeURI(
+        textData,
+    )}${PARAMS}`;
+    Http.open('GET', url);
+    Http.onloadend = () => {
+        if (Http.status === 200) {
+            resolve(Http.responseText);
+        } else {
+            reject(Error(Http.status));
+        }
+    };
+    // Handle network errors
+    Http.onerror = () => {
+        reject(Error('Network Error'));
+    };
+    Http.send();
+});
 
-export function getUniqueLocationsFromText(textData) {
+export function extractPlaces(textData) {
     return new Promise((resolve, reject) => {
         getEntitiesFromText(textData)
             .then(JSON.parse)
             .then(
                 (response) => {
-                    console.log(response);
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
-                    const ret = filterDuplicates(filterLocations(response), 'spot');
-                    console.log(ret);
-                    resolve(ret);
+                    resolve(filterDuplicates(filterLocations(response), 'spot'));
                 },
                 (error) => {
                     alert(
@@ -117,7 +114,6 @@ export function getUniqueLocationsFromCurrentPage() {
                 (response) => {
                     // filter the reponse for all entities that are locations
                     // then remove duplicate locations... ones that have the same "spot"
-                    console.log(response);
                     resolve(filterDuplicates(filterLocations(response), 'spot'));
                 },
                 (error) => {
@@ -142,7 +138,10 @@ function googleGeometryAPIGet(location) {
             if (Http.status === 200) {
                 resolve(
                     Http.response.candidates.length === 0
-                        ? { lat: null, lng: null }
+                        ? {
+                            lat: null,
+                            lng: null,
+                        }
                         : Http.response.candidates[0].geometry.location,
                 );
             } else {

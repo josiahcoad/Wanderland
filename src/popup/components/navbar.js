@@ -1,9 +1,20 @@
 import React from 'react';
-import { Navbar, Glyphicon } from 'react-bootstrap';
-import ActivateButton from './activateButton';
+import { Navbar, Glyphicon, Button } from 'react-bootstrap';
 import './navbar.css';
 
-const PopupNavbar = ({ onActivate, loading, error }) => (
+function getButtonText(loading, error) {
+    if (loading) {
+        return 'Loading...';
+    }
+    if (error) {
+        return 'Please Refresh';
+    }
+    return 'Scan Page';
+}
+
+const PopupNavbar = ({
+    onActivate, loading, error, toggleShowFeedbackForm, showFeedbackForm,
+}) => (
     <Navbar>
         <Navbar.Header>
             <Navbar.Brand>
@@ -20,7 +31,27 @@ Wanderland
             </Navbar.Brand>
         </Navbar.Header>
         <Navbar.Form pullRight>
-            <ActivateButton bsStyle="primary" onClick={onActivate} loading={loading} error={error} />
+            {!showFeedbackForm && (
+                <Button
+                    bsStyle="primary"
+                    onClick={onActivate}
+                    disabled={loading || error}
+                    className="activate-button"
+                >
+                    {getButtonText(loading, error)}
+                </Button>
+            )}
+        </Navbar.Form>
+        <Navbar.Form pullRight>
+            {showFeedbackForm ? (
+                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
+                    Hide Feedback
+                </Button>
+            ) : (
+                <Button bsStyle="primary" onClick={toggleShowFeedbackForm}>
+                    Give Feedback
+                </Button>
+            )}
         </Navbar.Form>
     </Navbar>
 );

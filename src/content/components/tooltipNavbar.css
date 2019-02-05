@@ -1,0 +1,24 @@
+.wanderland-popover .navbar-default {
+  background-color: #ec7c93 !important;
+  border-color: #ec7c93 !important;
+}
+
+.wanderland-popover .navbar-default a {
+  color: white;
+}
+
+.wanderland-popover .navbar {
+  margin-bottom: 0px !important;
+}
+
+.wanderland-popover .icon-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none !important;
+  border: 0;
+  background: transparent !important;
+  height: 10px;
+  width: 37px;
+  background-repeat: no-repeat !important;
+}

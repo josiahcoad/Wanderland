@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
 import Loader from './loader';
-import PopupMap from './popupMap';
 import PopupNavbar from './navbar';
-import ResultsList from './resultsList';
+import ResultsPage from './resultsPage';
+import FeedbackForm from './feedbackForm';
 import './popup.css';
 
 const SUCCESS = 'SUCCESS';
@@ -17,10 +16,12 @@ class Popup extends Component {
             selectedPlace: {},
             loading: false,
             error: false,
+            showFeedbackForm: false,
         };
         this.setLastPlacesScraped = this.setLastPlacesScraped.bind(this);
         this.setSelectedPlace = this.setSelectedPlace.bind(this);
         this.sendMessageToScrapePage = this.sendMessageToScrapePage.bind(this);
+        this.toggleShowFeedbackForm = this.toggleShowFeedbackForm.bind(this);
     }
 
     componentDidMount() {
@@ -38,6 +39,12 @@ class Popup extends Component {
 
     setSelectedPlace(place) {
         this.setState({ selectedPlace: place });
+    }
+
+    toggleShowFeedbackForm() {
+        this.setState(prevState => ({
+            showFeedbackForm: !prevState.showFeedbackForm,
+        }));
     }
 
     // Use google's extension api to send an "ACTIVATE" message to the page/tab you're currently on.
@@ -76,33 +83,19 @@ class Popup extends Component {
                         onActivate={this.sendMessageToScrapePage}
                         loading={this.state.loading}
                         error={this.state.error}
+                        toggleShowFeedbackForm={this.toggleShowFeedbackForm}
+                        showFeedbackForm={this.state.showFeedbackForm}
                     />
-                    <Grid>
-                        {this.state.placesScraped.length !== 0 && (
-                            <>
-                                <Row>
-                                    <Col xs={7}>
-                                        {this.state.placesScraped.length !== 0 && (
-                                            <PopupMap
-                                                placesScraped={this.state.placesScraped}
-                                                selectedPlace={this.state.selectedPlace}
-                                                setSelectedPlace={this.setSelectedPlace}
-                                                setLastPlacesScraped={this.setLastPlacesScraped}
-                                            />
-                                        )}
-                                    </Col>
-                                    <Col xs={4} xsOffset={1}>
-                                        <ResultsList
-                                            places={this.state.placesScraped}
-                                            setPlaces={this.setLastPlacesScraped}
-                                            setSelectedPlace={this.setSelectedPlace}
-                                            selectedPlace={this.state.selectedPlace}
-                                        />
-                                    </Col>
-                                </Row>
-                            </>
-                        )}
-                    </Grid>
+                    {this.state.showFeedbackForm ? (
+                        <FeedbackForm />
+                    ) : (
+                        <ResultsPage
+                            placesScraped={this.state.placesScraped}
+                            setLastPlacesScraped={this.setLastPlacesScraped}
+                            setSelectedPlace={this.setSelectedPlace}
+                            selectedPlace={this.state.selectedPlace}
+                        />
+                    )}
                 </div>
                 {this.state.loading && <Loader />}
             </>
