@@ -1,12 +1,12 @@
+// Root Component for the Popup that appears when you click the extension icon
+// in the chrome browser.
 import React, { Component } from 'react';
 import Loader from './loader';
 import PopupNavbar from './navbar';
 import ResultsPage from './resultsPage';
 import FeedbackForm from './feedbackForm';
 import './popup.css';
-
-const PAGE_SCAN_SUCCESS = 'PAGE_SCAN_SUCCESS';
-const PAGE_SCAN = 'PAGE_SCAN';
+import { PAGE_SCAN_SUCCESS, PAGE_SCAN } from '../../extensionMessageTypes';
 
 class Popup extends Component {
     constructor(props) {
@@ -47,9 +47,9 @@ class Popup extends Component {
         }));
     }
 
-    // Use google's extension api to send an "PAGE_SCAN" message to the page/tab you're currently on.
-    // Wait for a reponse and if the reponse is a SUCCESS then set the button with id "activate" to
-    // show "loaded". Until a response is received, set the button text to "loading".
+    // Use google's extension api to send an "PAGE_SCAN" to the page/tab you're currently on.
+    // Wait for a reponse and if the reponse is a "SUCCESS" then set the button with id "activate"
+    // to show "loaded". Until a response is received, set the button text to "loading".
     sendMessageToScrapePage() {
         chrome.tabs.query(
             {

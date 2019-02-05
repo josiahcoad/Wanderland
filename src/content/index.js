@@ -1,6 +1,7 @@
 // Content code gets injected automatically into every page you go onto in Google Chrome.
 import { getUniqueLocationsFromCurrentPage, addGeometryToObject } from './api.js';
 import { createTooltips } from './createTooltips.js';
+import * as message from '../extensionMessageTypes';
 
 function createTooltipsForPage() {
     return getUniqueLocationsFromCurrentPage()
@@ -58,17 +59,17 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add a results box to the top of the page
     // add an event listener to wait for a button press of the
     // activate button in the extension.js code.
-    if (request.message === 'PAGE_SCAN') {
+    if (request.message === message.PAGE_SCAN) {
         createTooltipsForPage()
             .then(results => sendResponse({
-                message: 'PAGE_SCAN_SUCCESS',
+                message: message.PAGE_SCAN_SUCCESS,
                 placesScraped: results,
             }))
             .catch(() => sendResponse({
-                message: 'PAGE_SCAN_FAILED',
+                message: message.PAGE_SCAN_FAILED,
                 placesScraped: [],
             }));
-    } else if (request.message === 'TEXT_SCAN') {
+    } else if (request.message === message.TEXT_SCAN) {
         createTooltipsForSinglePlace(request.data);
     }
     return true;
