@@ -10,17 +10,19 @@ const AboutPerson = ({ person }) => (
         </Panel.Heading>
         <Panel.Body>
             <Grid>
-                <Col xs={4}>
-                    <img
-                        src={`../images/${person.image}`}
-                        alt="avatar"
-                        className="profile-picture center-block"
-                    />
+                <Col xs={1}>
                     <div className="social-container">
                         <SocialIcon url={person.fblink} />
                         <SocialIcon url={person.LinkedIn} />
                         <SocialIcon url={person.Github} />
                     </div>
+                </Col>
+                <Col xs={3}>
+                    <img
+                        src={`../images/${person.image}`}
+                        alt="avatar"
+                        className="profile-picture center-block"
+                    />
                 </Col>
                 <Col xs={8}>
                     <ul className="person-description">
