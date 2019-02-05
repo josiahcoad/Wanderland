@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+
+.wanderland-popover .carousel-item {
+    background-color: white;
+    height: 340px;
+}
+
+.wanderland-popover .carousel-item h3 {
+    /* line-height: 340px;
+    vertical-align: middle;
+    text-align: center; */
+    font-family: Pacifico;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    bottom: 30px;
+}
+
+.wanderland-popover .carousel-item img {
+    /* width: 100%;
+    height: auto; */
+}
+
+.wanderland-popover .carousel-item #instagram {
+    width: 150px;
+    bottom: 20px;
+    margin-top: 70px;
+}
+
+.wanderland-popover .carousel-item #facebook {
+    width: 100px;
+    bottom: 20px;
+    margin-top: 100px;
+}

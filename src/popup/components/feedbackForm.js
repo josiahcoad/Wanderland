@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from './loader';
 
-const FeedbackForm = () => (
+export default () => (
     <iframe
         src="https://docs.google.com/forms/d/e/1FAIpQLSeYH2e5XDvBBQkPuTyqXxzn9Yrv4PBOlYo1U-t2wEiOrepb5g/viewform?embedded=true"
         width="100%"
@@ -14,5 +14,3 @@ const FeedbackForm = () => (
         <Loader />
     </iframe>
 );
-
-export default FeedbackForm;

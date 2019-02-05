@@ -12,7 +12,7 @@ function getButtonText(loading, error) {
     return 'Scan Page';
 }
 
-const PopupNavbar = ({
+export default ({
     onActivate, loading, error, toggleShowFeedbackForm, showFeedbackForm,
 }) => (
     <Navbar>
@@ -55,5 +55,3 @@ Wanderland
         </Navbar.Form>
     </Navbar>
 );
-
-export default PopupNavbar;

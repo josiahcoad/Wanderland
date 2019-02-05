@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Popover from 'react-popover';
 import $ from 'jquery';
-import TooltipMap from './tooltipMap';
 import TooltipNavbar from './tooltipNavbar';
 import './tooltip.css';
+import ContentCarousel from './contentCarousel';
 
-const PopoverContent = ({ name }) => (
+const PlacePopover = ({ name }) => (
     <div className="wanderland-popover">
         <TooltipNavbar />
         <div className="wl-content">
-            <TooltipMap name={name} />
+            <ContentCarousel name={name} />
         </div>
     </div>
 );
@@ -48,7 +48,7 @@ class Tooltip extends Component {
         return (
             <Popover
                 isOpen={this.state.show}
-                body={<PopoverContent name={this.props.place.name} />}
+                body={<PlacePopover name={this.props.place.name} />}
                 onOuterAction={() => this.setShow(false)}
                 place="below"
                 tipSize={0.01}

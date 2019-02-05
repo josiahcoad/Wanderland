@@ -1,3 +1,5 @@
+import { TEXT_SCAN } from '../extensionMessageTypes';
+
 function selectionTextListener(info) {
     chrome.tabs.query(
         {
@@ -6,7 +8,7 @@ function selectionTextListener(info) {
         },
         (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, {
-                message: 'TEXT_SCAN',
+                message: TEXT_SCAN,
                 data: info.selectionText,
             }); // Handle The Response
         },
