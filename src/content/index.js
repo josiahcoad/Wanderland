@@ -3,7 +3,7 @@ import { getUniqueLocationsFromCurrentPage, addGeometryToObject } from './api.js
 import { createTooltips } from './createTooltips.js';
 import * as message from '../extensionMessageTypes';
 
-function createTooltipsForPage() {
+function scanPage() {
     return getUniqueLocationsFromCurrentPage()
         .then(results => Promise.all(results.map(addGeometryToObject)))
         .then((results) => {
@@ -38,7 +38,7 @@ const emptyObject = {
     },
 };
 
-function createTooltipsForSinglePlace(textData) {
+function scanSinglePlace(textData) {
     return addGeometryToObject({ spot: textData })
         .then(result => ({ ...emptyObject, ...result }))
         .then((result) => {
@@ -60,7 +60,7 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     // add an event listener to wait for a button press of the
     // activate button in the extension.js code.
     if (request.message === message.PAGE_SCAN) {
-        createTooltipsForPage()
+        scanPage()
             .then(results => sendResponse({
                 message: message.PAGE_SCAN_SUCCESS,
                 placesScraped: results,
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
                 placesScraped: [],
             }));
     } else if (request.message === message.TEXT_SCAN) {
-        createTooltipsForSinglePlace(request.data);
+        scanSinglePlace(request.data);
     }
     return true;
 });

@@ -1,0 +1,10 @@
+.wanderland-popover .carousel-item {
+    background-color: white;
+    height: 340px;
+}
+
+.wanderland-popover .carousel-item h3 {
+    line-height: 340px;
+    vertical-align: middle;
+    text-align: center;
+}
