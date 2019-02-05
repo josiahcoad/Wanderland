@@ -6,7 +6,7 @@ function selectionTextListener(info) {
         },
         (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, {
-                message: 'CREATE_TOOLTIPS',
+                message: 'TEXT_SCAN',
                 data: info.selectionText,
             }); // Handle The Response
         },

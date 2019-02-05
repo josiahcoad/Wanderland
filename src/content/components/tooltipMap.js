@@ -5,7 +5,7 @@ const API_KEY = 'AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8';
 
 const TooltipMap = ({ title }) => (
     <iframe
-        style={{ border: 0, height: '350px', width: '100%' }}
+        style={{ border: 0, height: '340px', width: '100%' }}
         src={`https://www.google.com/maps/embed/v1/place?q=${encodeURI(title)}&key=${API_KEY}`}
         title={`google-map-${uuid.v4()}`}
     >

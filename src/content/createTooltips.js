@@ -7,7 +7,8 @@ import Tooltip from './components/tooltip';
 const TAGS_NOT_TO_COVER = ['a', 'span', 'button']; // Tags not to cover for tooltip wrapping
 const NUM_PARENTS_TO_CHECK = 2; // Number of parents of a node to check for tooltip wrapping
 
-export function insertTooltips(place, wrapClass) {
+
+function insertTooltipComponents(place, wrapClass) {
     const elements = document.getElementsByClassName(wrapClass);
 
     [].forEach.call(elements, (container) => {
@@ -18,6 +19,7 @@ export function insertTooltips(place, wrapClass) {
 export const createTooltips = (results) => {
     results.forEach((result) => {
         const linkClass = `${result.name.replace(' ', '_')}_tooltip`;
+        // Add the container (span) where the tooltip component will be inserted
         findAndReplaceDOMText(document.body, {
             find: result.name,
             wrap: 'span',
@@ -39,7 +41,7 @@ export const createTooltips = (results) => {
                 return !tagsNotAllowed;
             },
         });
-        insertTooltips(
+        insertTooltipComponents(
             {
                 title: result.name,
                 link: result.lod.wikipedia,
