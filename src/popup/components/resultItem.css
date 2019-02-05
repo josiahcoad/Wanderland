@@ -13,14 +13,14 @@
 }
 
 .result-item .panel-heading:hover {
-    background-color: #8deedb;
+    background-color: #ec7c93;
 }
 
 .result-item .panel-heading:hover .panel-title {
     color: black;
 }
 
-.result-item .icon-button {
+.icon-button {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
