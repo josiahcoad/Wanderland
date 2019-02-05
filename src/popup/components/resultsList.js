@@ -4,7 +4,7 @@ import ResultItem from './resultItem';
 import { removeWhere } from '../../utils';
 import './resultsList.css';
 
-const ResultsList = props => (
+export default props => (
     <PanelGroup
         accordion
         activeKey={props.selectedPlace}
@@ -26,5 +26,3 @@ const ResultsList = props => (
         ))}
     </PanelGroup>
 );
-
-export default ResultsList;

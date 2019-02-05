@@ -1,6 +1,9 @@
-/* http://paletton.com/#uid=23c0u0knYN5d8Vbj2R3s+IEDFzh */
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+
 .navbar-brand {
     color: #ec7c93 !important;
+    font-family: Pacifico;
+    font-size: 25px;
 }
 
 #basic-nav-dropdown {

@@ -1,3 +1,5 @@
+import { TEXT_SCAN } from '../extensionMessageTypes';
+
 function selectionTextListener(info) {
     chrome.tabs.query(
         {
@@ -6,7 +8,7 @@ function selectionTextListener(info) {
         },
         (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, {
-                message: 'CREATE_TOOLTIPS',
+                message: TEXT_SCAN,
                 data: info.selectionText,
             }); // Handle The Response
         },
@@ -20,7 +22,7 @@ const listenerFunctionMap = {
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
         id: 'selectionWanderland',
-        title: 'Wanderland',
+        title: 'Lookup Place',
         contexts: ['selection'],
     });
 });

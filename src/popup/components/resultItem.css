@@ -13,21 +13,21 @@
 }
 
 .result-item .panel-heading:hover {
-  background-color: #ec7c93 !important;
+  background-color: #ec7c93;
 }
 
 .result-item .panel-heading:hover .panel-title {
   color: black;
 }
 
-.result-item .icon-button {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  border: 0;
-  background: transparent;
-  color: gray;
+.icon-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    color: gray;
 }
 
 .result-item .icon-button.remove-button:hover {

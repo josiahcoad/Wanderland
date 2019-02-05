@@ -24,14 +24,16 @@ module.exports = {
                 loader: 'style-loader!css-loader',
             },
             {
-                test: /\.(png|jp(e*)g|svg)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        limit: 8000, // If image is less than 8kb, convert to base64
-                        name: 'images/[name].[ext]',
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            limit: 8000, // If image is less than 8kb, convert to base64
+                            name: 'images/[name].[ext]',
+                        },
                     },
-                }],
+                ],
             },
             {
                 test: /\.html$/,

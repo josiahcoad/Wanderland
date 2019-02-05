@@ -1,7 +1,7 @@
 import React from 'react';
 import './resultItemBody.css';
 
-const ResultItemBody = ({ place }) => (
+export default ({ place }) => (
     <div className="result-item-body">
         <img src={place.image.thumbnail} alt="" />
         <hr />
@@ -18,5 +18,3 @@ const ResultItemBody = ({ place }) => (
         <p>{place.abstract}</p>
     </div>
 );
-
-export default ResultItemBody;
