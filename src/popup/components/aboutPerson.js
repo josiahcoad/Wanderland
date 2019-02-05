@@ -40,6 +40,10 @@ const AboutPerson = ({ person }) => (
                             <strong>Favorite Place to Visit: </strong>
                             {person.favoritePlace}
                         </li>
+                        <li>
+                            <strong>Favorite Quote: </strong>
+                            <i>{person.quote}</i>
+                        </li>
                     </ul>
                 </Col>
             </Grid>

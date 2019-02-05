@@ -6,53 +6,59 @@
     "fblink": "https://www.facebook.com/josiah.coad",
     "LinkedIn": "http://linkedin.com/in/josiahcoad",
     "Github": "http://github.com/josiahcoad",
-    "major": "Hello",
-    "interest": "abc",
-    "favortitePlace": "def"
-  },
-  {
-    "name": "Josiah Coad",
-    "image": "josiah.jpg",
-    "school": "Texas A&M University",
-    "fblink": "https://www.facebook.com/josiah.coad",
-    "LinkedIn": "http://linkedin.com/in/josiahcoad",
-    "Github": "http://github.com/josiahcoad",
-    "major": "Hello",
-    "interest": "abc",
-    "favortitePlace": "def"
-  },
-  {
-    "name": "Josiah Coad",
-    "image": "josiah.jpg",
-    "school": "Texas A&M University",
-    "fblink": "https://www.facebook.com/josiah.coad",
-    "LinkedIn": "http://linkedin.com/in/josiahcoad",
-    "Github": "http://github.com/josiahcoad",
     "major": "B.S. in Computer Science and Statistics, Class of 2020",
-    "interest": "abc",
-    "favortitePlace": "def"
+    "interest": "Machine Learning, Data Science & Entrepreneurship",
+    "favortitePlace": "India, England & Mexico",
+    "quote": "\"Only those who risk going too far can possibly find out how far one can go\""
   },
   {
     "name": "Chinmay Phulse",
-    "image": "Chimnay.JPG",
+    "image": "Chinmay.JPG",
     "school": "Texas A&M University",
-    "fblink": " chinmayphulse.me",
+    "fblink": " chimnayphulse.me",
     "LinkedIn": "https://www.linkedin.com/in/chinmay-phulse-b33907135",
     "Github": "GitHub.com/phulsechinmay",
     "major": "B.S. in Computer Science with a Minor in Statistics & Cyber Security, Class of 2020",
     "interest": "Artificial Intelligence, Cyber Security, Network Architecture & Distributed Programming",
-    "favortitePlace": "My favorite place to visit is Crete, an island in Greece"
+    "favortitePlace": "Crete, an island in Greece",
+    "quote": "\"Be the change that you wish to see in the world\""
+  },
+  {
+    "name": "Amir Sorhan Karimloo",
+    "image": "sorhan.jpg",
+    "school": "Texas A&M University",
+    "fblink": "https://www.facebook.com/Ssorhan",
+    "LinkedIn": "https://www.linkedin.com/in/amir-s-karimloo/",
+    "Github": "https://github.com/AmirSorhan",
+    "major": "B.S. in Computer Science with a Minor in Cyber Security, Class of 2019",
+    "interest": "Cybersecurity, Web Development, Entrepreneurship, sarketing and sales",
+    "favortitePlace": "My favorite place to visit is India, Iran, United States and Sweeden",
+    "quote": "\"Intellignece organizes the world by organizingg itself\""
   },
 
   {
-    "name": "Josiah Coad",
-    "image": "josiah.jpg",
+    "name": "Amir Mostafavi",
+    "image": "Amir.jpeg",
+    "school": "The University of Texas at Austin",
+    "fblink": " https://www.facebook.com/amirmst0",
+    "LinkedIn": "https://www.linkedin.com/in/amirrmostafavi/",
+    "Github": "https://github.com/Amirmst",
+    "major": "B.S. in Computer Science with a Minor in Business, Class of 2020",
+    "interest": "Mobile App Development, Data Science, Human Computer Interaction (HCI), UI/UX Design",
+    "favortitePlace": "Rocky Mountains, Maldives",
+    "quote": "\"Whereever you are, It's worth paying attention\""
+  },
+
+  {
+    "name": "Andrew Casillas",
+    "image": "Andrew1.jpeg",
     "school": "Texas A&M University",
     "fblink": "https://www.facebook.com/josiah.coad",
     "LinkedIn": "http://linkedin.com/in/josiahcoad",
     "Github": "http://github.com/josiahcoad",
-    "major": "Hello",
-    "interest": "abc",
-    "favortitePlace": "def"
+    "major": "B.S. in Computer Science with a Minor in Cyber Security & Mathematics, Class of 2019",
+    "interest": "Cybersecurity and App Development",
+    "favortitePlace": "Rocky Mountain National Park, Colorado, UK",
+    "quote": "\"To be is to do\""
   }
 ]
