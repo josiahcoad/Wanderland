@@ -1,5 +1,5 @@
 import React from 'react';
-import './resultItemBody.css';
+import './ResultItemBody.css';
 
 export default ({ place }) => (
     <div className="result-item-body">

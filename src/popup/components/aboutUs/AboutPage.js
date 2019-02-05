@@ -1,9 +1,9 @@
 import React from 'react';
 import { PanelGroup } from 'react-bootstrap';
 import uuid from 'uuid';
-import AboutPerson from './aboutPerson';
+import AboutPerson from './AboutPerson';
 import people from './people.json';
-import './aboutPage.css';
+import './AboutPage.css';
 import '../../images/amir.jpg';
 import '../../images/josiah.jpg';
 import '../../images/andrew.jpg';

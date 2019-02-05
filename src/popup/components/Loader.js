@@ -1,6 +1,6 @@
 import React from 'react';
 import { PulseLoader } from 'react-spinners';
-import './loader.css';
+import './Loader.css';
 
 export default () => (
     <div className="loader">

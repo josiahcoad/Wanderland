@@ -3,7 +3,7 @@ import {
     Map, GoogleApiWrapper, Marker,
 } from 'google-maps-react';
 import uuid from 'uuid';
-import InfoWindowExtention from '../infoWindowExtention';
+import InfoWindowExtention from '../InfoWindowExtention';
 import { removeWhere } from '../../../utils';
 
 const mapStyles = {

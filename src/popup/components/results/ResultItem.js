@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
 import ResultItemBody from './resultItemBody';
-import './resultItem.css';
+import './ResultItem.css';
 
 export default ({ eventKey, place, onRemove }) => (
     <Panel

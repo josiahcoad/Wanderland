@@ -1,7 +1,7 @@
 import findAndReplaceDOMText from 'findandreplacedomtext';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Tooltip from './components/tooltip';
+import Tooltip from './components/Tooltip';
 
 
 const TAGS_NOT_TO_COVER = ['a', 'span', 'button']; // Tags not to cover for tooltip wrapping

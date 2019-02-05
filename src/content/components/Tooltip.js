@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Popover from 'react-popover';
 import $ from 'jquery';
-import TooltipNavbar from './tooltipNavbar';
-import './tooltip.css';
-import ContentCarousel from './contentCarousel';
+import TooltipNavbar from './TooltipNavbar';
+import './Tooltip.css';
+import ContentCarousel from './ContentCarousel';
 
 const PlacePopover = ({ name }) => (
     <div className="wanderland-popover">

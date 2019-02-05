@@ -2,9 +2,9 @@ import React from 'react';
 import {
     Button, Col, Glyphicon, Grid, Row,
 } from 'react-bootstrap';
-import PopupMap from './popupMap';
-import ResultsList from './resultsList';
-import './resultsPage.css';
+import PopupMap from './PopupMap';
+import ResultsList from './ResultsList';
+import './ResultsPage.css';
 
 function getButtonText(loading, reloadNeeded) {
     if (loading) {

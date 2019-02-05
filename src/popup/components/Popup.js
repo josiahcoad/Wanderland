@@ -1,12 +1,12 @@
 // Root Component for the Popup that appears when you click the extension icon
 // in the chrome browser.
 import React, { Component } from 'react';
-import Loader from './loader';
-import PopupNavbar from './navbar';
-import ResultsPage from './results/resultsPage';
-import FeedbackForm from './feedbackForm';
-import AboutTeam from './aboutUs/aboutPage';
-import './popup.css';
+import Loader from './Loader';
+import PopupNavbar from './Navbar';
+import ResultsPage from './results/ResultsPage';
+import FeedbackForm from './FeedbackForm';
+import AboutTeam from './aboutUs/AboutPage';
+import './Popup.css';
 import { PAGE_SCAN, PAGE_SCAN_SUCCESS, PAGE_SCAN_FAILED } from '../../extensionMessageTypes';
 
 const pages = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Glyphicon, Button } from 'react-bootstrap';
-import './navbar.css';
+import './Navbar.css';
 
 const pages = {
     FEEDBACK: 'FEEDBACK',

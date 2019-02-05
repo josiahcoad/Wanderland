@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Col, Panel } from 'react-bootstrap';
 import { SocialIcon } from 'react-social-icons';
-import './aboutPerson.css';
+import './AboutPerson.css';
 
 const AboutPerson = ({ person }) => (
     <Panel className="about-person">

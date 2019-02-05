@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import TooltipMap from './tooltipMap';
-import './contentCarousel.css';
+import TooltipMap from './TooltipMap';
+import './ContentCarousel.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ContentCarousel extends Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import './tooltipNavbar.css';
+import './TooltipNavbar.css';
 
 export default () => (
     <div className="wl-navbar">

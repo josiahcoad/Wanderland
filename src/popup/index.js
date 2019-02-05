@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Popup from './components/popup';
+import Popup from './components/Popup';
 import './images/icon16.png';
 import './images/icon48.png';
 import './images/icon128.png';
