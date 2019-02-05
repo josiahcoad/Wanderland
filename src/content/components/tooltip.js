@@ -5,11 +5,11 @@ import TooltipMap from './tooltipMap';
 import TooltipNavbar from './tooltipNavbar';
 import './tooltip.css';
 
-const PopoverContent = ({ title }) => (
+const PopoverContent = ({ name }) => (
     <div className="wanderland-popover">
         <TooltipNavbar />
         <div className="wl-content">
-            <TooltipMap title={title} />
+            <TooltipMap name={name} />
         </div>
     </div>
 );
@@ -48,11 +48,18 @@ class Tooltip extends Component {
         return (
             <Popover
                 isOpen={this.state.show}
-                body={<PopoverContent title={this.props.place.title} />}
+                body={<PopoverContent name={this.props.place.name} />}
                 onOuterAction={() => this.setShow(false)}
+                place="below"
+                tipSize={0.01}
             >
-                <button type="button" className="anchor-like-button" onMouseEnter={this.toggleShow} onMouseLeave={this.mouseLeft}>
-                    {this.props.place.title}
+                <button
+                    type="button"
+                    className="anchor-like-button"
+                    onMouseEnter={this.toggleShow}
+                    onMouseLeave={this.mouseLeft}
+                >
+                    {this.props.place.name}
                 </button>
             </Popover>
         );

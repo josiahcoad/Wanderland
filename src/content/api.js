@@ -1,5 +1,4 @@
-// This code gets injected automatically into every page you go onto in Google Chrome.
-// The functions here are specifically for calling the dandelion api which does the entity
+// The functions here are for calling the dandelion and google maps api which does the entity
 // extraction on the webpage text.
 
 const LOCATION_TYPES = [
@@ -64,46 +63,6 @@ function getEntitiesFromWebpage(webpageUrl) {
     });
 }
 
-const getEntitiesFromText = textData => new Promise((resolve, reject) => {
-    const Http = new XMLHttpRequest();
-    const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${encodeURI(
-        textData,
-    )}${PARAMS}`;
-    Http.open('GET', url);
-    Http.onloadend = () => {
-        if (Http.status === 200) {
-            resolve(Http.responseText);
-        } else {
-            reject(Error(Http.status));
-        }
-    };
-    // Handle network errors
-    Http.onerror = () => {
-        reject(Error('Network Error'));
-    };
-    Http.send();
-});
-
-export function extractPlaces(textData) {
-    return new Promise((resolve, reject) => {
-        getEntitiesFromText(textData)
-            .then(JSON.parse)
-            .then(
-                (response) => {
-                    // filter the reponse for all entities that are locations
-                    // then remove duplicate locations... ones that have the same "spot"
-                    resolve(filterDuplicates(filterLocations(response), 'spot'));
-                },
-                (error) => {
-                    alert(
-                        'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
-                    );
-                    reject(Error(error));
-                },
-            );
-    });
-}
-
 // query Dandelion for all unique locations from the text on the current page
 export function getUniqueLocationsFromCurrentPage() {
     const currentPageUrl = getCurrentPageUrl();
@@ -126,6 +85,7 @@ export function getUniqueLocationsFromCurrentPage() {
     });
 }
 
+// Query the Google "Places" API for the latitude and longitude of the place
 function googleGeometryAPIGet(location) {
     return new Promise((resolve, reject) => {
         const Http = new XMLHttpRequest();
@@ -156,14 +116,17 @@ function googleGeometryAPIGet(location) {
     });
 }
 
+// Given an object that has a "spot" parameter denoting the place to look up,
+// query the Google "Places" API to get the lat/lng and then return the object with
+// whatever the object had before.
 export function addGeometryToObject({ spot, ...rest }) {
     return (
         googleGeometryAPIGet(spot)
             .then(response => ({
+                ...rest,
                 name: spot,
                 lat: response.lat,
                 lng: response.lng,
-                ...rest,
             }))
             // an error will be raised here if there is a Network Error or
             // if the response code from the Google Places API is not a 200
@@ -171,10 +134,10 @@ export function addGeometryToObject({ spot, ...rest }) {
                 // eslint-disable-next-line no-console
                 console.log(error);
                 return {
+                    ...rest,
                     name: spot,
                     lat: null,
                     lng: null,
-                    ...rest,
                 };
             })
     );

@@ -5,8 +5,8 @@ import ResultsPage from './resultsPage';
 import FeedbackForm from './feedbackForm';
 import './popup.css';
 
-const SUCCESS = 'SUCCESS';
-const ACTIVATE = 'ACTIVATE';
+const PAGE_SCAN_SUCCESS = 'PAGE_SCAN_SUCCESS';
+const PAGE_SCAN = 'PAGE_SCAN';
 
 class Popup extends Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class Popup extends Component {
         }));
     }
 
-    // Use google's extension api to send an "ACTIVATE" message to the page/tab you're currently on.
+    // Use google's extension api to send an "PAGE_SCAN" message to the page/tab you're currently on.
     // Wait for a reponse and if the reponse is a SUCCESS then set the button with id "activate" to
     // show "loaded". Until a response is received, set the button text to "loading".
     sendMessageToScrapePage() {
@@ -57,8 +57,8 @@ class Popup extends Component {
                 currentWindow: true,
             },
             (tabs) => {
-                chrome.tabs.sendMessage(tabs[0].id, { message: ACTIVATE }, (response) => {
-                    if (response && response.message === SUCCESS) {
+                chrome.tabs.sendMessage(tabs[0].id, { message: PAGE_SCAN }, (response) => {
+                    if (response && response.message === PAGE_SCAN_SUCCESS) {
                         this.setState({
                             loading: false,
                         });
