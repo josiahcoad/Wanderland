@@ -13,7 +13,7 @@ class ContentCarousel extends Component {
                     <TooltipMap name={this.props.name} />
                 </div>
                 <div className="carousel-item">
-                    <h3>Instagram Coming Soon!</h3>
+                    <h3>Instagram Pictures Coming Soon!</h3>
                     <img src="https://s3.amazonaws.com/revsearch-assets/insta.png" alt="instagram" id="instagram" />
                 </div>
                 <div className="carousel-item">
@@ -21,7 +21,7 @@ class ContentCarousel extends Component {
                     <img src="https://s3.amazonaws.com/revsearch-assets/flights.gif" alt="flights" id="flights" />
                 </div>
                 <div className="carousel-item">
-                    <h3>FB posts Coming Soon!</h3>
+                    <h3>Social Coming Soon!</h3>
                     <img src="https://s3.amazonaws.com/revsearch-assets/fb.png" alt="facebook" id="facebook" />
                 </div>
             </Carousel>

@@ -1,0 +1,22 @@
+.about-person .profile-picture {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.about-person .social-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 160px;
+}
+
+.about-person .person-description {
+  font-size: 14px;
+  text-align: left;
+  line-height: 1.5555;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 160px;
+}

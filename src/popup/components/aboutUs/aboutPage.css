@@ -1,0 +1,6 @@
+.about-page {
+  overflow-y: auto;
+  height: 400px;
+  padding-left: 10px;
+  padding-right: 10px;
+}

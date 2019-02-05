@@ -1,7 +1,7 @@
 import React from 'react';
 import { PanelGroup } from 'react-bootstrap';
 import ResultItem from './resultItem';
-import { removeWhere } from '../../utils';
+import { removeWhere } from '../../../utils';
 import './resultsList.css';
 
 export default props => (
