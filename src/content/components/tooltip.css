@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+
+.wanderland-popover {
+  width: 400px !important;
+  height: 400px !important;
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 5px 10px 18px #888888;
+}
+
+.wanderland-popover .wl-content {
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.wanderland-popover .wl-navbar {
+  border-top-right-radius: 10px !important;
+  border-top-left-radius: 10px !important;
+  text-align: center;
+  height: 60px;
+  /* background-color: #ec7c93; */
+  background-image: linear-gradient(to right, #ec7c93 , #ff9eb1);
+}
+
+.wanderland-popover .wl-brand {
+  font-family: 'Pacifico';
+  font-size: 30px;
+  color: white;
+  vertical-align: middle;
+  line-height: 50px;
+}
+
+.anchor-like-button {
+  align-items: normal;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #ec7c93;
+  border-style: none;
+  box-sizing: content-box;
+  color: #ec7c93;
+  cursor: pointer;
+  display: inline;
+  font: inherit;
+  height: auto;
+  padding: 0;
+  perspective-origin: 0 0;
+  text-align: start;
+  text-decoration: underline;
+  transform-origin: 0 0;
+  width: auto;
+  -moz-appearance: none;
+  -webkit-logical-height: 1em; /* Chrome ignores auto, so we have to use this hack to set the correct height  */
+  -webkit-logical-width: auto; /* Chrome ignores auto, but here for completeness */
+}
