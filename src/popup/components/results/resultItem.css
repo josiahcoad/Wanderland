@@ -1,23 +1,23 @@
 .result-item .panel-heading {
-  text-align: left;
-  padding: 5px 5px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    text-align: left;
+    padding: 5px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .result-item .panel-title {
-  color: gray;
-  text-decoration: none !important;
-  display: inline-block;
+    color: gray;
+    text-decoration: none !important;
+    display: inline-block;
 }
 
 .result-item .panel-heading:hover {
-  background-color: #ec7c93;
+    background-color: #ec7c93;
 }
 
 .result-item .panel-heading:hover .panel-title {
-  color: black;
+    color: black;
 }
 
 .icon-button {
@@ -31,5 +31,5 @@
 }
 
 .result-item .icon-button.remove-button:hover {
-  color: red;
+    color: red;
 }
