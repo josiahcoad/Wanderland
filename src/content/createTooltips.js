@@ -43,7 +43,7 @@ export const createTooltips = (results) => {
         });
         insertTooltipComponents(
             {
-                title: result.name,
+                name: result.name,
                 link: result.lod.wikipedia,
                 image: result.image.thumbnail,
                 summary: result.abstract,

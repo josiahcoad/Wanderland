@@ -15,11 +15,13 @@ function createTooltipsForPage() {
         });
 }
 
-function updateStorageWithNewPlaces(newPlaces) {
-    chrome.storage.local.get(['lastPlacesScraped'], (storage) => {
-        if (Array.isArray(storage.lastPlacesScraped)) {
+const placeAbsent = (places, name) => places.find(place => place.name === name) === undefined;
+
+function updateStorageWithNewPlace(newPlace) {
+    chrome.storage.local.get(['lastPlacesScraped'], ({ lastPlacesScraped }) => {
+        if (Array.isArray(lastPlacesScraped) && placeAbsent(lastPlacesScraped, newPlace)) {
             chrome.storage.local.set({
-                lastPlacesScraped: storage.lastPlacesScraped.concat(newPlaces),
+                lastPlacesScraped: lastPlacesScraped.concat(newPlace),
             });
         }
     });
@@ -41,7 +43,7 @@ function createTooltipsForSinglePlace(textData) {
         .then((result) => {
             if (result.lat && result.lng) {
                 createTooltips([result]);
-                updateStorageWithNewPlaces([result]);
+                updateStorageWithNewPlace(result);
             } else {
                 alert("Sorry we couldn't find any results for this selection.");
             }
