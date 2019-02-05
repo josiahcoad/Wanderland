@@ -20,7 +20,7 @@ const listenerFunctionMap = {
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
         id: 'selectionWanderland',
-        title: 'Wanderland',
+        title: 'Lookup Place',
         contexts: ['selection'],
     });
 });

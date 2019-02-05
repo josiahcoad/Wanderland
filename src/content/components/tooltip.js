@@ -50,8 +50,15 @@ class Tooltip extends Component {
                 isOpen={this.state.show}
                 body={<PopoverContent title={this.props.place.title} />}
                 onOuterAction={() => this.setShow(false)}
+                place="below"
+                tipSize={0.01}
             >
-                <button type="button" className="anchor-like-button" onMouseEnter={this.toggleShow} onMouseLeave={this.mouseLeft}>
+                <button
+                    type="button"
+                    className="anchor-like-button"
+                    onMouseEnter={this.toggleShow}
+                    onMouseLeave={this.mouseLeft}
+                >
                     {this.props.place.title}
                 </button>
             </Popover>
