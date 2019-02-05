@@ -2,7 +2,7 @@ import React from 'react';
 import { PulseLoader } from 'react-spinners';
 import './loader.css';
 
-const Loader = () => (
+export default () => (
     <div className="loader">
         <PulseLoader
             className="loader"
@@ -13,5 +13,3 @@ const Loader = () => (
         />
     </div>
 );
-
-export default Loader;

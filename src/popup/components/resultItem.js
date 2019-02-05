@@ -3,7 +3,7 @@ import { Panel } from 'react-bootstrap';
 import ResultItemBody from './resultItemBody';
 import './resultItem.css';
 
-const ResultItem = ({ eventKey, place, onRemove }) => (
+export default ({ eventKey, place, onRemove }) => (
     <Panel
         eventKey={eventKey}
         key={place.name}
@@ -27,5 +27,3 @@ const ResultItem = ({ eventKey, place, onRemove }) => (
         </Panel.Collapse>
     </Panel>
 );
-
-export default ResultItem;

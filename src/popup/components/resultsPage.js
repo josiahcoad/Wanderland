@@ -4,7 +4,7 @@ import PopupMap from './popupMap';
 import ResultsList from './resultsList';
 import './popup.css';
 
-const ResultsPage = ({
+export default ({
     placesScraped, setLastPlacesScraped, setSelectedPlace, selectedPlace,
 }) => (
     <Grid>
@@ -34,5 +34,3 @@ const ResultsPage = ({
         )}
     </Grid>
 );
-
-export default ResultsPage;
