@@ -1,6 +1,6 @@
-import { TEXT_SCAN } from '../extensionMessageTypes';
+import { LOOKUP_PLACE, SCAN_PARAGRAPH } from '../extensionMessageTypes';
 
-function selectionTextListener(info) {
+function lookupPlaceListener(info) {
     chrome.tabs.query(
         {
             active: true,
@@ -8,7 +8,22 @@ function selectionTextListener(info) {
         },
         (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, {
-                message: TEXT_SCAN,
+                message: LOOKUP_PLACE,
+                data: info.selectionText,
+            }); // Handle The Response
+        },
+    );
+}
+
+function scanParagraphListener(info) {
+    chrome.tabs.query(
+        {
+            active: true,
+            currentWindow: true,
+        },
+        (tabs) => {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                message: SCAN_PARAGRAPH,
                 data: info.selectionText,
             }); // Handle The Response
         },
@@ -16,13 +31,26 @@ function selectionTextListener(info) {
 }
 
 const listenerFunctionMap = {
-    selectionWanderland: selectionTextListener,
+    lookupPlaceWanderland: lookupPlaceListener,
+    scanParagraphWanderland: scanParagraphListener,
 };
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
-        id: 'selectionWanderland',
+        id: 'wanderlandContextMenu',
+        title: 'Wanderland',
+        contexts: ['selection'],
+    });
+    chrome.contextMenus.create({
+        id: 'lookupPlaceWanderland',
+        parentId: 'wanderlandContextMenu',
         title: 'Lookup Place',
+        contexts: ['selection'],
+    });
+    chrome.contextMenus.create({
+        id: 'scanParagraphWanderland',
+        parentId: 'wanderlandContextMenu',
+        title: 'Scan Paragraph',
         contexts: ['selection'],
     });
 });

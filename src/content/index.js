@@ -1,5 +1,5 @@
 // Content code gets injected automatically into every page you go onto in Google Chrome.
-import { getUniqueLocationsFromCurrentPage, addGeometryToObject } from './api.js';
+import { getUniqueLocationsFromCurrentPage, getUniqueLocationsFromText, addGeometryToObject } from './api.js';
 import { createTooltips } from './createTooltips.js';
 import * as message from '../extensionMessageTypes';
 
@@ -18,13 +18,25 @@ function scanPage() {
 
 const placeAbsent = (places, name) => places.find(place => place.name === name) === undefined;
 
-function updateStorageWithNewPlace(newPlace) {
+function removeDuplicatePlaces(placesAlreadyScraped, newPlaces) {
+    const filteredPlaces = newPlaces.filter((curNewPlace) => {
+        const curPlaceName = curNewPlace.name;
+        return placesAlreadyScraped.find(place => place.name === curPlaceName) === undefined;
+    });
+
+    return filteredPlaces;
+}
+
+function updateStorageWithNewPlaces(newPlaces) {
     chrome.storage.local.get(['lastPlacesScraped'], ({ lastPlacesScraped }) => {
-        if (Array.isArray(lastPlacesScraped) && placeAbsent(lastPlacesScraped, newPlace)) {
-            chrome.storage.local.set({
-                lastPlacesScraped: lastPlacesScraped.concat(newPlace),
-            });
+        const filteredPlaces = removeDuplicatePlaces(lastPlacesScraped, newPlaces);
+        let updatedPlaces = filteredPlaces;
+        if (Array.isArray(lastPlacesScraped)) {
+            updatedPlaces = filteredPlaces.concat(lastPlacesScraped);
         }
+        chrome.storage.local.set({
+            lastPlacesScraped: updatedPlaces,
+        });
     });
 }
 
@@ -43,11 +55,26 @@ function scanSinglePlace(textData) {
         .then(result => ({ ...emptyObject, ...result }))
         .then((result) => {
             if (result.lat && result.lng) {
+                console.log(result);
                 createTooltips([result]);
-                updateStorageWithNewPlace(result);
+                updateStorageWithNewPlaces([result]);
             } else {
                 alert("Sorry we couldn't find any results for this selection.");
             }
+        });
+}
+
+function scanParagraph(textData) {
+    return getUniqueLocationsFromText(textData)
+        .then(results => Promise.all(results.map(addGeometryToObject)))
+        .then((results) => {
+            if (results.length > 0) {
+                createTooltips(results);
+                updateStorageWithNewPlaces(results);
+            } else {
+                alert("Sorry we couldn't find any results for this page.");
+            }
+            return results;
         });
 }
 
@@ -69,8 +96,10 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
                 message: message.PAGE_SCAN_FAILED,
                 placesScraped: [],
             }));
-    } else if (request.message === message.TEXT_SCAN) {
+    } else if (request.message === message.LOOKUP_PLACE) {
         scanSinglePlace(request.data);
+    } else if (request.message === message.SCAN_PARAGRAPH) {
+        scanParagraph(request.data);
     }
     return true;
 });
