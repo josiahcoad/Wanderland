@@ -2,6 +2,7 @@
 import { getUniqueLocationsFromCurrentPage, getUniqueLocationsFromText, addGeometryToObject } from './api.js';
 import { createTooltips } from './createTooltips.js';
 import * as message from '../extensionMessageTypes';
+import { showErrorToast, showNotificationToast } from '../toasts.js';
 
 function scanPage() {
     return getUniqueLocationsFromCurrentPage()
@@ -10,13 +11,11 @@ function scanPage() {
             if (results.length > 0) {
                 createTooltips(results);
             } else {
-                alert("Sorry we couldn't find any results for this page.");
+                showErrorToast("Sorry we couldn't find any results for this page.");
             }
             return results;
         });
 }
-
-const placeAbsent = (places, name) => places.find(place => place.name === name) === undefined;
 
 function removeDuplicatePlaces(placesAlreadyScraped, newPlaces) {
     const filteredPlaces = newPlaces.filter((curNewPlace) => {
@@ -59,7 +58,7 @@ function scanSinglePlace(textData) {
                 createTooltips([result]);
                 updateStorageWithNewPlaces([result]);
             } else {
-                alert("Sorry we couldn't find any results for this selection.");
+                showErrorToast('Sorry we couldn\'t find any results for the selected place :(');
             }
         });
 }
@@ -72,7 +71,8 @@ function scanParagraph(textData) {
                 createTooltips(results);
                 updateStorageWithNewPlaces(results);
             } else {
-                alert("Sorry we couldn't find any results for this page.");
+                showErrorToast('Sorry we couldn\'t find any results for the selection :(');
+                showErrorToast('Try selecting just the location and use "Lookup Place" for better results');
             }
             return results;
         });
@@ -97,8 +97,10 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
                 placesScraped: [],
             }));
     } else if (request.message === message.LOOKUP_PLACE) {
+        showNotificationToast('We\'re looking it up, just a second!');
         scanSinglePlace(request.data);
     } else if (request.message === message.SCAN_PARAGRAPH) {
+        showNotificationToast('Scanning the page, it\'ll be just a moment!');
         scanParagraph(request.data);
     }
     return true;
