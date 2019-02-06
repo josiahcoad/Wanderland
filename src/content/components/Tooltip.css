@@ -33,11 +33,11 @@
 
 .anchor-like-button {
   align-items: normal;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: inherit !important;
   border-color: #ec7c93;
   border-style: none;
   box-sizing: content-box;
-  color: #ec7c93;
+  color: #ec7c93 !important;
   cursor: pointer;
   display: inline;
   font: inherit;
