@@ -22,7 +22,7 @@ class Popup extends Component {
         this.state = {
             placesScraped: [],
             selectedPlace: {},
-            loading: false,
+            loading: true,
             reloadNeeded: false,
             currentPage: pages.RESULTS,
         };
@@ -34,6 +34,13 @@ class Popup extends Component {
     }
 
     componentDidMount() {
+        // A little hack workaround that allows the page to load
+        // immediatly when the user clicks the poup icon.
+        // For the first 300 ms, the loader icon shows.
+        setTimeout(() => {
+            this.setState({ loading: false });
+        }, 300);
+
         chrome.storage.local.get(['lastPlacesScraped'], (result) => {
             if (result.lastPlacesScraped !== undefined && result.lastPlacesScraped !== null) {
                 this.setState({ placesScraped: result.lastPlacesScraped });
@@ -105,13 +112,14 @@ class Popup extends Component {
 
     render() {
         return (
-            <>
-                <div className={this.state.loading ? 'popup-loading' : ''}>
-                    <PopupNavbar setPage={this.setPage} currentPage={this.state.currentPage} />
-                    {this.renderPage()}
-                </div>
-                {this.state.loading && <Loader />}
-            </>
+            <div className="wanderland-popup">
+                {this.state.loading ? <Loader /> : (
+                    <div className={this.state.loading ? 'popup-loading' : ''}>
+                        <PopupNavbar setPage={this.setPage} currentPage={this.state.currentPage} />
+                        {this.renderPage()}
+                    </div>
+                )}
+            </div>
         );
     }
 }

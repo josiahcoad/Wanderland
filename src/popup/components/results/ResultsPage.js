@@ -23,7 +23,7 @@ Scan Page
 }
 
 export default props => (
-    <Grid className="results-page popup-page">
+    <Grid className="results-page">
         <Row>
             <Col xs={7}>
                 {props.placesScraped.length === 0 ? (

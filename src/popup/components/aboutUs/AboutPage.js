@@ -11,7 +11,7 @@ import '../../images/chinmay.jpg';
 import '../../images/sorhan.jpg';
 
 export default () => (
-    <PanelGroup className="about-page popup-page" generateChildId>
+    <PanelGroup className="about-page" generateChildId>
         {people.map(person => (
             <AboutPerson key={uuid.v4()} person={person} />
         ))}
