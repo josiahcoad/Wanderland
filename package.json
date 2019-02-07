@@ -1,52 +1,55 @@
 {
-  "name": "wanderland",
-  "version": "1.0.0",
-  "description": "An app made by travellers for travellers. See maps of places mentioned on webpages.",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode development --devtool source-map",
-    "watch": "webpack --mode development --devtool source-map --watch --info-verbosity verbose",
-    "prod": "webpack --mode production"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/josiahcoad/wanderland.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/josiahcoad/wanderland/issues"
-  },
-  "homepage": "https://github.com/josiahcoad/wanderland#readme",
-  "dependencies": {
-    "findandreplacedomtext": "^0.4.6",
-    "google-maps-react": "^2.0.2",
-    "jquery": "^3.3.1",
-    "react-bootstrap": "^0.32.4",
-    "react-popover": "^0.5.10",
-    "react-responsive-carousel": "^3.1.46",
-    "react-social-icons": "^4.1.0",
-    "react-spinners": "^0.5.1",
-    "uuid": "^3.3.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
-    "eslint": "^5.12.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.12.3",
-    "extract-loader": "^3.1.0",
-    "file-loader": "^3.0.1",
-    "html-loader": "^0.5.5",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "webpack": "^4.28.4",
-    "webpack-chrome-extension-reloader": "^1.1.1",
-    "webpack-cli": "^3.2.1"
-  }
+    "name": "wanderland",
+    "version": "1.0.0",
+    "description": "An app made by travellers for travellers. See maps of places mentioned on webpages.",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack --mode development --devtool source-map",
+        "watch": "webpack --mode development --devtool source-map --watch --info-verbosity verbose",
+        "prod": "webpack --mode production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/josiahcoad/wanderland.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/josiahcoad/wanderland/issues"
+    },
+    "homepage": "https://github.com/josiahcoad/wanderland#readme",
+    "dependencies": {
+        "findandreplacedomtext": "^0.4.6",
+        "google-maps-react": "^2.0.2",
+        "jquery": "^3.3.1",
+        "react-bootstrap": "^0.32.4",
+        "react-popover": "^0.5.10",
+        "react-responsive-carousel": "^3.1.46",
+        "react-social-icons": "^4.1.0",
+        "react-spinners": "^0.5.1",
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.2.3",
+        "@babel/preset-react": "^7.0.0",
+        "babel-eslint": "^10.0.1",
+        "babel-loader": "^8.0.5",
+        "eslint": "^5.12.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-react": "^7.12.3",
+        "extract-loader": "^3.1.0",
+        "file-loader": "^3.0.1",
+        "css-loader": "^2.1.0",
+        "style-loader": "^0.23.1",
+        "warning": "^4.0.2",
+        "html-loader": "^0.5.5",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "webpack": "^4.28.4",
+        "webpack-chrome-extension-reloader": "^1.1.1",
+        "webpack-cli": "^3.2.1"
+    }
 }
