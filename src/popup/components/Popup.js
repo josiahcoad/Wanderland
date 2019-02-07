@@ -25,6 +25,7 @@ class Popup extends Component {
             reloadNeeded: false,
             currentPage: pages.RESULTS,
         };
+        this.setLastPlacesScraped = this.setLastPlacesScraped.bind(this);
         this.setSelectedPlace = this.setSelectedPlace.bind(this);
         this.setPage = this.setPage.bind(this);
         this.sendMessageToScrapePage = this.sendMessageToScrapePage.bind(this);
@@ -47,6 +48,11 @@ class Popup extends Component {
         this.setState({ currentPage });
     }
 
+    setLastPlacesScraped(placesScraped) {
+        this.setState({ placesScraped });
+        chrome.storage.local.set({ lastPlacesScraped: placesScraped });
+    }
+
     // Use google's extension api to send an "PAGE_SCAN" to the page/tab you're currently on.
     // Wait for a reponse and if the reponse is a "SUCCESS" then set the button with id "activate"
     // to show "loaded". Until a response is received, set the button text to "loading".
@@ -64,12 +70,10 @@ class Popup extends Component {
                             reloadNeeded: true,
                         });
                     } else if (response.message === PAGE_SCAN_SUCCESS) {
-                        const { placesScraped } = response;
                         this.setState({
                             loading: false,
-                            placesScraped,
                         });
-                        chrome.storage.local.set({ lastPlacesScraped: placesScraped });
+                        this.setLastPlacesScraped(response.placesScraped);
                     } else if (response.message === PAGE_SCAN_FAILED) {
                         // eslint-disable-next-line no-console
                         console.log('Error returned from content scripts!');
