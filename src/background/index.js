@@ -1,6 +1,6 @@
 import { LOOKUP_PLACE, SCAN_PARAGRAPH } from '../extensionMessageTypes';
 
-function lookupPlaceListener(info) {
+function lookupPlaceListener({ selectionText }) {
     chrome.tabs.query(
         {
             active: true,
@@ -9,13 +9,13 @@ function lookupPlaceListener(info) {
         (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, {
                 message: LOOKUP_PLACE,
-                data: info.selectionText,
+                data: selectionText,
             }); // Handle The Response
         },
     );
 }
 
-function scanParagraphListener(info) {
+function scanParagraphListener({ selectionText }) {
     chrome.tabs.query(
         {
             active: true,
@@ -24,7 +24,7 @@ function scanParagraphListener(info) {
         (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, {
                 message: SCAN_PARAGRAPH,
-                data: info.selectionText,
+                data: selectionText,
             }); // Handle The Response
         },
     );
