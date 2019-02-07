@@ -10,14 +10,14 @@ const pages = {
 
 // decide what button to show on the navbar based on what page we're currently on
 const renderNavButtons = setPage => (
-    <span className="nav-buttons">
-        <Button bsStyle="primary" onClick={() => setPage(pages.FEEDBACK)}>
+    <span className="nav-button-group">
+        <Button className="nav-button" onClick={() => setPage(pages.FEEDBACK)}>
             Feedback
         </Button>
-        <Button bsStyle="primary" onClick={() => setPage(pages.ABOUT_US)}>
+        <Button className="nav-button" onClick={() => setPage(pages.ABOUT_US)}>
             About Us
         </Button>
-        <Button bsStyle="primary" onClick={() => setPage(pages.RESULTS)}>
+        <Button className="nav-button" onClick={() => setPage(pages.RESULTS)}>
             Results
         </Button>
     </span>
