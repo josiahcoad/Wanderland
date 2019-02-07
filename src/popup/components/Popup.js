@@ -8,6 +8,7 @@ import FeedbackForm from './FeedbackForm';
 import AboutTeam from './aboutUs/AboutPage';
 import './Popup.css';
 import { PAGE_SCAN, PAGE_SCAN_SUCCESS, PAGE_SCAN_FAILED } from '../../extensionMessageTypes';
+import { sendMessageToCurrentTab } from '../../googleMessaging';
 
 const pages = {
     FEEDBACK: 'FEEDBACK',
@@ -57,34 +58,27 @@ class Popup extends Component {
     // Wait for a reponse and if the reponse is a "SUCCESS" then set the button with id "activate"
     // to show "loaded". Until a response is received, set the button text to "loading".
     sendMessageToScrapePage() {
-        chrome.tabs.query(
-            {
-                active: true,
-                currentWindow: true,
-            },
-            (tabs) => {
-                chrome.tabs.sendMessage(tabs[0].id, { message: PAGE_SCAN }, (response) => {
-                    if (!response) {
-                        this.setState({
-                            loading: false,
-                            reloadNeeded: true,
-                        });
-                    } else if (response.message === PAGE_SCAN_SUCCESS) {
-                        this.setState({
-                            loading: false,
-                        });
-                        this.setLastPlacesScraped(response.placesScraped);
-                    } else if (response.message === PAGE_SCAN_FAILED) {
-                        // eslint-disable-next-line no-console
-                        console.log('Error returned from content scripts!');
-                    } else {
-                        // eslint-disable-next-line no-console
-                        console.log(`Unknown message ${response} from content scripts!`);
-                    }
-                });
-            },
-        );
         this.setState({ loading: true });
+        sendMessageToCurrentTab(PAGE_SCAN)
+            .then((response) => {
+                if (response.message === PAGE_SCAN_SUCCESS) {
+                    this.setLastPlacesScraped(response.placesScraped);
+                } else if (response.message === PAGE_SCAN_FAILED) {
+                    // eslint-disable-next-line no-console
+                    console.log('Error returned from content scripts!');
+                } else {
+                    // eslint-disable-next-line no-console
+                    console.log(`Unknown message ${response} from content scripts!`);
+                }
+            })
+            .catch(() => {
+                this.setState({
+                    reloadNeeded: true,
+                });
+            })
+            .finally(() => {
+                this.setState({ loading: false });
+            });
     }
 
     renderPage() {

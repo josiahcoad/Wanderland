@@ -10,12 +10,10 @@ import '../../images/andrew.jpg';
 import '../../images/chinmay.jpg';
 import '../../images/sorhan.jpg';
 
-const AboutTeam = () => (
+export default () => (
     <PanelGroup className="about-page popup-page" generateChildId>
         {people.map(person => (
             <AboutPerson key={uuid.v4()} person={person} />
         ))}
     </PanelGroup>
 );
-
-export default AboutTeam;

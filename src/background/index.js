@@ -1,22 +1,8 @@
 import { TEXT_SCAN } from '../extensionMessageTypes';
-
-function selectionTextListener(info) {
-    chrome.tabs.query(
-        {
-            active: true,
-            currentWindow: true,
-        },
-        (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                message: TEXT_SCAN,
-                data: info.selectionText,
-            }); // Handle The Response
-        },
-    );
-}
+import { sendMessageToCurrentTab } from '../googleMessaging';
 
 const listenerFunctionMap = {
-    selectionWanderland: selectionTextListener,
+    selectionWanderland: sendMessageToCurrentTab,
 };
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -27,6 +13,6 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-    listenerFunctionMap[info.menuItemId](info, tab);
+chrome.contextMenus.onClicked.addListener((data) => {
+    listenerFunctionMap[data.menuItemId](TEXT_SCAN, data.selectionText);
 });

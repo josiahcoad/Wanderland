@@ -4,6 +4,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import TooltipMap from './TooltipMap';
 import './ContentCarousel.css';
 
+// This must be a statefull class for Carousel package to work.
 // eslint-disable-next-line react/prefer-stateless-function
 class ContentCarousel extends Component {
     render() {
