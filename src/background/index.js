@@ -1,12 +1,9 @@
-import {
-    CONTEXT_MENU_TITLE,
-    LOOKUP_PLACE_TITLE,
-    SCAN_PARAGRAPH_TITLE,
-    CONTEXT_MENU_ID,
-    LOOKUP_PLACE_ID,
-    SCAN_PARAGRAPH_ID,
-} from './constants.js';
+import * as CONSTANTS from './constants.js';
 import { LOOKUP_PLACE, SCAN_PARAGRAPH } from '../extensionMessageTypes';
+
+const CONTEXT_MENU_ID = 'wanderlandContextMenu';
+const LOOKUP_PLACE_ID = 'lookupPlaceWanderland';
+const SCAN_PARAGRAPH_ID = 'scanParagraphWanderland';
 
 function lookupPlaceListener({ selectionText }) {
     chrome.tabs.query({
@@ -42,19 +39,19 @@ const listenerFunctionMap = {
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
         id: CONTEXT_MENU_ID,
-        title: CONTEXT_MENU_TITLE,
+        title: CONSTANTS.CONTEXT_MENU_TITLE,
         contexts: ['selection'],
     });
     chrome.contextMenus.create({
-        id: LOOKUP_PLACE_ID,
+        id: CONSTANTS.LOOKUP_PLACE_ID,
         parentId: CONTEXT_MENU_ID,
-        title: LOOKUP_PLACE_TITLE,
+        title: CONSTANTS.LOOKUP_PLACE_TITLE,
         contexts: ['selection'],
     });
     chrome.contextMenus.create({
-        id: SCAN_PARAGRAPH_ID,
+        id: CONSTANTS.SCAN_PARAGRAPH_ID,
         parentId: CONTEXT_MENU_ID,
-        title: SCAN_PARAGRAPH_TITLE,
+        title: CONSTANTS.SCAN_PARAGRAPH_TITLE,
         contexts: ['selection'],
     });
 });
