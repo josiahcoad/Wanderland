@@ -67,13 +67,7 @@ function getEntitiesFromWebpage(webpageUrl) {
 export const getUniqueLocationsFromCurrentPage = () => new Promise((resolve) => {
     getEntitiesFromWebpage(getCurrentPageUrl())
         .then(JSON.parse)
-        .then(
-            (response) => {
-                // filter the reponse for all entities that are locations
-                // then remove duplicate locations... ones that have the same "spot"
-                resolve(filterDuplicates(filterLocations(response), 'spot'));
-            },
-        );
+        .then(response => resolve(filterDuplicates(filterLocations(response), 'spot'))); // filter the reponse for all entities that are locations then remove duplicate locations... ones that have the same "spot"
 });
 
 const getEntitiesFromText = textData => new Promise((resolve, reject) => {
