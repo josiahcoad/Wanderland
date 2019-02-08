@@ -22,7 +22,7 @@ function updateStorageWithNewPlaces(newPlaces) {
     chrome.storage.local.get(['lastPlacesScraped'], ({ lastPlacesScraped }) => {
         const existing = Array.isArray(lastPlacesScraped) ? lastPlacesScraped : [];
         chrome.storage.local.set({
-            lastPlacesScraped: (removeDuplicatesWith(existing, newPlaces, 'name')).concat(existing),
+            lastPlacesScraped: (removeDuplicatesWith(newPlaces, existing, 'name')).concat(existing),
         });
     });
 }
