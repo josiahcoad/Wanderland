@@ -3,6 +3,7 @@ import { getUniqueLocationsFromCurrentPage, getUniqueLocationsFromText, addGeome
 import { createTooltips } from './createTooltips.js';
 import * as message from '../extensionMessageTypes';
 import { showErrorToast, showNotificationToast } from '../toasts.js';
+import { removeDuplicatesWith } from '../utils.js';
 
 function scanPage() {
     return getUniqueLocationsFromCurrentPage()
@@ -28,13 +29,9 @@ function removeDuplicatePlaces(placesAlreadyScraped, newPlaces) {
 
 function updateStorageWithNewPlaces(newPlaces) {
     chrome.storage.local.get(['lastPlacesScraped'], ({ lastPlacesScraped }) => {
-        const filteredPlaces = removeDuplicatePlaces(lastPlacesScraped, newPlaces);
-        let updatedPlaces = filteredPlaces;
-        if (Array.isArray(lastPlacesScraped)) {
-            updatedPlaces = filteredPlaces.concat(lastPlacesScraped);
-        }
+        const existing = Array.isArray(lastPlacesScraped) ? lastPlacesScraped : [];
         chrome.storage.local.set({
-            lastPlacesScraped: updatedPlaces,
+            lastPlacesScraped: (removeDuplicatesWith(existing, newPlaces, 'name')).concat(existing),
         });
     });
 }
@@ -54,7 +51,6 @@ function scanSinglePlace(textData) {
         .then(result => ({ ...emptyObject, ...result }))
         .then((result) => {
             if (result.lat && result.lng) {
-                console.log(result);
                 createTooltips([result]);
                 updateStorageWithNewPlaces([result]);
             } else {
@@ -100,7 +96,7 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
         showNotificationToast('We\'re looking it up, just a second!');
         scanSinglePlace(request.data);
     } else if (request.message === message.SCAN_PARAGRAPH) {
-        showNotificationToast('Scanning the page, it\'ll be just a moment!');
+        showNotificationToast('Scanning your selection, thanks for waiting!');
         scanParagraph(request.data);
     }
     return true;

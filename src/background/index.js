@@ -1,56 +1,63 @@
-import { LOOKUP_PLACE, SCAN_PARAGRAPH } from '../extensionMessageTypes';
+import {
+    CONTEXT_MENU_TITLE,
+    LOOKUP_PLACE_TITLE,
+    SCAN_PARAGRAPH_TITLE,
+    CONTEXT_MENU_ID,
+    LOOKUP_PLACE_ID,
+    SCAN_PARAGRAPH_ID
+} from './constants.js';
+import {
+    LOOKUP_PLACE,
+    SCAN_PARAGRAPH
+} from '../extensionMessageTypes';
 
 function lookupPlaceListener({ selectionText }) {
-    chrome.tabs.query(
-        {
-            active: true,
-            currentWindow: true,
-        },
-        (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                message: LOOKUP_PLACE,
-                data: selectionText,
-            }); // Handle The Response
-        },
-    );
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+    },
+    ([firstTab]) => {
+        chrome.tabs.sendMessage(firstTab.id, {
+            message: LOOKUP_PLACE,
+            data: selectionText,
+        }); // Handle The Response
+    });
 }
 
 function scanParagraphListener({ selectionText }) {
-    chrome.tabs.query(
-        {
-            active: true,
-            currentWindow: true,
-        },
-        (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                message: SCAN_PARAGRAPH,
-                data: selectionText,
-            }); // Handle The Response
-        },
-    );
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+    },
+    ([firstTab]) => {
+        chrome.tabs.sendMessage(firstTab.id, {
+            message: SCAN_PARAGRAPH,
+            data: selectionText,
+        }); // Handle The Response
+    });
 }
 
 const listenerFunctionMap = {
-    lookupPlaceWanderland: lookupPlaceListener,
-    scanParagraphWanderland: scanParagraphListener,
+    [LOOKUP_PLACE_ID]: lookupPlaceListener,
+    [SCAN_PARAGRAPH_ID]: scanParagraphListener,
 };
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
-        id: 'wanderlandContextMenu',
-        title: 'Wanderland',
+        id: CONTEXT_MENU_ID,
+        title: CONTEXT_MENU_TITLE,
         contexts: ['selection'],
     });
     chrome.contextMenus.create({
-        id: 'lookupPlaceWanderland',
-        parentId: 'wanderlandContextMenu',
-        title: 'Lookup Place',
+        id: LOOKUP_PLACE_ID,
+        parentId: CONTEXT_MENU_ID,
+        title: LOOKUP_PLACE_TITLE,
         contexts: ['selection'],
     });
     chrome.contextMenus.create({
-        id: 'scanParagraphWanderland',
-        parentId: 'wanderlandContextMenu',
-        title: 'Scan Paragraph',
+        id: SCAN_PARAGRAPH_ID,
+        parentId: CONTEXT_MENU_ID,
+        title: SCAN_PARAGRAPH_TITLE,
         contexts: ['selection'],
     });
 });

@@ -103,25 +103,17 @@ const getEntitiesFromText = textData => new Promise((resolve, reject) => {
     Http.send();
 });
 
-export function getUniqueLocationsFromText(textData) {
-    return new Promise((resolve, reject) => {
-        getEntitiesFromText(textData)
-            .then(JSON.parse)
-            .then(
-                (response) => {
-                    // filter the reponse for all entities that are locations
-                    // then remove duplicate locations... ones that have the same "spot"
-                    resolve(filterDuplicates(filterLocations(response), 'spot'));
-                },
-                (error) => {
-                    alert(
-                        'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
-                    );
-                    reject(Error(error));
-                },
-            );
-    });
-}
+export const getUniqueLocationsFromText = textData => new Promise((resolve, reject) => {
+    getEntitiesFromText(textData)
+        .then(JSON.parse)
+        .then(response => resolve(filterDuplicates(filterLocations(response), 'spot')), // filter the reponse for all entities that are locations then remove duplicate locations... ones that have the same "spot"
+            (error) => {
+                alert(
+                    'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
+                );
+                reject(Error(error));
+            });
+});
 
 // Query the Google "Places" API for the latitude and longitude of the place
 function googleGeometryAPIGet(location) {
