@@ -18,15 +18,6 @@ function scanPage() {
         });
 }
 
-function removeDuplicatePlaces(placesAlreadyScraped, newPlaces) {
-    const filteredPlaces = newPlaces.filter((curNewPlace) => {
-        const curPlaceName = curNewPlace.name;
-        return placesAlreadyScraped.find(place => place.name === curPlaceName) === undefined;
-    });
-
-    return filteredPlaces;
-}
-
 function updateStorageWithNewPlaces(newPlaces) {
     chrome.storage.local.get(['lastPlacesScraped'], ({ lastPlacesScraped }) => {
         const existing = Array.isArray(lastPlacesScraped) ? lastPlacesScraped : [];

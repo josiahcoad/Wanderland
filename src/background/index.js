@@ -4,12 +4,9 @@ import {
     SCAN_PARAGRAPH_TITLE,
     CONTEXT_MENU_ID,
     LOOKUP_PLACE_ID,
-    SCAN_PARAGRAPH_ID
+    SCAN_PARAGRAPH_ID,
 } from './constants.js';
-import {
-    LOOKUP_PLACE,
-    SCAN_PARAGRAPH
-} from '../extensionMessageTypes';
+import { LOOKUP_PLACE, SCAN_PARAGRAPH } from '../extensionMessageTypes';
 
 function lookupPlaceListener({ selectionText }) {
     chrome.tabs.query({
