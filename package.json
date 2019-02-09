@@ -56,6 +56,7 @@
     "react-dom": "^16.7.0",
     "request": "^2.88.0",
     "style-loader": "^0.23.1",
+    "toastify-js": "^1.3.2",
     "url-loader": "^1.1.2",
     "webpack": "^4.28.4",
     "webpack-chrome-extension-reloader": "^1.1.1",
