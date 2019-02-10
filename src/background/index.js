@@ -40,6 +40,7 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 
+
 const idToMessageMap = {
     [LOOKUP_PLACE_ID]: LOOKUP_PLACE,
     [SCAN_PARAGRAPH_ID]: SCAN_PARAGRAPH,
