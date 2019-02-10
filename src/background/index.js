@@ -1,18 +1,48 @@
-import { TEXT_SCAN } from '../extensionMessageTypes';
-import { sendMessageToCurrentTab } from '../googleMessaging';
+import * as titles from './constants.js';
+import { LOOKUP_PLACE, SCAN_PARAGRAPH } from '../extensionMessageTypes';
 
-const listenerFunctionMap = {
-    selectionWanderland: sendMessageToCurrentTab,
-};
+const CONTEXT_MENU_ID = 'wanderlandContextMenu';
+const LOOKUP_PLACE_ID = 'lookupPlaceWanderland';
+const SCAN_PARAGRAPH_ID = 'scanParagraphWanderland';
+
+function contextMenuSelectionTextListener(selectionText, message) {
+    chrome.tabs.query(
+        {
+            active: true,
+            currentWindow: true,
+        },
+        ([firstTab]) => {
+            chrome.tabs.sendMessage(firstTab.id, {
+                message,
+                data: selectionText,
+            }); // Handle The Response
+        },
+    );
+}
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
-        id: 'selectionWanderland',
-        title: 'Lookup Place',
+        id: CONTEXT_MENU_ID,
+        title: titles.CONTEXT_MENU_TITLE,
+        contexts: ['selection'],
+    });
+    chrome.contextMenus.create({
+        id: LOOKUP_PLACE_ID,
+        parentId: CONTEXT_MENU_ID,
+        title: titles.LOOKUP_PLACE_TITLE,
+        contexts: ['selection'],
+    });
+    chrome.contextMenus.create({
+        id: SCAN_PARAGRAPH_ID,
+        parentId: CONTEXT_MENU_ID,
+        title: titles.SCAN_PARAGRAPH_TITLE,
         contexts: ['selection'],
     });
 });
 
-chrome.contextMenus.onClicked.addListener((data) => {
-    listenerFunctionMap[data.menuItemId](TEXT_SCAN, data.selectionText);
+chrome.contextMenus.onClicked.addListener(({ menuItemId, selectionText }) => {
+    contextMenuSelectionTextListener(
+        selectionText,
+        menuItemId === LOOKUP_PLACE_ID ? LOOKUP_PLACE : SCAN_PARAGRAPH,
+    );
 });

@@ -13,9 +13,9 @@ const LOCATION_TYPES = [
 // NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
     // eslint-disable-next-line
-    return response.annotations.filter(
-        annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0,
-    );
+    return response.annotations.filter(annotation => {
+        return annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0;
+    });
 }
 
 // remove objects from an array who have the same value
@@ -64,26 +64,35 @@ function getEntitiesFromWebpage(webpageUrl) {
 }
 
 // query Dandelion for all unique locations from the text on the current page
-export function getUniqueLocationsFromCurrentPage() {
-    const currentPageUrl = getCurrentPageUrl();
-    return new Promise((resolve, reject) => {
-        getEntitiesFromWebpage(currentPageUrl)
-            .then(JSON.parse)
-            .then(
-                (response) => {
-                    // filter the reponse for all entities that are locations
-                    // then remove duplicate locations... ones that have the same "spot"
-                    resolve(filterDuplicates(filterLocations(response), 'spot'));
-                },
-                (error) => {
-                    alert(
-                        'Error: API.JS \n--------------\n Could not get entities from webpage \n---------------\n',
-                    );
-                    reject(error);
-                },
-            );
-    });
-}
+export const getUniqueLocationsFromCurrentPage = () => getEntitiesFromWebpage(getCurrentPageUrl())
+    .then(JSON.parse)
+// filter the reponse for all entities that are locations then remove duplicate locations...
+// ones that have the same "spot"
+    .then(response => filterDuplicates(filterLocations(response), 'spot'));
+
+const getEntitiesFromText = textData => new Promise((resolve, reject) => {
+    const Http = new XMLHttpRequest();
+    const url = `https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=${textData}${PARAMS}`;
+    Http.open('GET', url);
+    Http.onloadend = () => {
+        if (Http.status === 200) {
+            resolve(Http.responseText);
+        } else {
+            reject(Error(Http.status));
+        }
+    };
+    // Handle network errors
+    Http.onerror = () => {
+        reject(Error('Network Error'));
+    };
+    Http.send();
+});
+
+export const getUniqueLocationsFromText = textData => getEntitiesFromText(textData)
+    .then(JSON.parse)
+    .then(response => filterDuplicates(filterLocations(response), 'spot'));
+// filter the reponse for all entities that are locations then remove duplicate locations...
+// ones that have the same "spot"
 
 // Query the Google "Places" API for the latitude and longitude of the place
 function googleGeometryAPIGet(location) {
