@@ -3,7 +3,7 @@ import { Grid, Col, Panel } from 'react-bootstrap';
 import { SocialIcon } from 'react-social-icons';
 import './AboutPerson.css';
 
-const AboutPerson = ({ person }) => (
+export default ({ person }) => (
     <Panel className="about-person">
         <Panel.Heading>
             <Panel.Title>{person.name}</Panel.Title>
@@ -52,5 +52,3 @@ const AboutPerson = ({ person }) => (
         </Panel.Body>
     </Panel>
 );
-
-export default AboutPerson;

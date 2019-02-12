@@ -15,6 +15,9 @@
     margin: auto;
     position: absolute;
     bottom: 30px;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-transform: none;
 }
 
 .wanderland-popover .carousel-item img {

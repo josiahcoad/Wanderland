@@ -10,7 +10,18 @@
     color: #3e678c !important;
 }
 
-.nav-buttons button {
+.nav-button {
     margin-left: 5px;
     margin-right: 5px;
+    background-color: inherit;
+    border-style: none;
+    color: gray;
+}
+
+.nav-button:hover {
+    color: #3e678c;
+}
+
+.nav-button:focus {
+    color: #3e678c;
 }

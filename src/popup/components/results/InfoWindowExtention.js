@@ -1,3 +1,6 @@
+/**
+ * The box that appears above a marker when you click it in the Google map.
+ */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { InfoWindow } from 'google-maps-react';

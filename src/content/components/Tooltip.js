@@ -34,13 +34,20 @@ class Tooltip extends Component {
     }
 
     mouseLeft() {
+        // Give the user 300 ms to move from the anchor text to the Popover.
         setTimeout(() => {
             if ($('.Popover:hover').length === 0) {
                 this.setShow(false);
             }
         }, 300);
+        // If the user leaves the popover, it may have been by accident.
+        // Give them 300 ms to move back over the popover.
         $('.Popover').on('mouseleave', () => {
-            this.setShow(false);
+            setTimeout(() => {
+                if ($('.Popover:hover').length === 0) {
+                    this.setShow(false);
+                }
+            }, 300);
         });
     }
 

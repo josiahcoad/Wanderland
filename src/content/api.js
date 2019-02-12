@@ -13,9 +13,9 @@ const LOCATION_TYPES = [
 // NOTE: some results we want don't have a type... don't know what to do there
 function filterLocations(response) {
     // eslint-disable-next-line
-    return response.annotations.filter(
-        annotation => annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0,
-    );
+    return response.annotations.filter(annotation => {
+        return annotation.types.filter(type => LOCATION_TYPES.indexOf(type) !== -1).length !== 0;
+    });
 }
 
 // remove objects from an array who have the same value
@@ -64,9 +64,11 @@ function getEntitiesFromWebpage(webpageUrl) {
 }
 
 // query Dandelion for all unique locations from the text on the current page
-export const getUniqueLocationsFromCurrentPage = () => new Promise(resolve => getEntitiesFromWebpage(getCurrentPageUrl())
+export const getUniqueLocationsFromCurrentPage = () => getEntitiesFromWebpage(getCurrentPageUrl())
     .then(JSON.parse)
-    .then(response => resolve(filterDuplicates(filterLocations(response), 'spot')))); // filter the reponse for all entities that are locations then remove duplicate locations... ones that have the same "spot"
+// filter the reponse for all entities that are locations then remove duplicate locations...
+// ones that have the same "spot"
+    .then(response => filterDuplicates(filterLocations(response), 'spot'));
 
 const getEntitiesFromText = textData => new Promise((resolve, reject) => {
     const Http = new XMLHttpRequest();
@@ -86,9 +88,11 @@ const getEntitiesFromText = textData => new Promise((resolve, reject) => {
     Http.send();
 });
 
-export const getUniqueLocationsFromText = textData => new Promise(resolve => getEntitiesFromText(textData)
+export const getUniqueLocationsFromText = textData => getEntitiesFromText(textData)
     .then(JSON.parse)
-    .then(response => resolve(filterDuplicates(filterLocations(response), 'spot')))); // filter the reponse for all entities that are locations then remove duplicate locations... ones that have the same "spot"
+    .then(response => filterDuplicates(filterLocations(response), 'spot'));
+// filter the reponse for all entities that are locations then remove duplicate locations...
+// ones that have the same "spot"
 
 // Query the Google "Places" API for the latitude and longitude of the place
 function googleGeometryAPIGet(location) {

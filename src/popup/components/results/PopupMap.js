@@ -1,9 +1,16 @@
+/**
+ * The Google map that shows all the markers for the places.
+ * The bounds are updated everytime the placesScraped change.
+ * Each marker has an infowindow that appears when you
+ * click on it that allows the ability to remove the place
+ * from lastPlacesScraped.
+ */
 import React, { Component } from 'react';
 import {
     Map, GoogleApiWrapper, Marker,
 } from 'google-maps-react';
 import uuid from 'uuid';
-import InfoWindowExtention from '../InfoWindowExtention';
+import InfoWindowExtention from './InfoWindowExtention';
 import { removeWhere } from '../../../utils';
 
 const mapStyles = {
