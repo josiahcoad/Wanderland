@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Wanderland",
     "description": "An app made by travellers for travellers. See maps of places mentioned on webpages.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Josiah Coad, Chinmay Phulse, Amir Karimloo",
     "content_scripts": [
         {
