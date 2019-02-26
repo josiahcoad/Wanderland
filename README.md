@@ -6,7 +6,8 @@
 > So... get on your way!” 
 *― Dr. Seuss*
 
-[🤭 Get Extension Now!](https://chrome.google.com/webstore/detail/wanderland/mjmpogaohhmiggpipbojdciakhgjfedk)
+🤩 [Get Extension Here](https://chrome.google.com/webstore/detail/wanderland/mjmpogaohhmiggpipbojdciakhgjfedk)
+
 
 ![demo gif](./assets/demo.gif)
 
