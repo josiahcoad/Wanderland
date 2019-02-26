@@ -6,6 +6,8 @@
 > So... get on your way!” 
 *― Dr. Seuss*
 
+![demo gif](./assets/demo.gif)
+
 I love planning travel and seeing new places to go in the world 🌍. There is a recurrent problem with internet wanderlust though. 😬 You probably know what I'm talking about if you've ever experienced something like this:
 
 1. You decide your going travelling... 🥳 for whatever reason... to say *India*.
