@@ -43,7 +43,7 @@ I love planning travel and seeing new places to go in the world 🌍. There is a
 - download/clone the repo
 - go to ```chrome://extensions/``` in chrome browser
 - toggle Developer Mode (switch in top right corner of page)
-- click "Load Unpacked" and select the repo folder (button in top left corner of page)
+- click "Load Unpacked" (button in top left corner of page) and select the *dist* subolder inside the *wanderland* folder 
 - go to any site with locations mentioned to see results pop up at the top of the page
 
 ### How to Build:
