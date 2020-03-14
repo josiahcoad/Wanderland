@@ -20,7 +20,7 @@
   "homepage": "https://github.com/josiahcoad/wanderland#readme",
   "dependencies": {
     "@material-ui/core": "^3.9.0",
-    "acorn": "^6.0.5",
+    "acorn": "^6.4.1",
     "findandreplacedomtext": "^0.4.6",
     "fs": "0.0.1-security",
     "google-maps-react": "^2.0.2",
