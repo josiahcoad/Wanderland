@@ -24,7 +24,7 @@
     "findandreplacedomtext": "^0.4.6",
     "fs": "0.0.1-security",
     "google-maps-react": "^2.0.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "react-bootstrap": "^0.32.4",
     "react-popover": "^0.5.10",
     "react-responsive-carousel": "^3.1.46",
