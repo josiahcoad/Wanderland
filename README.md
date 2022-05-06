@@ -34,7 +34,7 @@ I love planning travel and seeing new places to go in the world 🌍. There is a
 6. Easily share your wanderlists with others, collaborate, assign the places dates and an ordering, and take notes on the places together all within a single workflow from any webpage. 😎
 7. Have the software retrieve all the information you care about for each place automatically and make it easily accessible in one spot.
 
-![where to go art](assets/readme.jpg)
+<img src=assets/readme.jpg" alt="where to go art" height="400px"/>
 
 ### Todo:
 - We are using github issues to track to-dos for this project.
