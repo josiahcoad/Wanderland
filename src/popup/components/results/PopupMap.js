@@ -130,5 +130,5 @@ export class PopupMap extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyANvkYDq_yLEJVS0t_auv5afE8iHCuKnt8',
+    apiKey: 'AIzaSyC-M10Hq2--4zG5NBRYW6Fy5WValLAfMVg',
 })(PopupMap);
