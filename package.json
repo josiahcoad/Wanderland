@@ -60,6 +60,6 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.28.4",
     "webpack-chrome-extension-reloader": "^1.1.1",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.3.12"
   }
 }
